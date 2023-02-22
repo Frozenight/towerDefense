@@ -14,6 +14,8 @@ public class BuildingSystem : MonoBehaviour
 
     public GameObject prefab1;
     public GameObject prefab2;
+    bool Placing = false;
+    bool Placed = false;
 
     private PlaceableObject objectToPlace;
 
@@ -28,14 +30,18 @@ public class BuildingSystem : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.A) && !Placing)
         {
             InitializeWithObject(prefab1);
+            Placing = true;
+            Placed = false;
         }
 
-        else if (Input.GetKeyDown(KeyCode.B))
+        else if (Input.GetKeyDown(KeyCode.B) && !Placing)
         {
             InitializeWithObject(prefab2);
+            Placing = true;
+            Placed = false;
         }
 
         if(!objectToPlace)
@@ -50,15 +56,19 @@ public class BuildingSystem : MonoBehaviour
                 objectToPlace.Place();
                 Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
                 TakeArea(start, objectToPlace.Size);
+                Placing = false;
+                Placed = true;
             }
             else
             {
                 Destroy(objectToPlace.gameObject);
+                Placing = false;
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Escape))
+        else if(Input.GetKeyDown(KeyCode.Escape) && !Placed)
         {
             Destroy(objectToPlace.gameObject);
+            Placing = false;
         }
     }
 
