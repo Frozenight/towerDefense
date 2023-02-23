@@ -14,7 +14,7 @@ public class BuildingSystem : MonoBehaviour
 
     public GameObject prefab1;
     public GameObject prefab2;
-    public bool Placing = false;
+    bool Placing = false;
     bool Placed = false;
 
     private PlaceableObject objectToPlace;
