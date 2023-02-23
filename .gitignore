@@ -61,4 +61,5 @@ crashlytics-build.properties
 
 towerDefense/.vscode/settings.json
 .vsconfig
+ProjectSettings/ProjectSettings.asset
 *.meta
