@@ -49,7 +49,7 @@ public class PlaceableObject : MonoBehaviour
     {
         ObjectDrag drag = gameObject.GetComponent<ObjectDrag>();
         Destroy(drag);
+
         Placed = true;
-        gameObject.AddComponent<TileOnWhichToPlace>();
     }
 }

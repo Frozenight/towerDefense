@@ -58,7 +58,6 @@ public class BuildingSystem : MonoBehaviour
                 TakeArea(start, objectToPlace.Size);
                 Placing = false;
                 Placed = true;
-                
             }
             else
             {

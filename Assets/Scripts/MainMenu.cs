@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     private Canvas _mainMenuCanvas;
-    public string Level_One;
 
     private void Start()
     {
@@ -13,7 +12,7 @@ public class MainMenu : MonoBehaviour
 
     public void Start_Game()
     {
-        SceneManager.LoadScene(Level_One);
+        SceneManager.LoadScene("GameSceneName");
     }
 
     public void Open_Settings()
