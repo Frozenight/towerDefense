@@ -426,26 +426,11 @@ MonoBehaviour:
   blackTile: {fileID: 11400000, guid: 779a97fb8689fb346a37bf47286f8bb1, type: 2}
   prefab1: {fileID: 3695683449867239243, guid: 5646072035afac44fbe12ee8eb7133f6, type: 3}
   prefab2: {fileID: 1733929500775171901, guid: 6cbd924d75a3a474b8215e1560e813b0, type: 3}
-  Placing: 0
 --- !u!156049354 &1370970016 stripped
 Grid:
   m_CorrespondingSourceObject: {fileID: 3774160746698831423, guid: 6d0f852f8b1f4834aa446df6eca2aff0, type: 3}
   m_PrefabInstance: {fileID: 1905200302}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1370970018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370970014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84aaeaa4faedeea858bce3e3586cb6c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  standardTurretPrefab: {fileID: 1733929500775171901, guid: 6cbd924d75a3a474b8215e1560e813b0, type: 3}
-  turretTwoPrefab: {fileID: 0}
 --- !u!1001 &1905200302
 PrefabInstance:
   m_ObjectHideFlags: 0
