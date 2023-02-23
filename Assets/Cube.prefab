@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5070576897674495889}
   - component: {fileID: 2528697204172626570}
   - component: {fileID: -2234773925586384684}
+  - component: {fileID: -3650371973410026536}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,3 +111,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1a2ea981563954fb6d60d7be4dfbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3650371973410026536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695683449867239243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a40684e732a48e2876d7d438eaa879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 0, g: 0, b: 0, a: 0}
+  offsetFromPlacer: {x: 0, y: 0, z: 0}
