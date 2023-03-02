@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    static Turret selectedBuilding = null;
 
     public Transform target;
 
@@ -27,6 +28,16 @@ public class Turret : MonoBehaviour
     void Start()
     {
         InvokeRepeating ("UpdateTarget", 0f, 0.5f);
+    }
+
+    public void SelectBuilding() {
+        Debug.Log("This building is selected: " + this.GetHashCode() + ".");
+        if (selectedBuilding == this) {
+            selectedBuilding = null;
+        } else {
+            selectedBuilding = this;
+        }
+
     }
 
     void UpdateTarget()
