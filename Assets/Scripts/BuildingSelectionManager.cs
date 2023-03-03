@@ -9,7 +9,7 @@ public class BuildingSelectionManager : MonoBehaviour
         "Tower"
     }; 
     
-    void Update() {
+    void LateUpdate() {
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit _hit;
@@ -29,11 +29,18 @@ public class BuildingSelectionManager : MonoBehaviour
                 }
                 if (validClick)
                 {
-                    Turret turret = _hit.collider.GetComponent<Turret>();
-                    turret.SelectBuilding();
+                    ManageableBuilding building = 
+                        _hit.collider.GetComponent<ManageableBuilding>();
+                    building.SelectBuilding();
+                } else {
+                    ManageableBuilding.selectedBuilding = null;
+                    Debug.Log("Unselected building");
                 }
-                Debug.Log(objTr.name + " " + objTag + " " + validClick);
-            }
+                // Debug.Log(objTr.name + " " + objTag + " " + validClick);
+            } 
+        } else if (Input.GetKeyDown(KeyCode.U) 
+            && ManageableBuilding.selectedBuilding != null) {
+            ManageableBuilding.selectedBuilding.UpgradeBuilding();
         }    
     }
 }
