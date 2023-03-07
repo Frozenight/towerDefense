@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Turret : ManageableBuilding
 {
+
     private const float INCREASE_DAMAGE = 5f;
     private const float INCREASE_FIRERATE_MULT = 1.1f;
     private const float INCREASE_RANGE = 2.5f;
@@ -27,17 +28,20 @@ public class Turret : ManageableBuilding
     public GameObject bulletPrefab;
     public Transform firePoint;
 
+    public override string buildingName { 
+        get { return "Turret"; } 
+    }
+
     public override void UpgradeBuilding() { 
-        Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
+        // Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
         range += INCREASE_RANGE;
         fireRate *= INCREASE_FIRERATE_MULT;
         damage += INCREASE_DAMAGE;
+        m_level++;
         if (UpdateObjectModel(out GameObject newModel)) {
-            // transform.Find("LeftShoulder/Arm/Hand/Finger");
-            
             partToRotate = transform.Find(currModelName + "/Armature/main");
-            Debug.Log(currModelName + "/Armature/main");
-            Debug.Log(partToRotate.GetHashCode());
+            // Debug.Log(currModelName + "/Armature/main");
+            // Debug.Log(partToRotate.GetHashCode());
         }
     }
 
