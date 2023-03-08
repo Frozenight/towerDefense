@@ -23,6 +23,7 @@ public class BuildingSelectionManager : MonoBehaviour
         maxXOfTab = corners[2].x;
         minYOfTab = corners[0].y;
         maxYOfTab = corners[2].y;        
+        manageBuildingTab.closeTab = UnselectB;
         manageBuildingTab.gameObject.SetActive(false);
     }
 

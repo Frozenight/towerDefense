@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
@@ -16,7 +17,13 @@ public class ManageableBuildingTab : MonoBehaviour
     [SerializeField] private TextMeshProUGUI NameText;
     [SerializeField] private TextMeshProUGUI LevelText;
     private ManageableBuilding assignedBuilding;
+    private UnityAction m_closeTab;
 
+    public UnityAction closeTab {
+        set {
+            m_closeTab = value;
+        }
+    }
 
     public void FillBuildingData(ManageableBuilding mBuilding) {
         assignedBuilding = mBuilding;
@@ -27,6 +34,11 @@ public class ManageableBuildingTab : MonoBehaviour
     public void Upgrade() {
         assignedBuilding?.UpgradeBuilding();
         UpdateBuildingStats();
+    }
+
+    public void Destroy() {
+        assignedBuilding?.DestroyBuilding();
+        m_closeTab?.Invoke();
     }
 
     private void UpdateBuildingStats() {

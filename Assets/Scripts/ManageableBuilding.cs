@@ -25,6 +25,10 @@ public class ManageableBuilding : MonoBehaviour {
         return UpgradeModels[nextModel-1].name;
     } }
 
+    public void DestroyBuilding() {
+        Destroy(gameObject);
+    }
+
     public void SelectBuilding() {
         if (selectedBuilding == this) {
             selectedBuilding = null;
