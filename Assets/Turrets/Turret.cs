@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class Turret : ManageableBuilding
 {
+
+    private const float INCREASE_DAMAGE = 5f;
+    private const float INCREASE_FIRERATE_MULT = 1.1f;
+    private const float INCREASE_RANGE = 2.5f;
 
     public Transform target;
 
@@ -13,6 +17,7 @@ public class Turret : MonoBehaviour
 
     public float fireRate = 1f;
     private float fireCountdown = 0f;
+    private float damage = 10f;
 
     [Header("Static")]
 
@@ -22,6 +27,23 @@ public class Turret : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Transform firePoint;
+
+    public override string buildingName { 
+        get { return "Turret"; } 
+    }
+
+    public override void UpgradeBuilding() { 
+        // Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
+        range += INCREASE_RANGE;
+        fireRate *= INCREASE_FIRERATE_MULT;
+        damage += INCREASE_DAMAGE;
+        m_level++;
+        if (UpdateObjectModel(out GameObject newModel)) {
+            partToRotate = transform.Find(currModelName + "/Armature/main");
+            // Debug.Log(currModelName + "/Armature/main");
+            // Debug.Log(partToRotate.GetHashCode());
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
