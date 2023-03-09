@@ -407,6 +407,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tower1
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 402f5380592e53748ad054a872dc1325, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: acda2bcb881ffd94db5269f708f6672e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 402f5380592e53748ad054a872dc1325, type: 3}
 --- !u!4 &1278077796425309562 stripped
