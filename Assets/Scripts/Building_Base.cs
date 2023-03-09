@@ -1,23 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.Collections;
 
 public class Building_Base : MonoBehaviour
 {
-    public float _health;
+    [SerializeField] private int _maxHealth = 100;
 
-    private int _defence;
+    private int _currentHealth;
 
-    public void GetHit(float damage)
+    public event Action<float> OnHealthChanged = delegate { };
+
+    private void OnEnable()
     {
+        _currentHealth = _maxHealth;
+    }
 
-        _health -= damage;
-        if (_health <= 0)
-            Die();
+    public void ModifyHealth(int amount)
+    {
+        _currentHealth += amount;
+
+        float currentHealthPct = (float)_currentHealth / (float)_maxHealth;
+        OnHealthChanged(currentHealthPct);
+        CheckForDeath();
     }
-  
-       private void Die()
-        {
-            Destroy(gameObject);
-        }
+
+    public void CheckForDeath()
+    {
+        if (_currentHealth <= 0)
+            StartCoroutine(destroyItself());
     }
+
+    private IEnumerator destroyItself()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+            ModifyHealth(-10);
+    }
+}
