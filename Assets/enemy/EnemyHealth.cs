@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
     float health;
-    float damage;
-    float speed;
 
     //enemy gets hit
     //damage here is the damage dealt by the player
     public void GetHit(float damage)
     {
+
         health -= damage;
         if (health <= 0)
             Die();
+        else
+            gameObject.GetComponent<Animator>().Play("getHit");
+
     }
 
     void Die()
     {
-        Destroy(gameObject);
+        gameObject.GetComponent<Animator>().Play("death");
+        Destroy(gameObject, 5);
     }
 }

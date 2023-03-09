@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5543876734551910077}
   m_Layer: 0
   m_Name: Turret_One
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1083957dd287f76498734eec7180379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpgradeModels:
+  - {fileID: 8272583994077384560, guid: 86eb4f147a9336340b8db28012821bfb, type: 3}
   target: {fileID: 0}
   range: 15
   fireRate: 1
