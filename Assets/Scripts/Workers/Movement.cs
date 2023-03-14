@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    private const float SPEED_INC_ON_UPGRADE = 3f;
+
     public List<TrashObject> trashObjects;
     public float speed = 1f;
     public bool going = false;
@@ -25,6 +27,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DetectUpgrade();
         if(NearestObject() != null)
         {
             if (going)
@@ -85,5 +88,13 @@ public class Movement : MonoBehaviour
         return nearestObj;
     }
 
+    public void Upgrade() {
+        speed += SPEED_INC_ON_UPGRADE;
+    }
 
+    private void DetectUpgrade() {
+        if (Input.GetKeyDown(KeyCode.L)) {
+            Upgrade();
+        }
+    }
 }

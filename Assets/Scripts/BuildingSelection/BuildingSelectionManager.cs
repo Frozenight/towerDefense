@@ -102,7 +102,6 @@ public class BuildingSelectionManager : MonoBehaviour
 
     void LateUpdate()
     {
-        // Debug.Log(rt.rect);
         DetectBuildingClick();
     }    
 }
