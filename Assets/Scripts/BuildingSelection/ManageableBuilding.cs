@@ -8,6 +8,10 @@ public class ManageableBuilding : MonoBehaviour {
     public virtual string buildingName { 
         get { return "Uncategorised building"; } 
     }
+    
+    public virtual bool canDestroyManually  {
+        get { return true; }
+    }
 
     public int level { 
         get { return m_level; }

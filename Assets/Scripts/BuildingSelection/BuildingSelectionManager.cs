@@ -7,7 +7,8 @@ public class BuildingSelectionManager : MonoBehaviour
     [SerializeField] private ManageableBuildingTab manageBuildingTab;
     private string[] ClickableBuildingTags = new string[] 
     { 
-        "Tower"
+        "Tower",
+        "Base"
     }; 
     private bool manageTabOpen = false;
     private float minXOfTab = 0f;

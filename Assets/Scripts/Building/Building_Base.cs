@@ -2,17 +2,36 @@ using System;
 using UnityEngine;
 using System.Collections;
 
-public class Building_Base : MonoBehaviour
+public class Building_Base : ManageableBuilding
 {
+    private const int HEALTH_INCREASE = 25;
+
+    public override string buildingName { 
+        get { return "Recycling Centre"; }
+    }
+
+    public override bool canDestroyManually { 
+        get { return false; }
+    }
+
     [SerializeField] private int _maxHealth = 100;
 
+    private int _currMaxHealth;
     private int _currentHealth;
 
     public event Action<float> OnHealthChanged = delegate { };
 
+    public override void UpgradeBuilding()
+    {
+        m_level += 1;
+        _currMaxHealth += HEALTH_INCREASE;
+        // set health to new max value
+        ModifyHealth(_currMaxHealth - _currentHealth);
+    }
+
     private void OnEnable()
     {
-        _currentHealth = _maxHealth;
+        _currMaxHealth = _currentHealth = _maxHealth;
     }
 
     public void ModifyHealth(int amount)

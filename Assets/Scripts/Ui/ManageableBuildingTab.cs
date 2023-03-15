@@ -26,6 +26,7 @@ public class ManageableBuildingTab : MonoBehaviour
     }
 
     public void FillBuildingData(ManageableBuilding mBuilding) {
+        RemoveB.gameObject.SetActive(mBuilding.canDestroyManually);
         assignedBuilding = mBuilding;
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;
