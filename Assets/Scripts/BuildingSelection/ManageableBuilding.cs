@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ManageableBuilding : MonoBehaviour {
+    public static string NAME_UNCATEGORISED = "Uncategorised building";
+    public static string NAME_TURRET = "Turret";
+    public static string NAME_BASE = "Recycling Centre";
+
     public static ManageableBuilding selectedBuilding = null;
 
     public virtual string buildingName { 
-        get { return "Uncategorised building"; } 
+        get { return NAME_UNCATEGORISED; } 
     }
     
     public virtual bool canDestroyManually  {

@@ -27,7 +27,6 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DetectUpgrade();
         if(NearestObject() != null)
         {
             if (going)
@@ -90,11 +89,5 @@ public class Movement : MonoBehaviour
 
     public void Upgrade() {
         speed += SPEED_INC_ON_UPGRADE;
-    }
-
-    private void DetectUpgrade() {
-        if (Input.GetKeyDown(KeyCode.L)) {
-            Upgrade();
-        }
     }
 }

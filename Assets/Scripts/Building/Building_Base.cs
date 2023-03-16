@@ -7,7 +7,7 @@ public class Building_Base : ManageableBuilding
     private const int HEALTH_INCREASE = 25;
 
     public override string buildingName { 
-        get { return "Recycling Centre"; }
+        get { return NAME_BASE; }
     }
 
     public override bool canDestroyManually { 
@@ -27,6 +27,12 @@ public class Building_Base : ManageableBuilding
         _currMaxHealth += HEALTH_INCREASE;
         // set health to new max value
         ModifyHealth(_currMaxHealth - _currentHealth);
+    }
+
+    public void UpgradeWorkers() {
+        var workers = GameObject.FindGameObjectsWithTag("Worker");
+        foreach (var w in workers)
+            w.GetComponent<Movement>().Upgrade();
     }
 
     private void OnEnable()

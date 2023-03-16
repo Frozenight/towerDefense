@@ -29,7 +29,7 @@ public class Turret : ManageableBuilding
     public Transform firePoint;
 
     public override string buildingName { 
-        get { return "Turret"; } 
+        get { return NAME_TURRET; } 
     }
 
     public override void UpgradeBuilding() { 

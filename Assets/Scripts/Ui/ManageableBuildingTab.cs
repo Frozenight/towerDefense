@@ -11,6 +11,7 @@ public class ManageableBuildingTab : MonoBehaviour
     private int animTime = 15; // 100 == 1 sec
     private float targetScale = 1.2f;
 
+    [SerializeField] private Button WorkerB;
     [SerializeField] private Button UpgradeB;
     [SerializeField] private Button RemoveB;
     [SerializeField] private RectTransform NameAndLevel;
@@ -27,6 +28,8 @@ public class ManageableBuildingTab : MonoBehaviour
 
     public void FillBuildingData(ManageableBuilding mBuilding) {
         RemoveB.gameObject.SetActive(mBuilding.canDestroyManually);
+        WorkerB.gameObject.SetActive(
+            mBuilding.buildingName == ManageableBuilding.NAME_BASE);
         assignedBuilding = mBuilding;
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;
@@ -35,6 +38,13 @@ public class ManageableBuildingTab : MonoBehaviour
     public void Upgrade() {
         assignedBuilding?.UpgradeBuilding();
         UpdateBuildingStats();
+    }
+
+    public void UpgradeWorkers() {
+        if (assignedBuilding is Building_Base) {
+            (assignedBuilding as Building_Base).UpgradeWorkers();
+            UpdateBuildingStats();
+        }
     }
 
     public void Destroy() {
