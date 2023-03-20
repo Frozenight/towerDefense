@@ -13,11 +13,11 @@ public class Store : MonoBehaviour
         
     }
 
-    public void BuyTurretOne(){
-        buildingManager.SelectTurret(buildingManager.standardTurretPrefab);
-    }
+    //public void BuyTurretOne(){
+    //    buildingManager.SelectTurret(buildingManager.standardTurretPrefab);
+    //}
 
-    public void BuyTurretTwo(){
-        buildingManager.SelectTurret(buildingManager.turretTwoPrefab);
-    }
+    //public void BuyTurretTwo(){
+    //    buildingManager.SelectTurret(buildingManager.turretTwoPrefab);
+    //}
 }
