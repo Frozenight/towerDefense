@@ -16,6 +16,9 @@ public class BuildingSelectionManager : MonoBehaviour
     private float minYOfTab = 0f;
     private float maxYOfTab = 0f;
 
+    private int clickType = -1;
+    RaycastHit lastRaycast;
+
     void Awake() {
         RectTransform rt = manageBuildingTab.GetComponent<RectTransform>();
         Vector3[] corners = new Vector3[4];
@@ -60,11 +63,11 @@ public class BuildingSelectionManager : MonoBehaviour
             Ray _ray = Camera.main.ScreenPointToRay(mousePos);
             if (Physics.Raycast(_ray, out _hit))
             {
-
-                Transform objTr = _hit.collider.transform;
-                while (objTr.parent != null)
-                    objTr = objTr.parent;
-                string objTag = objTr.gameObject.tag;
+                lastRaycast = _hit;
+                Transform objTransform = _hit.collider.transform;
+                while (objTransform.parent != null)
+                    objTransform = objTransform.parent;
+                string objTag = objTransform.gameObject.tag;
                 bool validClick = false;
                 foreach (string tag in ClickableBuildingTags)
                 {
@@ -78,14 +81,31 @@ public class BuildingSelectionManager : MonoBehaviour
                 }
                 if (validClick)
                 {
-                    SelectB(_hit);
+                    clickType = 0;
                 }
                 else
                 {
-                    UnselectB();
+                    clickType = 1;
                 }
-                // Debug.Log(objTr.name + " " + objTag + " " + validClick);
+                // Debug.Log(objTransform.name + " " + objTag + " " + validClick);
             }
+        } else if (Input.GetMouseButtonUp(0)) {
+            Vector3 mousePos = Input.mousePosition;            
+            if (PressedOnOpenTab(mousePos))
+                return;
+            RaycastHit _hit;
+            Ray _ray = Camera.main.ScreenPointToRay(mousePos);
+            if (Physics.Raycast(_ray, out _hit))
+            { 
+                if (lastRaycast.collider == _hit.collider) {
+                    if (clickType == 0) {
+                        SelectB(_hit);
+                    } else if (clickType == 1) {
+                        UnselectB();
+                    }
+                }
+            }
+            clickType = -1;
         }
     }
 
