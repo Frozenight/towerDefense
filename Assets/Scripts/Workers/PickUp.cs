@@ -20,7 +20,7 @@ public class PickUp : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Trash"))
         {
-            TrashManager.instance.trashObjects.Remove(other.gameObject.GetComponent<TrashObject>());
+            GameController.instance.trashObjects.Remove(other.gameObject.GetComponent<TrashObject>());
             Destroy(other.gameObject);
             GetComponent<Movement>().going = true;
         }

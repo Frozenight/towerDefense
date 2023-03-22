@@ -5,6 +5,7 @@ using System.Collections;
 public class Building_Base : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 100;
+    public GameOverScreen gameOverScreen;
 
     private int _currentHealth;
 
@@ -27,13 +28,17 @@ public class Building_Base : MonoBehaviour
     public void CheckForDeath()
     {
         if (_currentHealth <= 0)
+        {
+            GameController.instance.GameOver();
             StartCoroutine(destroyItself());
+        }
     }
 
     private IEnumerator destroyItself()
     {
         yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        
     }
 
 
