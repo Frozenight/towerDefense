@@ -2,49 +2,64 @@ using System;
 using UnityEngine;
 using System.Collections;
 
-public class Building_Base : MonoBehaviour
+public class Building_Base : MonoBehaviour, IGameController
 {
-    [SerializeField] private int _maxHealth = 100;
+    private int maxHealth;
     public GameOverScreen gameOverScreen;
 
     private int _currentHealth;
 
     public event Action<float> OnHealthChanged = delegate { };
 
-    private void OnEnable()
-    {
-        _currentHealth = _maxHealth;
-    }
-
     public void ModifyHealth(int amount)
     {
         _currentHealth += amount;
 
-        float currentHealthPct = (float)_currentHealth / (float)_maxHealth;
+        float currentHealthPct = (float)_currentHealth / (float)maxHealth;
         OnHealthChanged(currentHealthPct);
         CheckForDeath();
     }
 
     public void CheckForDeath()
     {
-        if (_currentHealth <= 0)
+        Debug.Log(gameObject.active);
+        if (_currentHealth <= 0 && gameObject.active)
         {
             GameController.instance.GameOver();
-            StartCoroutine(destroyItself());
+            gameObject.SetActive(false);
+            //StartCoroutine(destroyItself());
         }
     }
 
-    private IEnumerator destroyItself()
-    {
-        yield return new WaitForSeconds(0.5f);
-        gameObject.SetActive(false);
+    //private IEnumerator destroyItself()
+    //{
+    //    yield return new WaitForSeconds(0.5f);
+    //    gameObject.SetActive(false);
         
-    }
+    //}
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
             ModifyHealth(-10);
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.maxHealth = data.maxHealth;
+        _currentHealth = maxHealth;
+        Debug.Log(maxHealth + "TESTAS");
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.maxHealth = this.maxHealth;
+        Debug.Log(maxHealth + "TESTAS");
+    }
+
+    public void TestIncreaseHp()
+    {
+        maxHealth += 1000;
     }
 }

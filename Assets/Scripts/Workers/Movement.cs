@@ -34,8 +34,13 @@ public class Movement : MonoBehaviour
             if (going)
             {
                 var step = speed * Time.deltaTime; // calculate distance to move
+
                 transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+
                 transform.LookAt(targetPos);
+
+                transform.Rotate(new Vector3(-90, transform.rotation.y, transform.rotation.z));
+
                 if (Vector3.Distance(transform.position, targetPos) < 0.001f)
                 {
                     time = time + 1f * Time.deltaTime;
@@ -51,7 +56,10 @@ public class Movement : MonoBehaviour
             {
                 var step = speed * Time.deltaTime; // calculate distance to move
                 transform.position = Vector3.MoveTowards(transform.position, newTargetPos, step);
+
                 transform.LookAt(newTargetPos);
+                transform.Rotate(new Vector3(-90, transform.rotation.y, transform.rotation.z));
+
                 if (Vector3.Distance(transform.position, newTargetPos) < 0.001f)
                 {
                     time = time + 1f * Time.deltaTime;
@@ -69,7 +77,8 @@ public class Movement : MonoBehaviour
             var step = speed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
             transform.LookAt(targetPos);
-            
+            transform.Rotate(new Vector3(-90, transform.rotation.y, transform.rotation.z));
+
         }
     }
 

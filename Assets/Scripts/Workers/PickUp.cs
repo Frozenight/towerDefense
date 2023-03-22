@@ -23,6 +23,8 @@ public class PickUp : MonoBehaviour
             GameController.instance.trashObjects.Remove(other.gameObject.GetComponent<TrashObject>());
             Destroy(other.gameObject);
             GetComponent<Movement>().going = true;
+            GameController.instance.AddCountRecource("trash");
+            Debug.Log(GameController.instance.resources);
         }
     }
 }
