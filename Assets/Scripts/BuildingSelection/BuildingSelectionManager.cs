@@ -54,7 +54,7 @@ public class BuildingSelectionManager : MonoBehaviour
 
     private void DetectBuildingClick()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (CustomInput.GetOneTouchDown())
         {
             Vector3 mousePos = Input.mousePosition;            
             if (PressedOnOpenTab(mousePos))
@@ -89,7 +89,7 @@ public class BuildingSelectionManager : MonoBehaviour
                 }
                 // Debug.Log(objTransform.name + " " + objTag + " " + validClick);
             }
-        } else if (Input.GetMouseButtonUp(0)) {
+        } else if (CustomInput.GetNoTouchOrTouchUp()) {
             Vector3 mousePos = Input.mousePosition;            
             if (PressedOnOpenTab(mousePos))
                 return;
