@@ -26,6 +26,7 @@ public class Turret : ManageableBuilding
     public Transform partToRotate;
 
     public GameObject bulletPrefab;
+    public GameObject explosionPrefab;
     public Transform firePoint;
 
     public override string buildingName { 
@@ -93,6 +94,7 @@ public class Turret : ManageableBuilding
 
     void Fire(){
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject newSmoke = (GameObject)Instantiate(explosionPrefab, firePoint.position, firePoint.rotation);
         Ammunition bullet = newBullet.GetComponent<Ammunition>();
         if(bullet==null){
             return;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45140684, g: 0.50087464, b: 0.572204, a: 1}
+  m_IndirectSpecularColor: {r: 0.448739, g: 0.49754196, b: 0.56956106, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -745,7 +745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2489516281790752914, guid: 13f762d77bff78347beb4f735ede50d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.821982
+      value: -6.49
       objectReference: {fileID: 0}
     - target: {fileID: 2489516281790752914, guid: 13f762d77bff78347beb4f735ede50d7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -787,6 +787,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret_One 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7082213124776706894, guid: 13f762d77bff78347beb4f735ede50d7, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: f2c1ccfd8b5a0548da547c4705f5e0ea, type: 3}
+    - target: {fileID: 7082213124776706894, guid: 13f762d77bff78347beb4f735ede50d7, type: 3}
+      propertyPath: explosionPrefab
+      value: 
+      objectReference: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13f762d77bff78347beb4f735ede50d7, type: 3}
 --- !u!1 &1370970014 stripped
