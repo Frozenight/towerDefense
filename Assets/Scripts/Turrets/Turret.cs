@@ -31,7 +31,7 @@ public class Turret : ManageableBuilding
 
 
     public override string buildingName { 
-        get { return "Turret"; } 
+        get { return NAME_TURRET; } 
     }
 
     public override void UpgradeBuilding() { 

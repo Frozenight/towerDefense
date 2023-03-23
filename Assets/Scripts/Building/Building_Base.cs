@@ -2,14 +2,45 @@ using System;
 using UnityEngine;
 using System.Collections;
 
-public class Building_Base : MonoBehaviour, IGameController
+public class Building_Base : ManageableBuilding, IGameController
 {
     private int maxHealth;
     public GameOverScreen gameOverScreen;
 
+    private const int HEALTH_INCREASE = 50;
+
+    public override string buildingName { 
+        get { return NAME_BASE; }
+    }
+
+    public override bool canDestroyManually { 
+        get { return false; }
+    }
+
+
+    private int _currMaxHealth;
     private int _currentHealth;
 
     public event Action<float> OnHealthChanged = delegate { };
+
+    public override void UpgradeBuilding()
+    {
+        m_level += 1;
+        _currMaxHealth += HEALTH_INCREASE;
+        // set health to new max value
+        ModifyHealth(_currMaxHealth - _currentHealth);
+    }
+
+    public void UpgradeWorkers() {
+        var workers = GameObject.FindGameObjectsWithTag("Worker");
+        foreach (var w in workers)
+            w.GetComponent<Movement>().Upgrade();
+    }
+
+    private void OnEnable()
+    {
+        _currMaxHealth = _currentHealth = _maxHealth;
+    }
 
     public void ModifyHealth(int amount)
     {

@@ -5,6 +5,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Movement : MonoBehaviour, IGameController
 {
+    private const float SPEED_INC_ON_UPGRADE = 3f;
+
     public List<TrashObject> trashObjects;
     private float speed;
     public bool going = false;
@@ -115,5 +117,9 @@ public class Movement : MonoBehaviour, IGameController
     public void IncreaseMS()
     {
         speed += 1f;
+    }
+    
+    public void Upgrade() {
+        speed += SPEED_INC_ON_UPGRADE;
     }
 }
