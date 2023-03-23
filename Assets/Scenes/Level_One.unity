@@ -6639,7 +6639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3824919055262024542, guid: 66e9156d526d48a438e80460992ed1eb, type: 3}
       propertyPath: speed
-      value: 10
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3824919055262024542, guid: 66e9156d526d48a438e80460992ed1eb, type: 3}
       propertyPath: PointB
