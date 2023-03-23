@@ -4,24 +4,13 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    float health;
-
-    //enemy gets hit
-    //damage here is the damage dealt by the player
+    public float health;
     public void GetHit(float damage)
     {
-
-        health -= damage;
-        if (health <= 0)
-            Die();
-        else
-            gameObject.GetComponent<Animator>().Play("getHit");
-
+        health -= damage;;
     }
-
-    void Die()
+    public float getHealth()
     {
-        gameObject.GetComponent<Animator>().Play("death");
-        Destroy(gameObject, 5);
+        return health;
     }
 }
