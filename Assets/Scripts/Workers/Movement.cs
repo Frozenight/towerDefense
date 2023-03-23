@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviour, IGameController
 {
     public List<TrashObject> trashObjects;
-    public float speed = 1f;
+    private float speed;
     public bool going = false;
     public GameObject PointB;     //end point of movement (resource collection point)
 
     private float time;
     private float timeDelay;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        trashObjects = TrashManager.instance.trashObjects;
+        trashObjects = GameController.instance.trashObjects;
         //transform.position = PointA.transform.position;
         //going = true;
         time = 0f;
@@ -25,13 +27,21 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(NearestObject() != null)
+        Vector3 targetPos = new Vector3(PointB.transform.position.x, transform.position.y, PointB.transform.position.z);
+        if (NearestObject() != null)
         {
+            Vector3 newTargetPos = new Vector3(NearestObject().transform.position.x, transform.position.y, NearestObject().transform.position.z);
             if (going)
             {
                 var step = speed * Time.deltaTime; // calculate distance to move
-                transform.position = Vector3.MoveTowards(transform.position, PointB.transform.position, step);
-                if (Vector3.Distance(transform.position, PointB.transform.position) < 0.001f)
+
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+
+                transform.LookAt(targetPos);
+
+                transform.Rotate(new Vector3(-90, transform.rotation.y, transform.rotation.z));
+
+                if (Vector3.Distance(transform.position, targetPos) < 0.001f)
                 {
                     time = time + 1f * Time.deltaTime;
 
@@ -45,8 +55,12 @@ public class Movement : MonoBehaviour
             else
             {
                 var step = speed * Time.deltaTime; // calculate distance to move
-                transform.position = Vector3.MoveTowards(transform.position, NearestObject().transform.position, step);
-                if (Vector3.Distance(transform.position, NearestObject().transform.position) < 0.001f)
+                transform.position = Vector3.MoveTowards(transform.position, newTargetPos, step);
+
+                transform.LookAt(newTargetPos);
+                transform.Rotate(new Vector3(-90, transform.rotation.y, transform.rotation.z));
+
+                if (Vector3.Distance(transform.position, newTargetPos) < 0.001f)
                 {
                     time = time + 1f * Time.deltaTime;
 
@@ -61,7 +75,10 @@ public class Movement : MonoBehaviour
         else
         {
             var step = speed * Time.deltaTime; // calculate distance to move
-            transform.position = Vector3.MoveTowards(transform.position, PointB.transform.position, step);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
+            transform.LookAt(targetPos);
+            transform.Rotate(new Vector3(-90, transform.rotation.y, transform.rotation.z));
+
         }
     }
 
@@ -85,5 +102,18 @@ public class Movement : MonoBehaviour
         return nearestObj;
     }
 
+    public void LoadData(GameData data)
+    {
+        this.speed = data.workerSpeed;
+    }
 
+    public void SaveData(ref GameData data)
+    {
+        data.workerSpeed = this.speed;
+    }
+
+    public void IncreaseMS()
+    {
+        speed += 1f;
+    }
 }

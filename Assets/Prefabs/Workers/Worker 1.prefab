@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3824919055262024542}
   - component: {fileID: 3181633764091618994}
   - component: {fileID: 4119232705090752218}
+  - component: {fileID: -484372534141458357}
   m_Layer: 0
   m_Name: Worker 1
   m_TagString: Untagged
@@ -29,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3709994397645751020}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1.1352429, y: 0.2, z: -3.474772}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &1123796568259041267
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -116,7 +117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trashObjects: []
-  speed: 1
   going: 0
   PointB: {fileID: 0}
 --- !u!65 &3181633764091618994
@@ -146,5 +146,17 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 46
   m_CollisionDetection: 0
+--- !u!114 &-484372534141458357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3709994397645751020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3eb80471a19ae4f815e7da7a55a4e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

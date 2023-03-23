@@ -35,7 +35,7 @@ public class Ammunition : MonoBehaviour
         transform.Translate(dir.normalized*distancePerFrame, Space.World);
     }
 
-    void HitTarget(){
-        Destroy(gameObject);
+    public bool HitTarget(){
+        return true;
     }
 }

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Turret : ManageableBuilding
 {
-
+    public bool IsShooting;
     private const float INCREASE_DAMAGE = 5f;
     private const float INCREASE_FIRERATE_MULT = 1.1f;
     private const float INCREASE_RANGE = 2.5f;
 
     public Transform target;
+    private EnemyHealth nearestEnemyHealth;
 
     [Header("Attributes")]
 
@@ -28,6 +29,7 @@ public class Turret : ManageableBuilding
     public GameObject bulletPrefab;
     public GameObject explosionPrefab;
     public Transform firePoint;
+
 
     public override string buildingName { 
         get { return "Turret"; } 
@@ -49,12 +51,11 @@ public class Turret : ManageableBuilding
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating ("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating ("UpdateTarget", 0f, 0.1f);
     }
 
     void UpdateTarget()
     {
-
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
@@ -68,7 +69,9 @@ public class Turret : ManageableBuilding
 
         if(nearestEnemy!=null&&shortestDistance<range){
             target=nearestEnemy.transform;
-        }else{
+            nearestEnemyHealth = nearestEnemy.GetComponent<EnemyHealth>();
+        }
+        else{
             target=null;
         }
     }
@@ -77,15 +80,17 @@ public class Turret : ManageableBuilding
     void Update()
     {
         if(target==null){
+            IsShooting = false;
             return;
         }
-
+        IsShooting = true;
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = lookRotation.eulerAngles;
         partToRotate.rotation = Quaternion.Euler(-90f, rotation.y, 180f);
 
         if(fireCountdown<=0f){
+            
             Fire();
             fireCountdown=1f/fireRate;
         }
@@ -100,6 +105,10 @@ public class Turret : ManageableBuilding
             return;
         }
         bullet.Seek(target);
+        if (bullet.HitTarget() == true)
+        {
+            nearestEnemyHealth.GetHit(damage);
+        }
     }
 
     void OnDrawGizmosSelected ()

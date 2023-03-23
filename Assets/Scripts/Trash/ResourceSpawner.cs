@@ -40,7 +40,7 @@ public class ResourceSpawner: MonoBehaviour
 
             trash = Instantiate(objectToSpawn, randomPosition, Quaternion.identity).GetComponent<TrashObject>();
 
-            TrashManager.instance.AddTrash(trash);
+            GameController.instance.AddTrash(trash);
 
             spawnNumber = spawnNumber - 1;
         }
@@ -52,7 +52,7 @@ public class ResourceSpawner: MonoBehaviour
 
         yield return new WaitForSeconds(spawnTimer);
 
-        if(TrashManager.instance.trashObjects.Count == 0)
+        if(GameController.instance.trashObjects.Count == 0)
         {
             spawnNumber = 5;
             while (spawnNumber != 0)
@@ -67,7 +67,7 @@ public class ResourceSpawner: MonoBehaviour
 
                 trash = Instantiate(objectToSpawn, randomPosition, Quaternion.identity).GetComponent<TrashObject>();
 
-                TrashManager.instance.AddTrash(trash);
+                GameController.instance.AddTrash(trash);
 
                 spawnNumber = spawnNumber - 1;
             } 
