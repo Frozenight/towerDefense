@@ -56,6 +56,7 @@ MonoBehaviour:
   enemyTag: Enemy
   partToRotate: {fileID: 7674483468749312479}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
+  explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
   firePoint: {fileID: 2489516281790752914}
   IsShooting: 0
 --- !u!114 &6146665401972950633
