@@ -783,6 +783,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2103712853824325487, guid: 9e4d2023fbe50a94da5b91fa9d53f5af, type: 3}
+      propertyPath: waveComponents.enemyAmount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2103712853824325487, guid: 9e4d2023fbe50a94da5b91fa9d53f5af, type: 3}
+      propertyPath: waveComponents.enemyPrefab
+      value: 
+      objectReference: {fileID: 8378590293030824765, guid: ed430beea7457244ab0937ebae4d7e42, type: 3}
+    - target: {fileID: 2103712853824325487, guid: 9e4d2023fbe50a94da5b91fa9d53f5af, type: 3}
       propertyPath: waveComponents.Array.data[0].enemyPrefab
       value: 
       objectReference: {fileID: 8378590293030824765, guid: ed430beea7457244ab0937ebae4d7e42, type: 3}
@@ -995,6 +1003,10 @@ PrefabInstance:
     - target: {fileID: 188491464260347585, guid: e966bec628e28854b83dcba70d72485f, type: 3}
       propertyPath: m_Name
       value: WorkerAnimated
+      objectReference: {fileID: 0}
+    - target: {fileID: 188491464260347585, guid: e966bec628e28854b83dcba70d72485f, type: 3}
+      propertyPath: m_TagString
+      value: Worker
       objectReference: {fileID: 0}
     - target: {fileID: 2861155839705326640, guid: e966bec628e28854b83dcba70d72485f, type: 3}
       propertyPath: m_IsTrigger
@@ -1221,7 +1233,6 @@ MonoBehaviour:
   fileName: data
   trashObjects: []
   gameOverScreen: {fileID: 1286586780}
-  canvas: {fileID: 840966346}
   resources: 0
   trashResourceGainAmount: 2
 --- !u!4 &513332494
@@ -1666,6 +1677,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2979742994746471136, guid: cc2b3ed3decfc4943bcd417034086433, type: 3}
   m_PrefabInstance: {fileID: 2116232229}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &821019008 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2103712853824325487, guid: 9e4d2023fbe50a94da5b91fa9d53f5af, type: 3}
+  m_PrefabInstance: {fileID: 386251066}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422740755d527cf4a96eb6053f0b82e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &840966342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,6 +1808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer_text: {fileID: 1682455062}
   timer: {fileID: 329712901}
+  spawner: {fileID: 821019008}
   startButton: {fileID: 383432272}
 --- !u!114 &840966348
 MonoBehaviour:
@@ -2622,7 +2645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3190654975210168334, guid: 13f762d77bff78347beb4f735ede50d7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8161781696085591913, guid: 13f762d77bff78347beb4f735ede50d7, type: 3}
       propertyPath: m_IsActive

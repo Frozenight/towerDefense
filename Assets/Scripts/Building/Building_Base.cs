@@ -34,7 +34,7 @@ public class Building_Base : ManageableBuilding, IGameController
     public void UpgradeWorkers() {
         var workers = GameObject.FindGameObjectsWithTag("Worker");
         foreach (var w in workers)
-            w.GetComponent<Movement>().Upgrade();
+            w.GetComponent<MovementAnimated>().Upgrade();
     }
 
     private void OnEnable()
@@ -58,6 +58,7 @@ public class Building_Base : ManageableBuilding, IGameController
         {
             GameController.instance.GameOver();
             gameObject.SetActive(false);
+
             //StartCoroutine(destroyItself());
         }
     }

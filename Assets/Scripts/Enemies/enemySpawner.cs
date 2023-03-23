@@ -7,7 +7,7 @@ public class enemySpawner : MonoBehaviour
     public float spawnCoolDown = 1f;
     float spawnCoolDownRemaining = 0;
     float offsetZ = 5;
-   
+
 
     [System.Serializable]
     public class WaveComponent {
@@ -16,51 +16,25 @@ public class enemySpawner : MonoBehaviour
         [System.NonSerialized]
         public int spawned = 0;
     }
-    public WaveComponent[] waveComponents;
+    public WaveComponent waveComponents;
 
-    bool startSpawn = false;
+    public bool startSpawn {get; set;}
     // Start is called before the first frame update
     void Start()
     {
-       
+        startSpawn = false;
     }
 
     // Update is called once per frame
-    void Update()
+
+    public void spawnWave()
     {
-
-        if (Input.GetButtonDown("Fire2"))
+        for(int i = 0; i < waveComponents.enemyAmount; i++)
         {
-            startSpawn = true;
+            var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
+            Instantiate(waveComponents.enemyPrefab, transform.position + offset, Quaternion.identity);
+            
         }
-        spawnWave();
-    }
-    void spawnWave()
-    {
-        bool didSpawn = false;
-        spawnCoolDownRemaining -= Time.deltaTime;
-        if (spawnCoolDownRemaining < 0 && startSpawn == true)
-        {
-            spawnCoolDownRemaining = spawnCoolDown;
-
-            foreach (WaveComponent wc in waveComponents)
-            {
-                if (wc.spawned < wc.enemyAmount)
-                {
-                    wc.spawned++;
-                    var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
-                    Instantiate(wc.enemyPrefab, transform.position + offset, Quaternion.identity);
-                    didSpawn = true;
-                    break;
-                }
-            }
-
-            if (didSpawn == false)
-            {
-
-                Destroy(gameObject);
-
-            }
-        }
+        waveComponents.enemyAmount++;
     }
 }

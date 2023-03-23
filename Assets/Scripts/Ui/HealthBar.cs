@@ -10,13 +10,13 @@ public class HealthBar : MonoBehaviour
 
     private void Awake()
     {
-        if(GetComponentInParent<Building_Base>().isActiveAndEnabled)
         GetComponentInParent<Building_Base>().OnHealthChanged += HandleHealthChanged;
     }
 
     private void HandleHealthChanged(float pct)
-    {
-        StartCoroutine(ChangeToPct(pct));
+    {  
+        if(this.isActiveAndEnabled)
+            StartCoroutine(ChangeToPct(pct));
     }
 
     private IEnumerator ChangeToPct(float pct)

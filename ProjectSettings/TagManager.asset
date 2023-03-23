@@ -8,6 +8,7 @@ TagManager:
   - Tower
   - Trash
   - Base
+  - Worker
   layers:
   - Default
   - TransparentFX

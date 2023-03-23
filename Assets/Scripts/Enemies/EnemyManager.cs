@@ -25,7 +25,6 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-       
         MainBase = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
         health = gameObject.GetComponent<EnemyHealth>();
         MainBaseTransform = MainBase.transform;
@@ -69,11 +68,12 @@ public class EnemyManager : MonoBehaviour
             MainBase.ModifyHealth(damage);
             waitTime = TimeBetweenAttacks;
         }
-    
+
         if (MainBase.maxHealth <= 0)
         {
             _currentState = State.Idle;
         }
+
     }
 
     private void _Die()

@@ -11,9 +11,10 @@ public class GameController : MonoBehaviour
     public static GameController instance { get; private set; }
     public List<TrashObject> trashObjects;
     public GameOverPowerUP gameOverScreen;
-    public Canvas canvas;
     public int resources = 0;
     public int trashResourceGainAmount;
+    public Rounds rounds;
+
 
     private GameData gameData;
     private List<IGameController> gameControllerObjects;
@@ -31,8 +32,9 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        rounds.NewGame();
         gameOverScreen.Setup();
-        canvas.gameObject.SetActive(false);
+        
     }
 
     public void AddCountRecource(string name)

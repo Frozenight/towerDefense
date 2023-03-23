@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnCoolDown: 10
   waveComponents:
-  - enemyPrefab: {fileID: 4447868189530895501, guid: 765a62ea394fb404f9d292eb1bd77985, type: 3}
+  - enemyPrefab: {fileID: 8378590293030824765, guid: ed430beea7457244ab0937ebae4d7e42, type: 3}
     enemyAmount: 1
