@@ -10,16 +10,13 @@ public class GameController : MonoBehaviour
     [SerializeField] private string fileName;
     public static GameController instance { get; private set; }
     public List<TrashObject> trashObjects;
-    public GameOverScreen gameOverScreen;
+    public GameOverPowerUP gameOverScreen;
     public int resources = 0;
     public int trashResourceGainAmount;
 
     private GameData gameData;
     private List<IGameController> gameControllerObjects;
     private FileDataHandler dataHandler;
-
-    public  Building_Base building_base;
-    public Building_Base building_base2;
 
     private void Awake()
     {
@@ -34,8 +31,6 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         gameOverScreen.Setup();
-        building_base.TestIncreaseHp();
-        building_base2.TestIncreaseHp();
     }
 
     public void AddCountRecource(string name)

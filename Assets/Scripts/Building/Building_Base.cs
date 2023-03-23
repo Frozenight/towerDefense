@@ -60,6 +60,6 @@ public class Building_Base : MonoBehaviour, IGameController
 
     public void TestIncreaseHp()
     {
-        maxHealth += 1000;
+        maxHealth += 100;
     }
 }

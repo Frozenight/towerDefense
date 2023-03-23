@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviour, IGameController
 {
     public List<TrashObject> trashObjects;
-    public float speed = 1f;
+    private float speed;
     public bool going = false;
     public GameObject PointB;     //end point of movement (resource collection point)
 
@@ -102,5 +102,18 @@ public class Movement : MonoBehaviour
         return nearestObj;
     }
 
+    public void LoadData(GameData data)
+    {
+        this.speed = data.workerSpeed;
+    }
 
+    public void SaveData(ref GameData data)
+    {
+        data.workerSpeed = this.speed;
+    }
+
+    public void IncreaseMS()
+    {
+        speed += 1f;
+    }
 }
