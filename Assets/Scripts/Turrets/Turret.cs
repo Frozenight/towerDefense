@@ -10,6 +10,7 @@ public class Turret : ManageableBuilding
     private const float INCREASE_RANGE = 2.5f;
 
     public Transform target;
+    private EnemyHealth nearestEnemyHealth;
 
     [Header("Attributes")]
 
@@ -67,7 +68,9 @@ public class Turret : ManageableBuilding
 
         if(nearestEnemy!=null&&shortestDistance<range){
             target=nearestEnemy.transform;
-        }else{
+            nearestEnemyHealth = nearestEnemy.GetComponent<EnemyHealth>();
+        }
+        else{
             target=null;
         }
     }
@@ -98,6 +101,10 @@ public class Turret : ManageableBuilding
             return;
         }
         bullet.Seek(target);
+        if (bullet.HitTarget() == true)
+        {
+            nearestEnemyHealth.GetHit(damage);
+        }
     }
 
     void OnDrawGizmosSelected ()
