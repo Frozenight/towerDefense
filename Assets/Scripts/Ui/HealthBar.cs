@@ -10,6 +10,7 @@ public class HealthBar : MonoBehaviour
 
     private void Awake()
     {
+        if(GetComponentInParent<Building_Base>().isActiveAndEnabled)
         GetComponentInParent<Building_Base>().OnHealthChanged += HandleHealthChanged;
     }
 

@@ -70,7 +70,7 @@ public class EnemyManager : MonoBehaviour
             waitTime = TimeBetweenAttacks;
         }
     
-        if (MainBase.getCurretHeealth() <= 0)
+        if (MainBase.maxHealth <= 0)
         {
             _currentState = State.Idle;
         }

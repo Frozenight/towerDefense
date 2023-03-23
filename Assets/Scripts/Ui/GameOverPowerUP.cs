@@ -9,7 +9,7 @@ public class GameOverPowerUP : MonoBehaviour
     public Building_Base building_base;
     public Building_Base building_base2;
 
-    public Movement WorkerMovement;
+    public MovementAnimated WorkerMovement;
 
     public GameOverScreen gameOverScreen;
     public void Setup()

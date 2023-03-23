@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Building_Base : ManageableBuilding, IGameController
 {
-    private int maxHealth;
+    public int maxHealth { get; private set; }
     public GameOverScreen gameOverScreen;
 
     private const int HEALTH_INCREASE = 50;
@@ -39,7 +39,7 @@ public class Building_Base : ManageableBuilding, IGameController
 
     private void OnEnable()
     {
-        _currMaxHealth = _currentHealth = _maxHealth;
+        _currMaxHealth = _currentHealth = maxHealth;
     }
 
     public void ModifyHealth(int amount)

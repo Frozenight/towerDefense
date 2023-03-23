@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementAnimated : MonoBehaviour
+public class MovementAnimated : MonoBehaviour, IGameController
 {
+
+    private const float SPEED_INC_ON_UPGRADE = 3f;
+
     public List<TrashObject> trashObjects;
     public float speed = 1f;
     public bool goingBackward = false;
@@ -15,7 +18,7 @@ public class MovementAnimated : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        trashObjects = TrashManager.instance.trashObjects;
+        trashObjects = GameController.instance.trashObjects;
         time = 0f;
         timeDelay = 0.7f;
         PickUp = GetComponent<PickUpAnimated>();
@@ -82,14 +85,23 @@ public class MovementAnimated : MonoBehaviour
         return nearestObj;
     }
 
-    private void Delay(float time, float delay, bool condition)
+    public void LoadData(GameData data)
     {
-        time += Time.deltaTime;
-        if (time > timeDelay)
-        {
-            goingBackward = condition;
-        }
-        time = 0f;
+        this.speed = data.workerSpeed;
     }
 
+    public void SaveData(ref GameData data)
+    {
+        data.workerSpeed = this.speed;
+    }
+
+    public void IncreaseMS()
+    {
+        speed += 1f;
+    }
+
+    public void Upgrade()
+    {
+        speed += SPEED_INC_ON_UPGRADE;
+    }
 }

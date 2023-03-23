@@ -26,7 +26,7 @@ public class PickUpAnimated : MonoBehaviour
             time += Time.deltaTime;
             if (time > timeDelay)
             {
-                TrashManager.instance.trashObjects.Remove(other.gameObject.GetComponent<TrashObject>());
+                GameController.instance.trashObjects.Remove(other.gameObject.GetComponent<TrashObject>());
                 Destroy(other.gameObject);
                 time = 0f;
                 other = null;
@@ -40,7 +40,8 @@ public class PickUpAnimated : MonoBehaviour
         {
             this.other = other;
             HasTrash = true;
-            
+            GameController.instance.AddCountRecource("trash");
+            Debug.Log(GameController.instance.resources);
         }
     }
 }
