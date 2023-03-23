@@ -54,7 +54,7 @@ public class Timer : MonoBehaviour
             timer_text.text  = "Building Time: ";
             timer_text.fontSize = 14;
             curreentTime = buildingTime;
-            timer_text.enabled = true;
+            //timer_text.enabled = true;
             timerOn = true;
         }
         else if (eventController.currentState == EventManager.Event.defending)
@@ -62,7 +62,7 @@ public class Timer : MonoBehaviour
             timer_text.text = "Time left: ";
             timer_text.fontSize = 20;
             curreentTime = defenseTime;
-            timer_text.enabled = true;
+            //timer_text.enabled = true;
             timerOn = true;
             if(GameBase.activeSelf)
             {
@@ -74,5 +74,10 @@ public class Timer : MonoBehaviour
     public void HideButton()
     {
         startButton.gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.onRoundChange -= ChangeSGameState;
     }
 }

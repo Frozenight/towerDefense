@@ -11,7 +11,8 @@ public class CameraMovement : MonoBehaviour
     public float swipeZMax = 10f;
     public float zoomYMin = 6f;
     public float zoomYMax = 30f;
-    
+
+    public bool disabled = false;
     private ScaleGestureRecognizer scaleGesture;
     private Vector3 lastPos;
     private float zoomSpeed = 15f;
@@ -21,7 +22,10 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        MoveByDrag();
+        if(!disabled)
+        {
+            MoveByDrag();
+        }
     }
 
     private void MoveByDrag()

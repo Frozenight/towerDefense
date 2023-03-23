@@ -17,6 +17,10 @@ public class BuildingSystem : MonoBehaviour
     bool Placing = false;
     bool Placed = false;
 
+    public CameraMovement cameraMovement;
+    public GameObject confirmButton;
+    public GameObject cancelButton;
+
     private PlaceableObject objectToPlace;
 
     #region Unity methods
@@ -111,6 +115,49 @@ public class BuildingSystem : MonoBehaviour
         }
 
         return array;
+    }
+
+    public void SpawnTile()
+    {
+        confirmButton.SetActive(true);
+        cancelButton.SetActive(true);
+        cameraMovement.disabled = true;
+        InitializeWithObject(prefab1);
+        Placing = true;
+        Placed = false;
+    }
+
+    public void Confirm()
+    {
+        if (CanBePlaced(objectToPlace))
+        {
+            objectToPlace.Place();
+            Vector3Int start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
+            TakeArea(start, objectToPlace.Size);
+            Placing = false;
+            Placed = true;
+
+        }
+        else
+        {
+            Destroy(objectToPlace.gameObject);
+            Placing = false;
+        }
+        cameraMovement.disabled = false;
+        cancelButton.SetActive(false);
+        confirmButton.SetActive(false);
+    }
+
+    public void Cancel()
+    {
+        if(!Placed)
+        {
+            Destroy(objectToPlace.gameObject);
+            Placing = false;
+            cameraMovement.disabled = false;
+            confirmButton.SetActive(false);
+            cancelButton.SetActive(false);
+        }
     }
 
     #endregion
