@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Twr1Lvl2Shoot
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: TurretArmature.001
+    m_Weight: 1
+  - m_Path: TurretArmature.001/main
+    m_Weight: 1
+  - m_Path: TurretArmature.001/main/Cube.013
+    m_Weight: 0
+  - m_Path: TurretArmature.001/main/gun
+    m_Weight: 1
+  - m_Path: TurretArmature.001/main/gun/Cube.014
+    m_Weight: 1
+  - m_Path: TurretArmature.001/main/gun/gun_end
+    m_Weight: 1
+  - m_Path: TurretArmature.001/main/roll
+    m_Weight: 0
+  - m_Path: TurretArmature.001/main/roll/Cube.015
+    m_Weight: 1
+  - m_Path: TurretArmature.001/main/roll/roll_end
+    m_Weight: 1
+  - m_Path: TurretArmature.001/wheel1
+    m_Weight: 0
+  - m_Path: TurretArmature.001/wheel1/Cube.003
+    m_Weight: 0
+  - m_Path: TurretArmature.001/wheel1/wheel1_end
+    m_Weight: 0
+  - m_Path: TurretArmature.001/wheel2
+    m_Weight: 0
+  - m_Path: TurretArmature.001/wheel2/Cube.004
+    m_Weight: 0
+  - m_Path: TurretArmature.001/wheel2/wheel2_end
+    m_Weight: 0

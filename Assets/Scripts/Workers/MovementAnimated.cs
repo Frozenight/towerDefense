@@ -17,7 +17,7 @@ public class MovementAnimated : MonoBehaviour
     {
         trashObjects = TrashManager.instance.trashObjects;
         time = 0f;
-        timeDelay = 1.4f;
+        timeDelay = 0.7f;
         PickUp = GetComponent<PickUpAnimated>();
     }
 

@@ -15,7 +15,7 @@ public class PickUpAnimated : MonoBehaviour
     {
         HasTrash = false;
         time = 0f;
-        timeDelay = 0.75f;
+        timeDelay = 0.1f;
     }
 
     // Update is called once per frame
@@ -40,6 +40,7 @@ public class PickUpAnimated : MonoBehaviour
         {
             this.other = other;
             HasTrash = true;
+            
         }
     }
 }
