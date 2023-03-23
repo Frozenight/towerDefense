@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2489516281790752914}
   - component: {fileID: 7082213124776706894}
-  - component: {fileID: 6146665401972950633}
   - component: {fileID: 5543876734551910077}
   - component: {fileID: 6316087922996731514}
   - component: {fileID: 105746014081162816}
@@ -211,6 +210,10 @@ PrefabInstance:
     - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 754daca3328808a4fa1f28432d005aba, type: 3}

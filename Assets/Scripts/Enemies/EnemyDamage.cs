@@ -16,7 +16,7 @@ public class EnemyDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (gameObject.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("attack"))
+         if (gameObject.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("attack") && MainBase.gameObject.active)
         {
             MainBase.ModifyHealth(damage);
         }
