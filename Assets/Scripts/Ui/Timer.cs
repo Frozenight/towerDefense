@@ -12,8 +12,8 @@ public class Timer : MonoBehaviour
 
     float curreentTime = 0f;
 
-    float buildingTime = 5f;
-    float defenseTime = 10f;
+    float buildingTime = 60f;
+    float defenseTime = 20f;
 
     bool timerOn = false;
 
@@ -54,15 +54,14 @@ public class Timer : MonoBehaviour
             timer_text.text  = "Building Time: ";
             timer_text.fontSize = 14;
             curreentTime = buildingTime;
-            //timer_text.enabled = true;
             timerOn = true;
+            startButton.gameObject.SetActive(true);
         }
         else if (eventController.currentState == EventManager.Event.defending)
         {
             timer_text.text = "Time left: ";
             timer_text.fontSize = 20;
             curreentTime = defenseTime;
-            //timer_text.enabled = true;
             timerOn = true;
             if(GameBase.activeSelf)
             {
@@ -74,6 +73,12 @@ public class Timer : MonoBehaviour
     public void HideButton()
     {
         startButton.gameObject.SetActive(false);
+    }
+
+    public void CheckForEndOfRound()
+    {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            eventController.ChangeGameState();
     }
 
     private void OnDestroy()
