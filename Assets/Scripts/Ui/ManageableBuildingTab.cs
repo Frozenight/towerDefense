@@ -17,6 +17,7 @@ public class ManageableBuildingTab : MonoBehaviour
     [SerializeField] private RectTransform NameAndLevel;
     [SerializeField] private TextMeshProUGUI NameText;
     [SerializeField] private TextMeshProUGUI LevelText;
+    [SerializeField] private TextMeshProUGUI PriceText;
     private ManageableBuilding assignedBuilding;
     private UnityAction m_closeTab;
 
@@ -33,6 +34,7 @@ public class ManageableBuildingTab : MonoBehaviour
         assignedBuilding = mBuilding;
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;
+        PriceText.text = "Upgrade price: " + mBuilding.upgrade_Price;
     }
 
     public void Upgrade() {
@@ -54,6 +56,7 @@ public class ManageableBuildingTab : MonoBehaviour
 
     private void UpdateBuildingStats() {
         LevelText.text = "Level: " + assignedBuilding.level;
+        PriceText.text = "Upgrade price: " + assignedBuilding.upgrade_Price;
     }
 
     IEnumerator LabelScaleAnim() {   

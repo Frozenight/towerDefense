@@ -21,7 +21,12 @@ public class ManageableBuilding : MonoBehaviour {
         get { return m_level; }
     }
 
+    public int upgrade_Price {
+        get { return m_upgrade_price; }
+    }
+
     protected int m_level = 1;
+    protected int m_upgrade_price = 5;
     
     [SerializeField] private GameObject[] UpgradeModels = new GameObject[] {};  
     private int nextModel = 0;
@@ -33,7 +38,7 @@ public class ManageableBuilding : MonoBehaviour {
         return UpgradeModels[nextModel-1].name;
     } }
 
-    public void DestroyBuilding() {
+    public virtual void DestroyBuilding() {
         Destroy(gameObject);
     }
 

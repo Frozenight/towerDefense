@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Building_Base : ManageableBuilding, IGameController
 {
+    private GameController gameController;
     public int maxHealth { get; private set; }
     public GameOverScreen gameOverScreen;
 
@@ -23,9 +24,20 @@ public class Building_Base : ManageableBuilding, IGameController
 
     public event Action<float> OnHealthChanged = delegate { };
 
+    private void Start()
+    {
+        GameObject temp = GameObject.Find("GameController");
+        gameController = temp.GetComponent<GameController>();
+    }
+
     public override void UpgradeBuilding()
     {
+        // not enough recourses
+        if (gameController.resources < m_upgrade_price)
+            return;
+        gameController.resources -= m_upgrade_price;
         m_level += 1;
+        m_upgrade_price += 5;
         _currMaxHealth += HEALTH_INCREASE;
         // set health to new max value
         ModifyHealth(_currMaxHealth - _currentHealth);
