@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public int resources = 0;
     public int trashResourceGainAmount;
     public Rounds rounds;
-
+    public OpenAiAPI aiAPI;
 
     private GameData gameData;
     private List<IGameController> gameControllerObjects;
@@ -50,6 +50,7 @@ public class GameController : MonoBehaviour
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.gameControllerObjects = FindAllGameControllerObjects();
         LoadGame();
+        aiAPI.GetData();
     }
 
     private List<IGameController> FindAllGameControllerObjects()
