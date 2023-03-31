@@ -6,6 +6,8 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer instance { get; private set; }
+
     [SerializeField] TextMeshProUGUI timer_text;
     [SerializeField] TextMeshProUGUI timer;
     [SerializeField] enemySpawner spawner;
@@ -24,6 +26,7 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
+        instance = this;
         EventManager.onRoundChange += ChangeSGameState;
         eventController = GetComponent<EventManager>();
         eventController.NewGame();
