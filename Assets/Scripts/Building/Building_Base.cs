@@ -26,8 +26,7 @@ public class Building_Base : ManageableBuilding, IGameController
 
     private void Start()
     {
-        GameObject temp = GameObject.Find("GameController");
-        gameController = temp.GetComponent<GameController>();
+        gameController = GameController.instance;
     }
 
     public override void UpgradeBuilding()

@@ -58,8 +58,7 @@ public class Turret : ManageableBuilding
     void Start()
     {
         InvokeRepeating ("UpdateTarget", 0f, 0.1f);
-                    GameObject temp = GameObject.Find("GameController");
-            gameController = temp.GetComponent<GameController>();
+        gameController = GameController.instance;
     }
 
     void UpdateTarget()
