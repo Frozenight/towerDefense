@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class Turret : ManageableBuilding
 {
+    
     public bool IsShooting;
     private const float INCREASE_DAMAGE = 5f;
     private const float INCREASE_FIRERATE_MULT = 1.1f;
     private const float INCREASE_RANGE = 2.5f;
 
-    public Transform target;
-    private EnemyHealth nearestEnemyHealth;
+    protected Transform target;
+    protected EnemyHealth nearestEnemyHealth;
 
     [Header("Attributes")]
 
     public float range = 15f;
 
     public float fireRate = 1f;
-    private float fireCountdown = 0f;
-    private float damage = 10f;
+    public float fireCountdown = 0f;
+    public float damage = 10f;
 
     [Header("Static")]
 
-    public string enemyTag= "Enemy";
+    protected string enemyTag= "Enemy";
 
     public Transform partToRotate;
 
@@ -35,6 +36,7 @@ public class Turret : ManageableBuilding
         get { return NAME_TURRET; } 
     }
 
+   
     public override void UpgradeBuilding() { 
         // Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
         range += INCREASE_RANGE;
@@ -49,12 +51,12 @@ public class Turret : ManageableBuilding
     }
 
     // Start is called before the first frame update
-    void Start()
+     void Start()
     {
         InvokeRepeating ("UpdateTarget", 0f, 0.1f);
     }
 
-    void UpdateTarget()
+    protected virtual void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
@@ -72,32 +74,35 @@ public class Turret : ManageableBuilding
             nearestEnemyHealth = nearestEnemy.GetComponent<EnemyHealth>();
         }
         else{
+
             target=null;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        if(target==null){
+        if (target == null)
+        {
             IsShooting = false;
             return;
         }
-        IsShooting = true;
+            IsShooting = true;
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = lookRotation.eulerAngles;
         partToRotate.rotation = Quaternion.Euler(-90f, rotation.y, 180f);
 
-        if(fireCountdown<=0f){
-            
-            Fire();
-            fireCountdown=1f/fireRate;
-        }
-        fireCountdown-= Time.deltaTime;
+        if (fireCountdown <= 0f)
+            {
+
+                Fire();
+                fireCountdown = 1f / fireRate;
+            }
+            fireCountdown -= Time.deltaTime;
     }
 
-    void Fire(){
+    protected virtual void Fire(){
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         GameObject newSmoke = (GameObject)Instantiate(explosionPrefab, firePoint.position, firePoint.rotation);
         Ammunition bullet = newBullet.GetComponent<Ammunition>();
@@ -108,12 +113,22 @@ public class Turret : ManageableBuilding
         if (bullet.HitTarget() == true)
         {
             nearestEnemyHealth.GetHit(damage);
+            Bullet_Effect();
         }
+    }
+    protected virtual void Bullet_Effect()
+    {
+        return;
     }
 
     void OnDrawGizmosSelected ()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    public Transform GetTarget()
+    {
+        return target;
     }
 }
