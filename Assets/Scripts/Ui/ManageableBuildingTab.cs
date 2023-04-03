@@ -18,8 +18,14 @@ public class ManageableBuildingTab : MonoBehaviour
     [SerializeField] private TextMeshProUGUI NameText;
     [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private TextMeshProUGUI PriceText;
+    [SerializeField] private TextMeshProUGUI Description;
+    [SerializeField] public Button Fire_Turret;
+    [SerializeField] public Button Frost_Turret;
+    [SerializeField] public Button Earth_Turret;
+    
     private ManageableBuilding assignedBuilding;
     private UnityAction m_closeTab;
+
 
     public UnityAction closeTab {
         set {
@@ -31,15 +37,50 @@ public class ManageableBuildingTab : MonoBehaviour
         RemoveB.gameObject.SetActive(mBuilding.canDestroyManually);
         WorkerB.gameObject.SetActive(
             mBuilding.buildingName == ManageableBuilding.NAME_BASE);
+        Fire_Turret.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET);
+        Frost_Turret.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET);
+        Earth_Turret.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET);
         assignedBuilding = mBuilding;
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;
         PriceText.text = "Upgrade price: " + mBuilding.upgrade_Price;
+        if (GameController.instance.aiAPI.gameObjects.Length != 0)
+        {
+            Description.text = GameController.instance.aiAPI.gameObjects[0].text;
+        }
+        if (assignedBuilding.level < 5)
+            SetInteractiveType(false);
+    }
+
+    private void SetInteractiveType(bool set)
+    {
+            Fire_Turret.interactable = set;
+            Frost_Turret.interactable = set;
+            Earth_Turret.interactable = set;
     }
 
     public void Upgrade() {
         assignedBuilding?.UpgradeBuilding();
         UpdateBuildingStats();
+    }
+
+    public void ChangeBiulding_EarthTurret()
+    {
+        assignedBuilding?.ChangeTypeEarth();
+        m_closeTab?.Invoke();
+
+    }
+
+    public void ChangeBiulding_FireTurret()
+    {
+        assignedBuilding?.ChangeTypeFire();
+        m_closeTab?.Invoke();
+    }
+
+    public void ChangeBiulding_FrostTurret()
+    {
+        assignedBuilding?.ChangeTypeFrost();
+        m_closeTab?.Invoke();
     }
 
     public void UpgradeWorkers() {
@@ -57,6 +98,8 @@ public class ManageableBuildingTab : MonoBehaviour
     private void UpdateBuildingStats() {
         LevelText.text = "Level: " + assignedBuilding.level;
         PriceText.text = "Upgrade price: " + assignedBuilding.upgrade_Price;
+        if (assignedBuilding.level >= 5)
+            SetInteractiveType(true);
     }
 
     IEnumerator LabelScaleAnim() {   

@@ -18,6 +18,12 @@ public class EnemyManager : MonoBehaviour
     public int damage;
     public float TimeBetweenAttacks;
     public float speed;
+    private float temp;
+
+    private float Slow_Amount;
+    private float Slow_Time;
+    private bool slowed = false;
+    float timer = 0;
 
     private EnemyHealth health;
     private Building_Base MainBase;
@@ -45,6 +51,11 @@ public class EnemyManager : MonoBehaviour
             _Idle();
         if (_currentState == State.Attack)
             _Attack();
+
+        if (slowed == true)
+        {
+            Delay();
+        }
     }
 
     private void _MoveTo()
@@ -82,8 +93,8 @@ public class EnemyManager : MonoBehaviour
 
     private void _Die()
     {
+        transform.gameObject.tag = "Untagged";
         _currentState = State.Die;
-        Debug.Log("Die");
         _animator.Play("death");
         StartCoroutine(die());
     }
@@ -97,5 +108,31 @@ public class EnemyManager : MonoBehaviour
     private void OnDestroy()
     {
         _roundController.CheckForEndOfRound();
+    }
+    
+    public void ReduceSpeed(float reduce, float reduce_time)
+    {
+        if (slowed == false)
+        {
+            Debug.Log("SlowHit");
+            temp = speed;
+            slowed = true;
+            speed = speed * reduce;
+            Slow_Time = reduce_time;
+        }
+    }
+    private void Delay()
+    {
+        if (timer < Slow_Time)
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            timer = 0;
+            slowed = false;
+            speed = temp;
+        }
+
     }
 }
