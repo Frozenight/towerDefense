@@ -6,6 +6,9 @@ public class ManageableBuilding : MonoBehaviour {
     public static string NAME_UNCATEGORISED = "Uncategorised building";
     public static string NAME_TURRET = "Turret";
     public static string NAME_BASE = "Recycling Centre";
+    public static string NAME_FIRE_TURRET = "Fire Turret";
+    public static string NAME_FROST_TURRET = "Frost Turret";
+    public static string NAME_EARTH_TURRET = "Earth Turret";
 
     public static ManageableBuilding selectedBuilding = null;
 
@@ -52,6 +55,14 @@ public class ManageableBuilding : MonoBehaviour {
             "This should only be visible if a building of this " + 
             "category has no overriding implementation.");
     }
+
+    //Methods for changing turret types
+    public virtual void ChangeTypeFire()
+    { }
+    public virtual void ChangeTypeFrost()
+    { }
+    public virtual void ChangeTypeEarth()
+    { }
 
     protected bool UpdateObjectModel(out GameObject newModel) {
         if (nextModel < UpgradeModels.Length) {
