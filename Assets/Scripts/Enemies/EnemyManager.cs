@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
     }
     private State _currentState;
     [SerializeField] private Animator _animator;
+    private Timer _roundController;
 
     public int damage;
     public float TimeBetweenAttacks;
@@ -35,6 +36,9 @@ public class EnemyManager : MonoBehaviour
         health = gameObject.GetComponent<EnemyHealth>();
         MainBaseTransform = MainBase.transform;
         _currentState = State.Moveto;
+
+        _roundController = Timer.instance;
+        Debug.Log(_roundController);
     }
 
     private void Update()
@@ -100,6 +104,12 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(4);
         Destroy(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        _roundController.CheckForEndOfRound();
+    }
+    
     public void ReduceSpeed(float reduce, float reduce_time)
     {
         if (slowed == false)
@@ -123,5 +133,6 @@ public class EnemyManager : MonoBehaviour
             slowed = false;
             speed = temp;
         }
+
     }
 }

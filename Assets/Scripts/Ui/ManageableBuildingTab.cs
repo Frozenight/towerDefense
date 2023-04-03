@@ -17,10 +17,12 @@ public class ManageableBuildingTab : MonoBehaviour
     [SerializeField] private RectTransform NameAndLevel;
     [SerializeField] private TextMeshProUGUI NameText;
     [SerializeField] private TextMeshProUGUI LevelText;
+    [SerializeField] private TextMeshProUGUI PriceText;
     [SerializeField] private TextMeshProUGUI Description;
     [SerializeField] public Button Fire_Turret;
     [SerializeField] public Button Frost_Turret;
     [SerializeField] public Button Earth_Turret;
+    
     private ManageableBuilding assignedBuilding;
     private UnityAction m_closeTab;
 
@@ -41,6 +43,7 @@ public class ManageableBuildingTab : MonoBehaviour
         assignedBuilding = mBuilding;
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;
+        PriceText.text = "Upgrade price: " + mBuilding.upgrade_Price;
         if (GameController.instance.aiAPI.gameObjects.Length != 0)
         {
             Description.text = GameController.instance.aiAPI.gameObjects[0].text;
@@ -94,6 +97,7 @@ public class ManageableBuildingTab : MonoBehaviour
 
     private void UpdateBuildingStats() {
         LevelText.text = "Level: " + assignedBuilding.level;
+        PriceText.text = "Upgrade price: " + assignedBuilding.upgrade_Price;
         if (assignedBuilding.level >= 5)
             SetInteractiveType(true);
     }

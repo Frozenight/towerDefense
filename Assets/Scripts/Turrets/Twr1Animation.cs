@@ -21,7 +21,6 @@ public class Twr1Animation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(turretScript.IsShooting);
         if (turretScript.IsShooting)
         {
             anim.SetBool("IsShooting", true);

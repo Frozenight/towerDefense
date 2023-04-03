@@ -36,6 +36,8 @@ public class Rounds : MonoBehaviour
         eventController.currentState = EventManager.Event.preparation;
     }
 
+
+
     private void ChangeRoundText()
     {
         rounds.text = current_round.ToString();

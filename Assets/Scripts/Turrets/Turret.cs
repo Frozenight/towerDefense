@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Turret : ManageableBuilding
 {
-    
+    private GameController gameController;
+
     public bool IsShooting;
     private const float INCREASE_DAMAGE = 5f;
     private const float INCREASE_FIRERATE_MULT = 1.1f;
@@ -39,10 +40,14 @@ public class Turret : ManageableBuilding
    
     public override void UpgradeBuilding() { 
         // Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
+        if (gameController.resources < m_upgrade_price)
+            return;
         range += INCREASE_RANGE;
         fireRate *= INCREASE_FIRERATE_MULT;
         damage += INCREASE_DAMAGE;
-        m_level++;
+        gameController.resources -= m_upgrade_price;
+        m_level += 1;
+        m_upgrade_price += 5;
         if (UpdateObjectModel(out GameObject newModel)) {
             partToRotate = transform.Find(currModelName + "/Armature/main");
             // Debug.Log(currModelName + "/Armature/main");
@@ -54,6 +59,7 @@ public class Turret : ManageableBuilding
      void Start()
     {
         InvokeRepeating ("UpdateTarget", 0f, 0.1f);
+        gameController = GameController.instance;
     }
 
     protected virtual void UpdateTarget()
@@ -119,6 +125,19 @@ public class Turret : ManageableBuilding
     protected virtual void Bullet_Effect()
     {
         return;
+    }
+
+    public override void DestroyBuilding()
+    {
+        int sell_price = 0;
+        int one_level_price = 5;
+        for (int i = 0; i < m_level; i++)
+        {
+            sell_price += one_level_price;
+            one_level_price += 5;
+        }
+        gameController.resources += sell_price / 2;
+        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected ()

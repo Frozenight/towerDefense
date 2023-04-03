@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     private Canvas _mainMenuCanvas;
+
     public string Level_One;
 
     private void Start()
@@ -25,4 +26,6 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+
 }
