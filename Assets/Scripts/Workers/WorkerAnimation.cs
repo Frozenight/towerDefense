@@ -20,6 +20,7 @@ public class WorkerAnimation : MonoBehaviour
     {
         if(animator != null)
         {
+
             //to go towards trash
             if(worker.goingBackward == false && pickup.HasTrash == false)
             {

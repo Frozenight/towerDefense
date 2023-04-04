@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
     public delegate void OnRoundChange();
     public static event OnRoundChange onRoundChange;
+    public static UnityAction changeWorkerState;
 
     public Event currentState;
     public enum Event
@@ -32,7 +34,14 @@ public class EventManager : MonoBehaviour
 
     private void UpdateCurrentState(Event newState)
     {
+        if (ChangingToOrFromDefending(newState)) {
+            changeWorkerState?.Invoke();
+        }
         currentState = newState;
         onRoundChange?.Invoke();
+    }
+
+    private bool ChangingToOrFromDefending(Event newState) {
+        return currentState == Event.defending || newState == Event.defending;
     }
 }

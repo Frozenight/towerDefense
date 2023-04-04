@@ -7,17 +7,21 @@ public class MovementAnimated : MonoBehaviour, IGameController
 
     private const float SPEED_INC_ON_UPGRADE = 3f;
 
+    public static bool ongoingRaid {get; private set;}
+
     public List<TrashObject> trashObjects;
     public float speed = 1f;
+    private float savedSpeed;
     public bool goingBackward = false;
     public GameObject PointB;     //end point of movement (resource collection point)
     private float time;
     private float timeDelay;
     private PickUpAnimated PickUp;
-
+    private bool detectedRaidStart = true;
     // Start is called before the first frame update
     void Start()
     {
+        EventManager.changeWorkerState = ChangeRaidState;
         trashObjects = GameController.instance.trashObjects;
         time = 0f;
         timeDelay = 0.7f;
@@ -29,8 +33,14 @@ public class MovementAnimated : MonoBehaviour, IGameController
     {
         if (NearestObject() != null)
         {
-            if (goingBackward && PickUp.HasTrash)
+            if (!detectedRaidStart) {
+                goingBackward = true;
+                detectedRaidStart = true;
+            }
+
+            if (goingBackward)
             {
+                Debug.Log("1");
                 transform.LookAt(PointB.transform.position);
                 var step = speed * Time.deltaTime; // calculate distance to move
                 transform.position = Vector3.MoveTowards(transform.position, PointB.transform.position, step);
@@ -39,6 +49,10 @@ public class MovementAnimated : MonoBehaviour, IGameController
                 {
                     PickUp.HasTrash = false;
                     goingBackward = false;
+                    // Stops worker at base until ongoingRaid is set to false 
+                    if (ongoingRaid) {
+                        speed = 0f;
+                    }
                 }
             }
             if (!goingBackward && !PickUp.HasTrash)
@@ -88,20 +102,36 @@ public class MovementAnimated : MonoBehaviour, IGameController
     public void LoadData(GameData data)
     {
         this.speed = data.workerSpeed;
+        savedSpeed = speed;
+        Debug.Log($"LoadData speed: {speed}");
     }
 
     public void SaveData(ref GameData data)
     {
-        data.workerSpeed = this.speed;
+        data.workerSpeed = this.savedSpeed;
     }
 
     public void IncreaseMS()
     {
         speed += 1f;
+        savedSpeed = speed;
     }
 
     public void Upgrade()
     {
         speed += SPEED_INC_ON_UPGRADE;
+        savedSpeed = speed;
+    }
+
+    private void ChangeRaidState() {
+        Debug.Log($"ChangeRaidState to {!ongoingRaid}");
+        ongoingRaid = !ongoingRaid;
+        if (!ongoingRaid) {
+            speed = savedSpeed;
+            if (!PickUp.HasTrash)
+                goingBackward = false;
+        } else {
+            detectedRaidStart = false;
+        }
     }
 }

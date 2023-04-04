@@ -21,7 +21,18 @@ public class TileOnWhichToPlace : MonoBehaviour
         startColor=rend.material.color;
     }
 
-    void OnMouseDown(){
+    void Update()
+    {
+        DetectTileClick();
+    }
+
+    private void DetectTileClick()
+    {
+        if (CustomInput.ClickedOnObject(this))
+            BuildStructure();
+    }
+
+    void BuildStructure(){
         if((turret!=null)||(buildingManager.GetTurret()==null)){
             return;
         }
