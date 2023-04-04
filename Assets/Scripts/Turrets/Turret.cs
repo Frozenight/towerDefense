@@ -5,6 +5,7 @@ using UnityEngine;
 public class Turret : ManageableBuilding
 {
     private GameController gameController;
+    private enemySpawner enemyController;
 
     public bool IsShooting;
     private const float INCREASE_DAMAGE = 5f;
@@ -56,10 +57,11 @@ public class Turret : ManageableBuilding
     }
 
     // Start is called before the first frame update
-     void Start()
+    void Start()
     {
         InvokeRepeating ("UpdateTarget", 0f, 0.1f);
         gameController = GameController.instance;
+        enemyController = enemySpawner.instance;
     }
 
     protected virtual void UpdateTarget()
@@ -149,5 +151,10 @@ public class Turret : ManageableBuilding
     public Transform GetTarget()
     {
         return target;
+    }
+
+    private void OnDestroy()
+    {
+        enemyController.OnBuildingDestroyed();
     }
 }

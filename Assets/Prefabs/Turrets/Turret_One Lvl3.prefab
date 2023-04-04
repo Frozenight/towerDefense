@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 5543876734551910077}
   - component: {fileID: 6196867110960698098}
   - component: {fileID: 8145914316435509831}
-  m_Layer: 0
+  - component: {fileID: -4927021934542564540}
+  m_Layer: 6
   m_Name: Turret_One Lvl3
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -122,6 +123,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89a297dabc587004d85e1549dbdab932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &-4927021934542564540
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190654975210168334}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1284617743570788732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -173,6 +190,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8238658693826056800, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7873125569009165366, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4412879769974481947, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -4182865538355671333, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
       propertyPath: m_DirtyAABB
       value: 0
@@ -209,9 +238,41 @@ PrefabInstance:
       propertyPath: m_BlendShapeWeights.Array.data[0]
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: -4013771183628641615, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3668186374701330883, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2653122120384414727, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -1393490158618891436, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -595148397647081605, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
       propertyPath: m_Name
       value: tower1Lvl3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 966727700181717585, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935434879922704320, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3367587998289177179, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
       propertyPath: m_DirtyAABB
@@ -240,6 +301,10 @@ PrefabInstance:
     - target: {fileID: 3367587998289177179, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
       propertyPath: m_AABB.m_Extent.z
       value: 0.0021706526
+      objectReference: {fileID: 0}
+    - target: {fileID: 5578933113460046606, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5619625577261300083, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
       propertyPath: m_DirtyAABB
@@ -280,6 +345,22 @@ PrefabInstance:
     - target: {fileID: 5619625577261300083, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
       propertyPath: m_BlendShapeWeights.Array.data[1]
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624354596328128805, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017782954080943916, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557088071575285326, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779745694787660137, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac7598bf3d6c85f4fb3fe45c76465ebc, type: 3}
@@ -384,9 +465,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5367232991740041271, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838985731939672225, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 754daca3328808a4fa1f28432d005aba, type: 3}

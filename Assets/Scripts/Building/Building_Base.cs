@@ -64,22 +64,18 @@ public class Building_Base : ManageableBuilding, IGameController
 
     public void CheckForDeath()
     {
-        Debug.Log(gameObject.active);
-        if (_currentHealth <= 0 && gameObject.active)
+        if (_currentHealth <= 0)
         {
-            GameController.instance.GameOver();
-            gameObject.SetActive(false);
-
-            //StartCoroutine(destroyItself());
+            if (GetComponent<Turret>() != null || GetComponent<Wall>() != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+                GameController.instance.GameOver();
+                gameObject.SetActive(false);
         }
     }
 
-    //private IEnumerator destroyItself()
-    //{
-    //    yield return new WaitForSeconds(0.5f);
-    //    gameObject.SetActive(false);
-        
-    //}
 
 
     private void OnTriggerEnter(Collider other)

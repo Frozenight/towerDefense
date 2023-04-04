@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class enemySpawner : MonoBehaviour
 {
+    public static enemySpawner instance { get; private set; }
     public float spawnCoolDown = 1f;
     float spawnCoolDownRemaining = 0;
     float offsetZ = 5;
@@ -19,6 +20,10 @@ public class enemySpawner : MonoBehaviour
     public WaveComponent waveComponents;
 
     public bool startSpawn {get; set;}
+    void Awake()
+    {
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -36,5 +41,20 @@ public class enemySpawner : MonoBehaviour
             
         }
         waveComponents.enemyAmount++;
+    }
+
+    public void OnBuildingDestroyed()
+    {
+        // Call a method on the rest of the enemies
+        EnemyNavmesh[] enemies = FindObjectsOfType<EnemyNavmesh>();
+        foreach (EnemyNavmesh e in enemies)
+        {
+            e.OnBuildingDestroyed();
+        }
+        EnemyManager[] enemies1 = FindObjectsOfType<EnemyManager>();
+        foreach (var e in enemies1)
+        {
+            e.ResetObjective();
+        }
     }
 }
