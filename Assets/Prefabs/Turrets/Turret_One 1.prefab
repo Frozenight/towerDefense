@@ -50,7 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623f3a0d2828c564aacd94605b7b9dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpgradeModels: []
+  UpgradeModels:
+  - {fileID: 134015296191264017, guid: 1bd8161c16563204088b4492bcd126a3, type: 3}
+  - {fileID: 6139106547975946548, guid: 477b9989b749ce444b30ba7c3181dd4d, type: 3}
   IsShooting: 0
   range: 15
   fireRate: 1
@@ -282,6 +284,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
       propertyPath: m_Name
       value: tower1Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_TagString
+      value: Model
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}

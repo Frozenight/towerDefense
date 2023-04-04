@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2066964618189531345}
+  - component: {fileID: -2407129277142896302}
+  - component: {fileID: -6963321893989982148}
   m_Layer: 0
   m_Name: WallLvl1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,6 +34,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-2407129277142896302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059076539962996950}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4, y: 1.4, z: 1.4}
+  m_Center: {x: 0, y: 0.5, z: -0.5}
+--- !u!114 &-6963321893989982148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059076539962996950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9947d7a91e80a24089d65516ec24550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeModels:
+  - {fileID: 9162974844325488295, guid: 1123138b508a7ce4887cc0b851ecfa11, type: 3}
+  - {fileID: 1786776636487100252, guid: 1f1f14440ed45d044a70cebe553f298d, type: 3}
+  - {fileID: 5444958169383773804, guid: 4d0691a8c4101b14785c8d666033c910, type: 3}
+  - {fileID: 5562190045408245430, guid: 9a37b1b5a1682eb4c90286dafa45a8fe, type: 3}
 --- !u!1001 &3307919732018014347
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TileOnWhichToPlace : MonoBehaviour
 {
-
     public Color hoverColor;
     public Vector3 offsetFromPlacer;
 
@@ -12,10 +11,11 @@ public class TileOnWhichToPlace : MonoBehaviour
 
     private Renderer rend;
     private Color startColor;
-
+    private GameController gameController;
 
     BuildingManager buildingManager;
-    void Start(){
+    void Start(){        
+        gameController = GameController.instance;
         buildingManager=BuildingManager.instance;
         rend = GetComponent<Renderer>();
         startColor=rend.material.color;
@@ -27,7 +27,12 @@ public class TileOnWhichToPlace : MonoBehaviour
         }
 
         GameObject selectedTurret = buildingManager.GetTurret();
-        turret = (GameObject)Instantiate(selectedTurret, transform.position+offsetFromPlacer, transform.rotation);
+        ManageableBuilding manageableBuilding = selectedTurret.GetComponent<ManageableBuilding>();
+        if (manageableBuilding != null 
+            && gameController.resources >= manageableBuilding.buildingPrice) {
+            turret = (GameObject)Instantiate(selectedTurret, transform.position+offsetFromPlacer, transform.rotation);
+            gameController.resources -= manageableBuilding.buildingPrice;
+        }
     }
 
     void OnMouseEnter(){

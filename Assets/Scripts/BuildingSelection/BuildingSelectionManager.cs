@@ -8,7 +8,8 @@ public class BuildingSelectionManager : MonoBehaviour
     private string[] ClickableBuildingTags = new string[] 
     { 
         "Tower",
-        "Base"
+        "Base",
+        "Wall"
     }; 
     private bool manageTabOpen = false;
     private float minXOfTab = 0f;

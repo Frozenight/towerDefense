@@ -9,8 +9,13 @@ public class ManageableBuilding : MonoBehaviour {
     public static string NAME_FIRE_TURRET = "Fire Turret";
     public static string NAME_FROST_TURRET = "Frost Turret";
     public static string NAME_EARTH_TURRET = "Earth Turret";
+    public static string NAME_WALL = "Wall";
 
     public static ManageableBuilding selectedBuilding = null;
+
+    public virtual int buildingPrice {
+        get { return 5; }
+    }
 
     public virtual string buildingName { 
         get { return NAME_UNCATEGORISED; } 
@@ -33,7 +38,7 @@ public class ManageableBuilding : MonoBehaviour {
     
     [SerializeField] private GameObject[] UpgradeModels = new GameObject[] {};  
     private int nextModel = 0;
-
+    private GameController gameController;
     public string currModelName { get {
         if (nextModel == 0) {
             return "default";
@@ -41,7 +46,19 @@ public class ManageableBuilding : MonoBehaviour {
         return UpgradeModels[nextModel-1].name;
     } }
 
+    private void Start() {
+        gameController = GameController.instance;        
+    }
+
     public virtual void DestroyBuilding() {
+        int sell_price =  buildingPrice;
+        int one_level_price = 5;
+        for (int i = 0; i < m_level; i++)
+        {
+            sell_price += one_level_price;
+            one_level_price += 5;
+        }
+        gameController.resources += sell_price / 2;
         Destroy(gameObject);
     }
 
@@ -55,10 +72,15 @@ public class ManageableBuilding : MonoBehaviour {
         }
     }
 
-    public virtual void UpgradeBuilding() { 
-        Debug.LogWarning("UpgradeBuilding() Base class method invoked. " + 
-            "This should only be visible if a building of this " + 
-            "category has no overriding implementation.");
+    public virtual void UpgradeBuilding() {
+        if (gameController.resources < m_upgrade_price)
+            return;
+        gameController.resources -= m_upgrade_price;
+        m_level += 1;
+        m_upgrade_price += 5;
+        if (m_level % 5 == 0)
+            UpdateObjectModel(out GameObject newModel); 
+        Debug.LogWarning("UpgradeBuilding() Base class method invoked. ");
     }
 
     //Methods for changing turret types
@@ -71,7 +93,10 @@ public class ManageableBuilding : MonoBehaviour {
 
     protected bool UpdateObjectModel(out GameObject newModel) {
         if (nextModel < UpgradeModels.Length) {
-            Destroy(this.transform.GetChild(0).gameObject);
+            foreach(Transform child in transform) {
+                if(child.tag == "Model")
+                    Destroy(child.gameObject);
+            }
             newModel = Instantiate(UpgradeModels[nextModel++], transform);
             newModel.name = currModelName;
             return true;
