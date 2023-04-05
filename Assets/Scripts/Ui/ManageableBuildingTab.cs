@@ -14,6 +14,8 @@ public class ManageableBuildingTab : MonoBehaviour
     [SerializeField] private Button WorkerB;
     [SerializeField] private Button UpgradeB;
     [SerializeField] private Button RemoveB;
+    [SerializeField] private Button RotationL_B;
+    [SerializeField] private Button RotationR_B;
     [SerializeField] private RectTransform NameAndLevel;
     [SerializeField] private TextMeshProUGUI NameText;
     [SerializeField] private TextMeshProUGUI LevelText;
@@ -31,6 +33,8 @@ public class ManageableBuildingTab : MonoBehaviour
         RemoveB.gameObject.SetActive(mBuilding.canDestroyManually);
         WorkerB.gameObject.SetActive(
             mBuilding.buildingName == ManageableBuilding.NAME_BASE);
+        RotationL_B.gameObject.SetActive(mBuilding.tag == "Wall");
+        RotationR_B.gameObject.SetActive(mBuilding.tag == "Wall");
         assignedBuilding = mBuilding;
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;
@@ -50,6 +54,18 @@ public class ManageableBuildingTab : MonoBehaviour
             (assignedBuilding as Building_Base).UpgradeWorkers();
             UpdateBuildingStats();
         }
+    }
+
+    public void RotateLeft()
+    { 
+        Vector3 left = new Vector3 (0, -1, 0);
+        assignedBuilding.transform.Rotate(left * 1 * Time.deltaTime, 90);
+    }
+
+    public void RotateRight()
+    {
+        Vector3 right = new Vector3(0, 1, 0);
+        assignedBuilding.transform.Rotate(right * 1 * Time.deltaTime, 90);
     }
 
     public void Destroy() {

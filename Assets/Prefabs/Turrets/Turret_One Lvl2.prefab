@@ -56,8 +56,9 @@ MonoBehaviour:
   range: 15
   fireRate: 2
   enemyTag: Enemy
-  partToRotate: {fileID: 4831029257688972600}
+  partToRotate: {fileID: 3701087501560703654}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
+  explosionPrefab: {fileID: 0}
   firePoint: {fileID: 2489516281790752914}
 --- !u!114 &6146665401972950633
 MonoBehaviour:
@@ -71,7 +72,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4afcd4b8c19bee4488e6bb45348a291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 125
+  UpgradeModels: []
+  gameOverScreen: {fileID: 0}
 --- !u!65 &5543876734551910077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -309,8 +311,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 735d405461402284681d40787705353b, type: 3}
   m_PrefabInstance: {fileID: 2434582701125025848}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4831029257688972600 stripped
+--- !u!4 &3701087501560703654 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -2107082562448933632, guid: 735d405461402284681d40787705353b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1339125346602560158, guid: 735d405461402284681d40787705353b, type: 3}
   m_PrefabInstance: {fileID: 2434582701125025848}
   m_PrefabAsset: {fileID: 0}

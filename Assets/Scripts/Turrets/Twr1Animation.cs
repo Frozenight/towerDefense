@@ -25,13 +25,10 @@ public class Twr1Animation : MonoBehaviour
         if (turretScript.IsShooting)
         {
             anim.SetBool("IsShooting", true);
-            anim.SetLayerWeight(2, 1);
-            anim.SetLayerWeight(1, 0);
         }
         else
         {
-            anim.SetLayerWeight(1, 1);
-            anim.SetLayerWeight(2, 0);
+            anim.SetBool("IsShooting", false);
         }
     }
 }

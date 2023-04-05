@@ -30,6 +30,8 @@ public class Turret : ManageableBuilding
     public GameObject explosionPrefab;
     public Transform firePoint;
 
+    public float rotateX;
+
 
     public override string buildingName { 
         get { return NAME_TURRET; } 
@@ -42,7 +44,7 @@ public class Turret : ManageableBuilding
         damage += INCREASE_DAMAGE;
         m_level++;
         if (UpdateObjectModel(out GameObject newModel)) {
-            partToRotate = transform.Find(currModelName + "/Armature/main");
+            //partToRotate = transform.Find(currModelName + "/Armature/main");
             // Debug.Log(currModelName + "/Armature/main");
             // Debug.Log(partToRotate.GetHashCode());
         }
@@ -87,7 +89,7 @@ public class Turret : ManageableBuilding
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = lookRotation.eulerAngles;
-        partToRotate.rotation = Quaternion.Euler(-90f, rotation.y, 180f);
+        partToRotate.rotation = Quaternion.Euler(rotateX, rotation.y, rotation.z);
 
         if(fireCountdown<=0f){
             
