@@ -103,7 +103,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void _FinalMove()
     {
-        Debug.Log("FinalMove");
+        Objective = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
         if (Vector3.Distance(transform.position, Objective.transform.position) < 8)
         {
             _currentState = State.Attack;

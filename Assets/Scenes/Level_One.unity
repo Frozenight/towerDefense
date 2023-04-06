@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45707607, g: 0.42091772, b: 0.451401, a: 1}
+  m_IndirectSpecularColor: {r: 0.4576338, g: 0.42386243, b: 0.4538195, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -459,8 +459,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140112657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41, y: -1, z: 74.7}
-  m_LocalScale: {x: 34.1, y: 1.0179104, z: 32.26776}
+  m_LocalPosition: {x: -41, y: -1, z: 73.3}
+  m_LocalScale: {x: 34.1, y: 1.0179104, z: 31.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1329834170}
@@ -1279,7 +1279,7 @@ MonoBehaviour:
   fileName: data
   trashObjects: []
   gameOverScreen: {fileID: 1286586780}
-  resources: 0
+  resources: 20
   trashResourceGainAmount: 5
   rounds: {fileID: 840966349}
   aiAPI: {fileID: 513332495}
@@ -3844,6 +3844,14 @@ PrefabInstance:
     - target: {fileID: 476825578742278488, guid: 924d56c53f454584491cba4642672e4a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 860368123973635144, guid: 924d56c53f454584491cba4642672e4a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1371
+      objectReference: {fileID: 0}
+    - target: {fileID: 860368123973635144, guid: 924d56c53f454584491cba4642672e4a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -601
       objectReference: {fileID: 0}
     - target: {fileID: 3893816163333968682, guid: 924d56c53f454584491cba4642672e4a, type: 3}
       propertyPath: m_AnchorMax.y
