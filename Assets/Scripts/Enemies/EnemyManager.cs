@@ -103,7 +103,8 @@ public class EnemyManager : MonoBehaviour
     }
     private void _FinalMove()
     {
-        if (Vector3.Distance(transform.position, Objective.transform.position) < 12)
+        Debug.Log("FinalMove");
+        if (Vector3.Distance(transform.position, Objective.transform.position) < 8)
         {
             _currentState = State.Attack;
         }
@@ -132,7 +133,7 @@ public class EnemyManager : MonoBehaviour
 
         if (Objective.tag == "Base")
         {
-            if (Vector3.Distance(transform.position, Objective.transform.position) > 12)
+            if (Vector3.Distance(transform.position, Objective.transform.position) > 8)
                 return;
             GetComponent<EnemyNavmesh>().Stop();
         }
@@ -151,6 +152,7 @@ public class EnemyManager : MonoBehaviour
 
     private void _Die()
     {
+        GetComponent<EnemyNavmesh>().Stop();
         transform.gameObject.tag = "Untagged";
         _currentState = State.Die;
         _animator.Play("death");

@@ -37,8 +37,8 @@ public class enemySpawner : MonoBehaviour
         for(int i = 0; i < waveComponents.enemyAmount; i++)
         {
             var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
-            Instantiate(waveComponents.enemyPrefab, transform.position + offset, Quaternion.identity);
-            
+            Instantiate(waveComponents.enemyPrefab, transform.position + offset, Quaternion.identity).transform.parent = this.transform;
+                        
         }
         waveComponents.enemyAmount++;
     }

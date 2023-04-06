@@ -10,7 +10,6 @@ public class ManageableBuilding : MonoBehaviour {
     public static string NAME_FIRE_TURRET = "Fire Turret";
     public static string NAME_FROST_TURRET = "Frost Turret";
     public static string NAME_EARTH_TURRET = "Earth Turret";
-    public static string NAME_WALL = "Wall";
 
     public static ManageableBuilding selectedBuilding = null;
 
@@ -39,7 +38,7 @@ public class ManageableBuilding : MonoBehaviour {
     
     [SerializeField] private GameObject[] UpgradeModels = new GameObject[] {};  
     private int nextModel = 0;
-    private GameController gameController;
+    protected GameController gameController;
     public string currModelName { get {
         if (nextModel == 0) {
             return "default";
@@ -54,12 +53,12 @@ public class ManageableBuilding : MonoBehaviour {
     public virtual void DestroyBuilding() {
         int sell_price =  buildingPrice;
         int one_level_price = 5;
-        for (int i = 0; i < m_level; i++)
+        for (int i = 1; i < m_level; i++)
         {
             sell_price += one_level_price;
             one_level_price += 5;
         }
-        gameController.resources += sell_price / 2;
+        gameController.resources += (int)Mathf.Ceil(sell_price / 2f);
         Destroy(gameObject);
     }
 

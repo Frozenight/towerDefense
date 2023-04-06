@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class TileOnWhichToPlace : MonoBehaviour
 {
-    public Color hoverColor;
+
+    public Material hoverColor;
     public Vector3 offsetFromPlacer;
 
     private GameObject turret;
 
     private Renderer rend;
-    private Color startColor;
+    private Material startColor;
     private GameController gameController;
 
     BuildingManager buildingManager;
@@ -18,7 +19,7 @@ public class TileOnWhichToPlace : MonoBehaviour
         gameController = GameController.instance;
         buildingManager=BuildingManager.instance;
         rend = GetComponent<Renderer>();
-        startColor=rend.material.color;
+        startColor=rend.material;
     }
 
     void Update()
@@ -47,10 +48,10 @@ public class TileOnWhichToPlace : MonoBehaviour
     }
 
     void OnMouseEnter(){
-        rend.material.color = hoverColor;
+        rend.material = hoverColor;
     }
 
     void OnMouseExit(){
-        rend.material.color = startColor;
+        rend.material = startColor;
     }
 }

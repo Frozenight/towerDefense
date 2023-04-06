@@ -31,13 +31,13 @@ public class EnemyNavmesh : MonoBehaviour
             {
                 e.ChangeEnemyStateToFinal();
             }
-            print("Path available");
+            Debug.Log("Path available");
         }
         else
         {
             pathAvailable = false;
             DestroyBuildings();
-            print("Path not available");
+            Debug.Log("Path not available");
         }
     }
 

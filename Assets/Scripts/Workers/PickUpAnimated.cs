@@ -41,7 +41,6 @@ public class PickUpAnimated : MonoBehaviour
             this.other = other;
             HasTrash = true;
             GameController.instance.AddCountRecource("trash");
-            Debug.Log(GameController.instance.resources);
         }
     }
 }

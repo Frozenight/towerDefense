@@ -55,7 +55,7 @@ public class Timer : MonoBehaviour
         else if (eventController.currentState == EventManager.Event.building)
         {
             timer_text.text  = "Building Time: ";
-            timer_text.fontSize = 14;
+            timer_text.fontSize = 26;
             curreentTime = buildingTime;
             timerOn = true;
             startButton.gameObject.SetActive(true);
@@ -63,7 +63,7 @@ public class Timer : MonoBehaviour
         else if (eventController.currentState == EventManager.Event.defending)
         {
             timer_text.text = "Time left: ";
-            timer_text.fontSize = 20;
+            timer_text.fontSize = 36;
             curreentTime = defenseTime;
             timerOn = true;
             if(GameBase.activeSelf)
@@ -80,8 +80,10 @@ public class Timer : MonoBehaviour
 
     public void CheckForEndOfRound()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        if (GameObject.FindObjectsOfType<EnemyManager>().Length == 0)
+        {
             eventController.ChangeGameState();
+        }
     }
 
     private void OnDestroy()

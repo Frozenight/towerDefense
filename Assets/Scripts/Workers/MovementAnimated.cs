@@ -40,7 +40,6 @@ public class MovementAnimated : MonoBehaviour, IGameController
 
             if (goingBackward)
             {
-                Debug.Log("1");
                 transform.LookAt(PointB.transform.position);
                 var step = speed * Time.deltaTime; // calculate distance to move
                 transform.position = Vector3.MoveTowards(transform.position, PointB.transform.position, step);

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Turret : ManageableBuilding
 {
-    private GameController gameController;
     private enemySpawner enemyController;
 
     public bool IsShooting;
@@ -58,12 +57,17 @@ public class Turret : ManageableBuilding
         }
     }
 
+    private void Awake()
+    {
+        InvokeRepeating("UpdateTarget", 0f, 0.1f);
+        gameController = GameController.instance;
+        enemyController = enemySpawner.instance;
+        GetComponent<Building_Base>().maxHealth = gameController.GetTurretHealth();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating ("UpdateTarget", 0f, 0.1f);
-        gameController = GameController.instance;
-        enemyController = enemySpawner.instance;
+        
     }
 
     protected virtual void UpdateTarget()
@@ -116,6 +120,8 @@ public class Turret : ManageableBuilding
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         GameObject newSmoke = (GameObject)Instantiate(explosionPrefab, firePoint.position, firePoint.rotation);
         Ammunition bullet = newBullet.GetComponent<Ammunition>();
+        newSmoke.transform.parent = this.transform;
+        bullet.transform.parent = this.transform;
         if(bullet==null){
             return;
         }

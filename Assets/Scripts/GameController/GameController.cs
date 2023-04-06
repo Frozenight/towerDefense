@@ -53,6 +53,16 @@ public class GameController : MonoBehaviour
         aiAPI.GetData();
     }
 
+    public int GetTurretHealth()
+    {
+        return gameData.TowerHealth1;
+    }
+
+    public int GetWallHealth()
+    {
+        return gameData.TowerHealth1;
+    }
+
     private List<IGameController> FindAllGameControllerObjects()
     {
         IEnumerable<IGameController> gameControllerObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameController>();

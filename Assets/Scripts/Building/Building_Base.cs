@@ -4,8 +4,7 @@ using System.Collections;
 
 public class Building_Base : ManageableBuilding, IGameController
 {
-    private GameController gameController;
-    public int maxHealth { get; private set; }
+    public int maxHealth { get; set; }
     public GameOverScreen gameOverScreen;
 
     private const int HEALTH_INCREASE = 50;
@@ -18,8 +17,6 @@ public class Building_Base : ManageableBuilding, IGameController
         get { return false; }
     }
 
-
-    private int _currMaxHealth;
     private int _currentHealth;
 
     public event Action<float> OnHealthChanged = delegate { };
@@ -27,6 +24,7 @@ public class Building_Base : ManageableBuilding, IGameController
     private void Start()
     {
         gameController = GameController.instance;
+        _currentHealth = maxHealth;
     }
 
     public override void UpgradeBuilding()
@@ -37,9 +35,9 @@ public class Building_Base : ManageableBuilding, IGameController
         gameController.resources -= m_upgrade_price;
         m_level += 1;
         m_upgrade_price += 5;
-        _currMaxHealth += HEALTH_INCREASE;
+        maxHealth += HEALTH_INCREASE;
         // set health to new max value
-        ModifyHealth(_currMaxHealth - _currentHealth);
+        ModifyHealth(maxHealth - _currentHealth);
     }
 
     public void UpgradeWorkers() {
@@ -50,7 +48,7 @@ public class Building_Base : ManageableBuilding, IGameController
 
     private void OnEnable()
     {
-        _currMaxHealth = _currentHealth = maxHealth;
+        _currentHealth = maxHealth;
     }
 
     public void ModifyHealth(int amount)
@@ -88,13 +86,11 @@ public class Building_Base : ManageableBuilding, IGameController
     {
         this.maxHealth = data.maxHealth;
         _currentHealth = maxHealth;
-        Debug.Log(maxHealth + "TESTAS");
     }
 
     public void SaveData(ref GameData data)
     {
         data.maxHealth = this.maxHealth;
-        Debug.Log(maxHealth + "TESTAS");
     }
 
     public void TestIncreaseHp()

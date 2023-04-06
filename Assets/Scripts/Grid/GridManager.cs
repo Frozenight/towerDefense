@@ -18,9 +18,9 @@ public class GridManager : MonoBehaviour
 
     void GenerateGrid()
     {
-        for(int x = -23; x < _width; x = x + 2 )
+        for(int x = -41; x < _width; x = x + 2 )
         {
-            for(int y = -13; y < _height; y = y + 2)
+            for(int y = -3; y < _height; y = y + 2)
             {
                 var spawnedTile = Instantiate(block, new Vector3(x, 0.2f, y), Quaternion.identity);
                 
@@ -33,9 +33,9 @@ public class GridManager : MonoBehaviour
 
     void GenerateFakeGrid()
     {
-        for (int x = -23; x < _width; x = x + 2)
+        for (int x = -41; x < _width; x = x + 2)
         {
-            for (int y = -23; y < -13; y = y + 2)
+            for (int y = -15; y < -3; y = y + 2)
             {
                 var spawnedTile = Instantiate(block2, new Vector3(x, 0.2f, y), Quaternion.identity);
 

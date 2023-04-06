@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2489516281790752914}
+  - component: {fileID: -4301665401226611516}
   - component: {fileID: 105746014081162816}
   - component: {fileID: 4613402665312923862}
-  - component: {fileID: 7082213124776706894}
   - component: {fileID: 5543876734551910077}
   - component: {fileID: 6146665401972950633}
-  m_Layer: 0
+  - component: {fileID: 5984393787315618867}
+  m_Layer: 6
   m_Name: Turret_One 1
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -38,6 +39,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4301665401226611516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190654975210168334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623f3a0d2828c564aacd94605b7b9dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeModels:
+  - {fileID: 134015296191264017, guid: 1bd8161c16563204088b4492bcd126a3, type: 3}
+  - {fileID: 6139106547975946548, guid: 477b9989b749ce444b30ba7c3181dd4d, type: 3}
+  IsShooting: 0
+  range: 15
+  fireRate: 1
+  fireCountdown: 0
+  damage: 10
+  partToRotate: {fileID: 7241744599462579758}
+  bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
+  explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
+  firePoint: {fileID: 2489516281790752914}
+  rotateX: -90
+  Earth_Turret: {fileID: 6308971644287959954, guid: d1b83efe96c778d47bd145bc8cd8492b, type: 3}
+  Fire_Turret: {fileID: 6016936162135373229, guid: 31dc1f8b73c3a3c4b841cd4c55afb975, type: 3}
+  Frost_Turret: {fileID: 8866188744923808478, guid: c39222154f846f542822c8b386bd1d1a, type: 3}
 --- !u!114 &105746014081162816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,30 +99,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7082213124776706894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3190654975210168334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1083957dd287f76498734eec7180379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpgradeModels:
-  - {fileID: 134015296191264017, guid: 1bd8161c16563204088b4492bcd126a3, type: 3}
-  - {fileID: 6139106547975946548, guid: 477b9989b749ce444b30ba7c3181dd4d, type: 3}
-  IsShooting: 0
-  target: {fileID: 0}
-  range: 15
-  fireRate: 1
-  enemyTag: Enemy
-  partToRotate: {fileID: 7241744599462579758}
-  bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
-  explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
-  firePoint: {fileID: 2489516281790752914}
 --- !u!65 &5543876734551910077
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -121,6 +126,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   gameOverScreen: {fileID: 0}
+--- !u!208 &5984393787315618867
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3190654975210168334}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &6275789143019397489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,9 +193,77 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7734350502697193390, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7242761276949520043, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7089430435066148776, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5505361307737135305, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4665167327298440935, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3157930835444872707, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2526810508854306162, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2466785593844551857, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2437277772138986580, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
       propertyPath: m_Name
       value: tower1Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_TagString
+      value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 1698794854491368960, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840782654181336368, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2304688292385707217, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5529245848009614105, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486018238837250711, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190660434866555989, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23cb21f235e7e32448c9b33c2acffc94, type: 3}
@@ -286,6 +375,14 @@ PrefabInstance:
     - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838985731939672225, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 754daca3328808a4fa1f28432d005aba, type: 3}

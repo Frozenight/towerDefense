@@ -2117,8 +2117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 3021149002330467325}
-  damage: -100
-  TimeBetweenAttacks: 0.3
+  damage: -10
+  TimeBetweenAttacks: 1
   speed: 5
   layerMask:
     serializedVersion: 2
