@@ -32,7 +32,7 @@ public class GameOverPowerUP : MonoBehaviour
     public void PickSecondButton()
     {
         building_base.TestIncreaseHp();
-        building_base2.TestIncreaseHp();
+        //building_base2.TestIncreaseHp();
         gameOverScreen.Setup();
         TurnOff();
     }

@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class Turret : ManageableBuilding
 {
+    private GameController gameController;
+    private enemySpawner enemyController;
+
     public bool IsShooting;
     private const float INCREASE_DAMAGE = 5f;
     private const float INCREASE_FIRERATE_MULT = 1.1f;
     private const float INCREASE_RANGE = 2.5f;
 
-    public Transform target;
-    private EnemyHealth nearestEnemyHealth;
+    protected Transform target;
+    protected EnemyHealth nearestEnemyHealth;
 
     [Header("Attributes")]
 
     public float range = 15f;
 
     public float fireRate = 1f;
-    private float fireCountdown = 0f;
-    private float damage = 10f;
+    public float fireCountdown = 0f;
+    public float damage = 10f;
 
     [Header("Static")]
 
-    public string enemyTag= "Enemy";
+    protected string enemyTag= "Enemy";
 
     public Transform partToRotate;
 
@@ -37,12 +40,17 @@ public class Turret : ManageableBuilding
         get { return NAME_TURRET; } 
     }
 
+   
     public override void UpgradeBuilding() { 
         // Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
+        if (gameController.resources < m_upgrade_price)
+            return;
         range += INCREASE_RANGE;
         fireRate *= INCREASE_FIRERATE_MULT;
         damage += INCREASE_DAMAGE;
-        m_level++;
+        gameController.resources -= m_upgrade_price;
+        m_level += 1;
+        m_upgrade_price += 5;
         if (UpdateObjectModel(out GameObject newModel)) {
             //partToRotate = transform.Find(currModelName + "/Armature/main");
             // Debug.Log(currModelName + "/Armature/main");
@@ -54,9 +62,11 @@ public class Turret : ManageableBuilding
     void Start()
     {
         InvokeRepeating ("UpdateTarget", 0f, 0.1f);
+        gameController = GameController.instance;
+        enemyController = enemySpawner.instance;
     }
 
-    void UpdateTarget()
+    protected virtual void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
@@ -74,32 +84,35 @@ public class Turret : ManageableBuilding
             nearestEnemyHealth = nearestEnemy.GetComponent<EnemyHealth>();
         }
         else{
+
             target=null;
         }
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        if(target==null){
+        if (target == null)
+        {
             IsShooting = false;
             return;
         }
-        IsShooting = true;
+            IsShooting = true;
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = lookRotation.eulerAngles;
         partToRotate.rotation = Quaternion.Euler(rotateX, rotation.y, rotation.z);
 
-        if(fireCountdown<=0f){
-            
-            Fire();
-            fireCountdown=1f/fireRate;
-        }
-        fireCountdown-= Time.deltaTime;
+        if (fireCountdown <= 0f)
+            {
+
+                Fire();
+                fireCountdown = 1f / fireRate;
+            }
+            fireCountdown -= Time.deltaTime;
     }
 
-    void Fire(){
+    protected virtual void Fire(){
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         GameObject newSmoke = (GameObject)Instantiate(explosionPrefab, firePoint.position, firePoint.rotation);
         Ammunition bullet = newBullet.GetComponent<Ammunition>();
@@ -110,12 +123,40 @@ public class Turret : ManageableBuilding
         if (bullet.HitTarget() == true)
         {
             nearestEnemyHealth.GetHit(damage);
+            Bullet_Effect();
         }
+    }
+    protected virtual void Bullet_Effect()
+    {
+        return;
+    }
+
+    public override void DestroyBuilding()
+    {
+        int sell_price = 0;
+        int one_level_price = 5;
+        for (int i = 0; i < m_level; i++)
+        {
+            sell_price += one_level_price;
+            one_level_price += 5;
+        }
+        gameController.resources += sell_price / 2;
+        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected ()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    public Transform GetTarget()
+    {
+        return target;
+    }
+
+    private void OnDestroy()
+    {
+        enemyController.OnBuildingDestroyed();
     }
 }
