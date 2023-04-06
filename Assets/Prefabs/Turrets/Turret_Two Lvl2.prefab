@@ -34,6 +34,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 5163520785160823239}
   - {fileID: 2049983530301630613}
   - {fileID: 7720329642051485203}
   m_Father: {fileID: 0}
@@ -55,12 +56,12 @@ MonoBehaviour:
   IsShooting: 0
   range: 25
   fireRate: 1
-  fireCountdown: 0
-  damage: 10
-  partToRotate: {fileID: 0}
+  enemyTag: Enemy
+  partToRotate: {fileID: 2986253444289249945}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
   explosionPrefab: {fileID: 0}
   firePoint: {fileID: 0}
+  rotateX: 0
 --- !u!114 &1330796160399620939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5d0ff5e59e22ce34e81a74e25958c089, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5d0ff5e59e22ce34e81a74e25958c089, type: 3}
       propertyPath: m_LocalPosition.x
@@ -350,7 +351,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5d0ff5e59e22ce34e81a74e25958c089, type: 3}
   m_PrefabInstance: {fileID: 2015844986284330878}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5855430896411429989
+--- !u!4 &2986253444289249945 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3641430753450855911, guid: 5d0ff5e59e22ce34e81a74e25958c089, type: 3}
+  m_PrefabInstance: {fileID: 2015844986284330878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9065243900872856497
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -367,7 +373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_AnchorMax.x
@@ -447,8 +453,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
---- !u!224 &7720329642051485203 stripped
+--- !u!224 &5163520785160823239 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
-  m_PrefabInstance: {fileID: 5855430896411429989}
+  m_PrefabInstance: {fileID: 9065243900872856497}
   m_PrefabAsset: {fileID: 0}

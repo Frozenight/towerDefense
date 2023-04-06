@@ -9,6 +9,7 @@ TagManager:
   - Trash
   - Base
   - Worker
+  - Wall
   layers:
   - Default
   - TransparentFX

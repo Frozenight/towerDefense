@@ -54,12 +54,11 @@ MonoBehaviour:
   UpgradeModels: []
   IsShooting: 0
   range: 15
-  fireRate: 1
-  fireCountdown: 0
-  damage: 10
-  partToRotate: {fileID: 4831029257688972600}
+  fireRate: 2
+  enemyTag: Enemy
+  partToRotate: {fileID: 3701087501560703654}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
-  explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
+  explosionPrefab: {fileID: 0}
   firePoint: {fileID: 2489516281790752914}
   Earth_Turret: {fileID: 6308971644287959954, guid: d1b83efe96c778d47bd145bc8cd8492b, type: 3}
   Fire_Turret: {fileID: 6016936162135373229, guid: 31dc1f8b73c3a3c4b841cd4c55afb975, type: 3}
@@ -407,8 +406,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 735d405461402284681d40787705353b, type: 3}
   m_PrefabInstance: {fileID: 2434582701125025848}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4831029257688972600 stripped
+--- !u!4 &3701087501560703654 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -2107082562448933632, guid: 735d405461402284681d40787705353b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1339125346602560158, guid: 735d405461402284681d40787705353b, type: 3}
   m_PrefabInstance: {fileID: 2434582701125025848}
   m_PrefabAsset: {fileID: 0}
