@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2a39413c379c4444d8d3190f14256a1d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 77fc9ad01e8b582408a27fc34cc8c6b5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2023,7 +2023,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5380673723215028464}
         m_TargetAssemblyTypeName: ManageableBuildingTab, Assembly-CSharp
-        m_MethodName: ChangeBiulding_FrostTurret
+        m_MethodName: ChangeBiulding_EarthTurret
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
