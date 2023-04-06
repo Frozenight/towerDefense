@@ -44,12 +44,13 @@ public class ManageableBuildingTab : MonoBehaviour
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;
         PriceText.text = "Upgrade price: " + mBuilding.upgrade_Price;
+        if (assignedBuilding.level < 5)
+            SetInteractiveType(false);
         if (GameController.instance.aiAPI.gameObjects.Length != 0)
         {
             Description.text = GameController.instance.aiAPI.gameObjects[0].text;
         }
-        if (assignedBuilding.level < 5)
-            SetInteractiveType(false);
+        
     }
 
     private void SetInteractiveType(bool set)
