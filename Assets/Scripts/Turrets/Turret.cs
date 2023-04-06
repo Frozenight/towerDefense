@@ -51,8 +51,8 @@ public class Turret : ManageableBuilding
         gameController.resources -= m_upgrade_price;
         m_level += 1;
         m_upgrade_price += 5;
-        if (UpdateObjectModel(out GameObject newModel)) {
-            //partToRotate = transform.Find(currModelName + "/Armature/main");
+        if (m_level % 5 == 0 && UpdateObjectModel(out GameObject newModel)) {
+            partToRotate = transform.Find(currModelName + "/Armature/main");
             // Debug.Log(currModelName + "/Armature/main");
             // Debug.Log(partToRotate.GetHashCode());
         }

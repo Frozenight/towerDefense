@@ -82,7 +82,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1083957dd287f76498734eec7180379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpgradeModels: []
+  UpgradeModels:
+  - {fileID: 134015296191264017, guid: 1bd8161c16563204088b4492bcd126a3, type: 3}
+  - {fileID: 6139106547975946548, guid: 477b9989b749ce444b30ba7c3181dd4d, type: 3}
   IsShooting: 0
   target: {fileID: 0}
   range: 15
