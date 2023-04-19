@@ -62,10 +62,11 @@ public class Timer : MonoBehaviour
         }
         else if (eventController.currentState == EventManager.Event.defending)
         {
-            timer_text.text = "Time left: ";
+            timer_text.text = "Defend!";
             timer_text.fontSize = 36;
             curreentTime = defenseTime;
-            timerOn = true;
+            timerOn = false;
+            timer.text = string.Empty;
             if(GameBase.activeSelf)
             {
                 spawner.spawnWave();
