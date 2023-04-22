@@ -32,6 +32,8 @@ public class EnemyHealth : MonoBehaviour
     {
 
         Fire_Damage = fireDamage;
+        if (GetComponent<BossManager>() != null) { Fire_Damage *= 1.5f; }
+            
         Burn_Time = burnTime;
         burning = true;
     }
