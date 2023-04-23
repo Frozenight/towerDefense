@@ -8,7 +8,10 @@ public class CustomInput : MonoBehaviour
     }
 
     public static bool GetOneTouchDrag() {
-        return Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved;
+        // Debug.Log($"{Input.touchCount} {Input.GetTouch(0).phase} {TouchPhase.Moved} {TouchPhase.Moved}");
+        return Input.touchCount == 1 
+        && (Input.GetTouch(0).phase 
+            & (TouchPhase.Moved | TouchPhase.Stationary)) != 0;
     }
 
     public static bool GetNoTouchOrTouchUp() {
