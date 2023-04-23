@@ -223,7 +223,7 @@ public class CameraMovement : MonoBehaviour
     {
         if (gesture.State == GestureRecognizerState.Executing)
         {
-            RotateCamera(rotateGesture.RotationDegreesDelta);
+            RotateCamera(-rotateGesture.RotationDegreesDelta);
         }
     }
 }
