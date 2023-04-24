@@ -26,11 +26,8 @@ public class EnemyNavmesh : MonoBehaviour
         {
             pathAvailable = true;
             spawnPosition.destination = goal.position;
-            EnemyManager[] enemies1 = FindObjectsOfType<EnemyManager>();
-            foreach (var e in enemies1)
-            {
-                e.ChangeEnemyStateToFinal();
-            }
+            spawnPosition.speed = GetComponent<EnemyManager>().speed;
+            GetComponent<EnemyManager>().ChangeEnemyStateToFinal();
             Debug.Log("Path available");
         }
         else

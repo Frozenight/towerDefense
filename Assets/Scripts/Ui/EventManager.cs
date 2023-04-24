@@ -9,6 +9,9 @@ public class EventManager : MonoBehaviour
     public static event OnRoundChange onRoundChange;
     public static UnityAction changeWorkerState;
 
+    [SerializeField] GameController gameController;
+    [SerializeField] ResourceSpawner resourceSpawner;
+
     public Event currentState;
     public enum Event
     {
@@ -34,6 +37,12 @@ public class EventManager : MonoBehaviour
 
     private void UpdateCurrentState(Event newState)
     {
+        if (newState == Event.building)
+        {
+            Debug.Log("Calling Spawning");
+            resourceSpawner.bagsPerRound = 0;
+            resourceSpawner.StartNewSpawn();
+        }
         if (ChangingToOrFromDefending(newState)) {
             changeWorkerState?.Invoke();
         }

@@ -8,8 +8,15 @@ public class ResourceSpawner: MonoBehaviour
     public int spawnNumber;
     private Transform spawner;
 
+    [System.NonSerialized]
+    public int maxBagsPerRound = 9;
+    [System.NonSerialized]
+    public int bagsPerRound = 0;
+
     [SerializeField]
     private float spawnTimer = 3f;
+
+    [SerializeField] private EventManager eventManager;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +27,13 @@ public class ResourceSpawner: MonoBehaviour
         StartCoroutine(SpawnNew());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartNewSpawn()
     {
-        
+        if (this != null)
+            if (bagsPerRound <= maxBagsPerRound)
+            {
+                StartCoroutine(SpawnNew());
+            }
     }
 
     void spawnStart()
@@ -52,27 +62,30 @@ public class ResourceSpawner: MonoBehaviour
     {
 
         yield return new WaitForSeconds(spawnTimer);
-
-        if(GameController.instance.trashObjects.Count == 0)
+        if (bagsPerRound < maxBagsPerRound)
         {
-            spawnNumber = 5;
-            while (spawnNumber != 0)
+            if (GameController.instance.trashObjects.Count == 0)
             {
-                Vector3 randomPosition = new Vector3(
-                Random.Range(spawner.position.x - 3, spawner.position.x + 3),
-                Random.Range(spawner.position.y, spawner.position.y),
-                Random.Range(spawner.position.z - 3, spawner.position.z + 3)
-            );
+                spawnNumber = 5;
+                bagsPerRound += spawnNumber;
+                while (spawnNumber != 0)
+                {
+                    Vector3 randomPosition = new Vector3(
+                    Random.Range(spawner.position.x - 3, spawner.position.x + 3),
+                    Random.Range(spawner.position.y, spawner.position.y),
+                    Random.Range(spawner.position.z - 3, spawner.position.z + 3)
+                );
 
-                TrashObject trash;
+                    TrashObject trash;
 
-                trash = Instantiate(objectToSpawn, randomPosition, Quaternion.identity).GetComponent<TrashObject>();
+                    trash = Instantiate(objectToSpawn, randomPosition, Quaternion.identity).GetComponent<TrashObject>();
 
-                GameController.instance.AddTrash(trash);
+                    GameController.instance.AddTrash(trash);
 
-                spawnNumber = spawnNumber - 1;
-            } 
+                    spawnNumber = spawnNumber - 1;
+                }
+            }
+            StartCoroutine(SpawnNew());
         }
-        StartCoroutine(SpawnNew());
     }
 }

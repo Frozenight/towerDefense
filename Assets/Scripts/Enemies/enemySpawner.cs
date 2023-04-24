@@ -6,8 +6,8 @@ public class enemySpawner : MonoBehaviour
 {
     public static enemySpawner instance { get; private set; }
     public float spawnCoolDown = 1f;
-    float spawnCoolDownRemaining = 0;
     float offsetZ = 5;
+    private bool isInPlayMode = false;
 
 
     [System.Serializable]
@@ -28,12 +28,15 @@ public class enemySpawner : MonoBehaviour
     void Start()
     {
         startSpawn = false;
+        isInPlayMode = true;
     }
 
     // Update is called once per frame
 
     public void spawnWave()
     {
+        if (!isInPlayMode)
+            return;
         for(int i = 0; i < waveComponents.enemyAmount; i++)
         {
             var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
@@ -56,5 +59,10 @@ public class enemySpawner : MonoBehaviour
         {
             e.ResetObjective();
         }
+    }
+
+    private void OnDestroy()
+    {
+        isInPlayMode = false;
     }
 }
