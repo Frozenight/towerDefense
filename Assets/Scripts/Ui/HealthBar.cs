@@ -13,6 +13,8 @@ public class HealthBar : MonoBehaviour
     private float fadeOutTime = 3f;
     private float fadeInTime = 1f;
 
+    private Coroutine fadeOutCoroutine; // declare a variable to store the running fadeOut coroutine
+
     private void Awake()
     {
         if (transform.parent != null && transform.parent.tag == "Enemy")
@@ -28,7 +30,7 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(FadeOut());
+        fadeOutCoroutine = StartCoroutine(FadeOut());
     }
 
     private void HandleHealthChanged(float pct)
@@ -76,6 +78,11 @@ public class HealthBar : MonoBehaviour
 
     IEnumerator FadeIn()
     {
+        // if there's a running fadeOut coroutine, stop it
+        if (fadeOutCoroutine != null)
+        {
+            StopCoroutine(fadeOutCoroutine);
+        }
         foregroundImage.color = new Color(foregroundImage.color.r, foregroundImage.color.g, foregroundImage.color.b, 0f);
         backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 0f);
         float startTime = Time.time;
