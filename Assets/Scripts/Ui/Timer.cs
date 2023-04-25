@@ -30,6 +30,7 @@ public class Timer : MonoBehaviour
         EventManager.onRoundChange += ChangeSGameState;
         eventController = GetComponent<EventManager>();
         eventController.NewGame();
+        
     }
 
     private void Update()

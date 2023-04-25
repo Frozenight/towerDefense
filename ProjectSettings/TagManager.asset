@@ -10,6 +10,8 @@ TagManager:
   - Base
   - Worker
   - Wall
+  - Model
+  - GrindManager
   layers:
   - Default
   - TransparentFX

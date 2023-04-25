@@ -9,6 +9,8 @@ public class Rounds : MonoBehaviour
     [SerializeField] TextMeshProUGUI rounds_text;
     [SerializeField] TextMeshProUGUI rounds;
     EventManager eventController;
+    [SerializeField] GameController gameController;
+    GameMode gameMode;
 
     private int current_round = 0;
 
@@ -16,12 +18,14 @@ public class Rounds : MonoBehaviour
     {
         EventManager.onRoundChange += NextRound;
         eventController = GetComponent<EventManager>();
+        gameMode = gameController.GetComponent<GameMode>();
     }
 
     public void NextRound()
     {
         if (eventController.currentState == EventManager.Event.defending)
         {
+            gameMode.changeGameMode(5);
             current_round++;
             ChangeRoundText();
         }
