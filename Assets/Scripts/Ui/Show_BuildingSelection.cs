@@ -16,7 +16,7 @@ public class Show_BuildingSelection : MonoBehaviour
     private void Start()
     {
         isHidden = true;
-        gameMode = GameObject.FindObjectOfType<GameController>().GetComponent<GameMode>();
+        gameMode = FindObjectOfType<GameController>().GetComponent<GameMode>();
     }
 
     public void Change_Panel()

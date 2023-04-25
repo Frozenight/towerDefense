@@ -29,6 +29,7 @@ public class EventManager : MonoBehaviour
     {
         if (currentState == Event.preparation)
             UpdateCurrentState(Event.defending);
+
         else if (currentState == Event.building)
             UpdateCurrentState(Event.defending);
         else

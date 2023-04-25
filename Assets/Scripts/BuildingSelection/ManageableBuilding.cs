@@ -12,6 +12,7 @@ public class ManageableBuilding : MonoBehaviour {
     public static string NAME_EARTH_TURRET = "Earth Turret";
 
     public static ManageableBuilding selectedBuilding = null;
+    private GameMode gameMode;
 
     public virtual int buildingPrice {
         get { return 5; }
@@ -68,6 +69,8 @@ public class ManageableBuilding : MonoBehaviour {
             // Debug.Log("This building is unselected: " + this.GetHashCode());
         } else {
             selectedBuilding = this;
+            gameMode = gameController.GetComponent<GameMode>();
+            gameMode.changeGameMode(4);
             // Debug.Log("This building is selected: " + this.GetHashCode());
         }
     }

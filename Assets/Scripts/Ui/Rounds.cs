@@ -9,19 +9,21 @@ public class Rounds : MonoBehaviour
     [SerializeField] TextMeshProUGUI rounds_text;
     [SerializeField] TextMeshProUGUI rounds;
     EventManager eventController;
-
+    GameMode gameMode;
     private int current_round = 0;
 
     private void Start()
     {
         EventManager.onRoundChange += NextRound;
         eventController = GetComponent<EventManager>();
+        gameMode = GameController.instance.GetComponent<GameMode>();
     }
 
     public void NextRound()
     {
         if (eventController.currentState == EventManager.Event.defending)
         {
+            gameMode.changeGameMode(5);
             current_round++;
             ChangeRoundText();
         }

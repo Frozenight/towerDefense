@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     private bool burning = false;
     private float Fire_Damage;
     private float Burn_Time;
+    private float Turret_Damage;
 
     public event Action<float> OnHealthChanged = delegate { };
 
@@ -29,14 +30,14 @@ public class EnemyHealth : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < Burn_Time)
         {
-            health -= Fire_Damage * Time.deltaTime * 0.1f;
+            health -= ((Fire_Damage + Turret_Damage) * 0.1f) * Time.deltaTime * 0.1f;
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         burning = false;
 
     }
-    public void SetFire(float fireDamage, float burnTime)
+    public void SetFire(float fireDamage, float burnTime, float turretDamage)
     {
 
         Fire_Damage = fireDamage;
@@ -44,6 +45,7 @@ public class EnemyHealth : MonoBehaviour
             
         Burn_Time = burnTime;
         burning = true;
+        Turret_Damage = turretDamage;
     }
     public void GetHit(float damage)
     {

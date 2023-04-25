@@ -19,6 +19,8 @@ public class TileOnWhichToPlace : MonoBehaviour
     private float timeDelay;
     public bool placed = false;
 
+    protected GameMode gameMode;
+
 
     BuildingManager buildingManager;
     void Start(){        
@@ -27,6 +29,7 @@ public class TileOnWhichToPlace : MonoBehaviour
         rend = GetComponent<Renderer>();
         startColor=rend.material;
         timeDelay = 0.5f;
+        gameMode = gameController.GetComponent<GameMode>();
     }
 
     void Update()
@@ -41,8 +44,9 @@ public class TileOnWhichToPlace : MonoBehaviour
     }
 
     void BuildStructure(){
-        if((turret!=null)||(buildingManager.GetTurret()==null)){
-            return;
+        if ((turret != null) || (buildingManager.GetTurret() == null) || (gameMode.isBiuldMode == false)) 
+        { 
+                return;
         }
         
         GameObject selectedTurret = buildingManager.GetTurret();
