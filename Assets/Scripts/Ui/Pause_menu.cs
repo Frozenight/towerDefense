@@ -9,6 +9,9 @@ public class Pause_menu : MonoBehaviour
     {
         Time.timeScale = 0;
         _pause_menu.SetActive(true);
+        GameMode gameMode = GameObject.FindObjectOfType<GameController>().GetComponent<GameMode>();
+        gameMode.changeGameMode(3);
+        
     }
 
     public void Resume_Game()

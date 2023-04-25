@@ -7,19 +7,21 @@ using UnityEngine.SceneManagement;
 public class GameOverScreen : MonoBehaviour
 {
     public void Setup()
-    {
+    { 
         gameObject.SetActive(true);
+        GameController.instance.SaveGame();
+        Time.timeScale = 0;
     }
 
     public void RestartButton()
     {
-        GameController.instance.SaveGame();
+        Time.timeScale = 1;
         SceneManager.LoadScene("Level_One");
     }
 
     public void ExitButton()
     {
-        GameController.instance.SaveGame();
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 }

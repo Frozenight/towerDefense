@@ -5,17 +5,18 @@ using UnityEngine.UI;
 
 public class Show_BuildingSelection : MonoBehaviour
 {
-    private float xOffset = 220f;
+    private float xOffset = 420f;
     private float animationTime = 1f;
-    private bool isHidden;
-
+    public bool isHidden;
+    private GameMode gameMode;
     [SerializeField] private RectTransform panel;
     [SerializeField] private Sprite hide_arrow;
     [SerializeField] private Sprite show_arrow;
 
     private void Start()
     {
-        isHidden = false;
+        isHidden = true;
+        gameMode = GameObject.FindObjectOfType<GameController>().GetComponent<GameMode>();
     }
 
     public void Change_Panel()
@@ -23,12 +24,12 @@ public class Show_BuildingSelection : MonoBehaviour
         if (isHidden)
         {
             Show_Panel();
-            isHidden = false;
+            gameMode.changeGameMode(2);
         }
         else
         {
             Hide_Panel();
-            isHidden = true;
+            gameMode.changeGameMode(1);
         }
     }
 
@@ -37,13 +38,15 @@ public class Show_BuildingSelection : MonoBehaviour
         Vector3 newPosition = panel.anchoredPosition + new Vector2(xOffset, 0);
         StartCoroutine(SlideOverTime(panel.anchoredPosition, newPosition));
         panel.GetChild(1).GetComponent<Image>().sprite = hide_arrow;
+        isHidden = false;
     }
 
-    private void Hide_Panel()
+    public void Hide_Panel()
     {
         Vector3 newPosition = panel.anchoredPosition - new Vector2(xOffset, 0);
         StartCoroutine(SlideOverTime(panel.anchoredPosition, newPosition));
         panel.GetChild(1).GetComponent<Image>().sprite = show_arrow;
+        isHidden = true;
     }
 
     IEnumerator SlideOverTime(Vector3 initialPosition, Vector3 newPosition)
