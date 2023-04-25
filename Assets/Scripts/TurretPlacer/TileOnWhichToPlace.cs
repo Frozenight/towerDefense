@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TileOnWhichToPlace : MonoBehaviour
 {
-    protected GameMode gameMode;
+
     public Material hoverColor;
     public Vector3 offsetFromPlacer;
 
@@ -15,12 +15,11 @@ public class TileOnWhichToPlace : MonoBehaviour
     private GameController gameController;
 
     BuildingManager buildingManager;
-    void Start(){
+    void Start(){        
         gameController = GameController.instance;
         buildingManager=BuildingManager.instance;
         rend = GetComponent<Renderer>();
         startColor=rend.material;
-        gameMode = gameController.GetComponent<GameMode>();
     }
 
     void Update()
@@ -35,8 +34,7 @@ public class TileOnWhichToPlace : MonoBehaviour
     }
 
     void BuildStructure(){
-        if((turret!=null)||(buildingManager.GetTurret()==null) || (gameMode.isBiuldMode == false))
-        {
+        if((turret!=null)||(buildingManager.GetTurret()==null)){
             return;
         }
 

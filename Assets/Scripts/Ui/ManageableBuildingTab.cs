@@ -28,6 +28,7 @@ public class ManageableBuildingTab : MonoBehaviour
     private ManageableBuilding assignedBuilding;
     private UnityAction m_closeTab;
 
+
     public UnityAction closeTab {
         set {
             m_closeTab = value;

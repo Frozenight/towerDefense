@@ -12,8 +12,6 @@ public class ManageableBuilding : MonoBehaviour {
     public static string NAME_EARTH_TURRET = "Earth Turret";
 
     public static ManageableBuilding selectedBuilding = null;
-    GameMode gameMode;
-
 
     public virtual int buildingPrice {
         get { return 5; }
@@ -49,7 +47,7 @@ public class ManageableBuilding : MonoBehaviour {
     } }
 
     private void Start() {
-        gameController = GameController.instance;
+        gameController = GameController.instance;        
     }
 
     public virtual void DestroyBuilding() {
@@ -68,12 +66,8 @@ public class ManageableBuilding : MonoBehaviour {
         if (selectedBuilding == this) {
             selectedBuilding = null;
             // Debug.Log("This building is unselected: " + this.GetHashCode());
-        }
-        else
-        {
+        } else {
             selectedBuilding = this;
-            gameMode = gameController.GetComponent<GameMode>();
-            gameMode.changeGameMode(4);
             // Debug.Log("This building is selected: " + this.GetHashCode());
         }
     }

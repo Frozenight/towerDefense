@@ -64,9 +64,9 @@ MonoBehaviour:
   explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
   firePoint: {fileID: 2489516281790752914}
   rotateX: -90
-  Earth_Turret: {fileID: 1483309739963487027, guid: d1b83efe96c778d47bd145bc8cd8492b, type: 3}
-  Fire_Turret: {fileID: 2478340846770029591, guid: c79d85ae810368a40b115c12a4b6c723, type: 3}
-  Frost_Turret: {fileID: 1927527227406465508, guid: d533c3f7916d0a4459486840e5817ed2, type: 3}
+  Earth_Turret: {fileID: 6308971644287959954, guid: d1b83efe96c778d47bd145bc8cd8492b, type: 3}
+  Fire_Turret: {fileID: 6016936162135373229, guid: 31dc1f8b73c3a3c4b841cd4c55afb975, type: 3}
+  Frost_Turret: {fileID: 8866188744923808478, guid: c39222154f846f542822c8b386bd1d1a, type: 3}
 --- !u!114 &105746014081162816
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        if (!disabled)
+        if(!disabled)
         {
             MoveByDrag();
         }

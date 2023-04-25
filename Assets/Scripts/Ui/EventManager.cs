@@ -8,7 +8,6 @@ public class EventManager : MonoBehaviour
     public delegate void OnRoundChange();
     public static event OnRoundChange onRoundChange;
     public static UnityAction changeWorkerState;
-    GameMode gameMode;
 
     public Event currentState;
     public enum Event
@@ -21,7 +20,6 @@ public class EventManager : MonoBehaviour
     public void NewGame()
     {
         UpdateCurrentState(Event.preparation);
-        gameMode = GameObject.FindObjectOfType<GameController>().GetComponent<GameMode>();
     }
 
     public void ChangeGameState()
@@ -41,10 +39,6 @@ public class EventManager : MonoBehaviour
         }
         currentState = newState;
         onRoundChange?.Invoke();
-        if (currentState == Event.defending)
-        {
-            gameMode.changeGameMode(5);
-        }
     }
 
     private bool ChangingToOrFromDefending(Event newState) {

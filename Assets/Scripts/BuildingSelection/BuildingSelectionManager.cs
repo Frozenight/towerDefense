@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BuildingSelectionManager : MonoBehaviour
 {
-    GameMode gameMode;
     [SerializeField] private ManageableBuildingTab manageBuildingTab;
     private string[] ClickableBuildingTags = new string[] 
     { 
@@ -17,7 +16,6 @@ public class BuildingSelectionManager : MonoBehaviour
     private float maxXOfTab = 0f;
     private float minYOfTab = 0f;
     private float maxYOfTab = 0f;
-
 
     private int clickType = -1;
     RaycastHit lastRaycast;
@@ -52,8 +50,6 @@ public class BuildingSelectionManager : MonoBehaviour
         ManageableBuilding.selectedBuilding = null;
         manageBuildingTab.gameObject.SetActive(false);
         manageTabOpen = false;
-        gameMode = GameController.instance.GetComponent<GameMode>();
-        gameMode.changeTabMode();
         // Debug.Log("Unselected building");
     }
 

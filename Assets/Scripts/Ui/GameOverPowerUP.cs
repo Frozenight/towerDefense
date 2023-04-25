@@ -14,7 +14,6 @@ public class GameOverPowerUP : MonoBehaviour
     public GameOverScreen gameOverScreen;
     public void Setup()
     {
-        Time.timeScale = 0;
         gameObject.SetActive(true);
     }
 
@@ -25,7 +24,6 @@ public class GameOverPowerUP : MonoBehaviour
 
     public void PickFirstButton()
     {
-        Time.timeScale = 1;
         WorkerMovement.IncreaseMS();
         gameOverScreen.Setup();
         TurnOff();
@@ -33,7 +31,6 @@ public class GameOverPowerUP : MonoBehaviour
 
     public void PickSecondButton()
     {
-        Time.timeScale = 1;
         building_base.TestIncreaseHp();
         //building_base2.TestIncreaseHp();
         gameOverScreen.Setup();
