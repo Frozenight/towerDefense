@@ -6,10 +6,14 @@ public class enemySpawner : MonoBehaviour
 {
     public static enemySpawner instance { get; private set; }
     public float spawnCoolDown = 1f;
-    float spawnCoolDownRemaining = 0;
     float offsetZ = 5;
+
     int waveCnt;
     public int bossWave;
+
+    private bool isInPlayMode = false;
+
+
 
     [System.Serializable]
     public class WaveComponent {
@@ -31,16 +35,23 @@ public class enemySpawner : MonoBehaviour
     {
         waveCnt = 0;
         startSpawn = false;
+        isInPlayMode = true;
     }
 
     // Update is called once per frame
 
     public void spawnWave()
     {
+
         waveCnt++;
         
 
         if (waveCnt == bossWave)
+
+        if (!isInPlayMode)
+            return;
+        for(int i = 0; i < waveComponents.enemyAmount; i++)
+
         {
             var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
             Instantiate(waveComponents.BossPrefab, transform.position + offset, Quaternion.identity).transform.parent = this.transform;
@@ -80,5 +91,10 @@ public class enemySpawner : MonoBehaviour
         {
             b.ResetObjective();
         }
+    }
+
+    private void OnDestroy()
+    {
+        isInPlayMode = false;
     }
 }

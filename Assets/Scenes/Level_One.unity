@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4576338, g: 0.42386243, b: 0.4538195, a: 1}
+  m_IndirectSpecularColor: {r: 0.4570772, g: 0.4209196, b: 0.4514026, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1279,7 +1279,7 @@ MonoBehaviour:
   fileName: data
   trashObjects: []
   gameOverScreen: {fileID: 1286586780}
-  resources: 20
+  resources: 200
   trashResourceGainAmount: 5
   rounds: {fileID: 840966349}
   aiAPI: {fileID: 513332495}
@@ -2013,6 +2013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fed05412c030848bfd0c98173d489d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 513332493}
+  resourceSpawner: {fileID: 2106454621}
   currentState: 0
 --- !u!114 &840966349
 MonoBehaviour:
@@ -3389,6 +3391,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2866149890688547489, guid: c7527a76e46c5ce4b8d1f3002a4520df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3318624150353113126, guid: c7527a76e46c5ce4b8d1f3002a4520df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.28
@@ -3421,6 +3427,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4498346572417621537, guid: c7527a76e46c5ce4b8d1f3002a4520df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4891918737943497674, guid: c7527a76e46c5ce4b8d1f3002a4520df, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3429,7 +3439,23 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 5615432919206701860, guid: c7527a76e46c5ce4b8d1f3002a4520df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310092188261849919, guid: c7527a76e46c5ce4b8d1f3002a4520df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6718091566258064651, guid: c7527a76e46c5ce4b8d1f3002a4520df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6890667358372485845, guid: c7527a76e46c5ce4b8d1f3002a4520df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969164291052405922, guid: c7527a76e46c5ce4b8d1f3002a4520df, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -3556,6 +3582,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c126ca815266bc646870f0907e8d591c, type: 3}
+--- !u!114 &2106454621 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6085127283958192548, guid: c08baff97d42c1044b0d1206adc77a50, type: 3}
+  m_PrefabInstance: {fileID: 221872566300883790}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fcd1fc856e124418a842ae666e602f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &221872566300883790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3571,6 +3608,14 @@ PrefabInstance:
       propertyPath: spawnNumber
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6085127283958192548, guid: c08baff97d42c1044b0d1206adc77a50, type: 3}
+      propertyPath: eventManager
+      value: 
+      objectReference: {fileID: 840966348}
+    - target: {fileID: 6085127283958192548, guid: c08baff97d42c1044b0d1206adc77a50, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 513332493}
     - target: {fileID: 7611183322116898856, guid: c08baff97d42c1044b0d1206adc77a50, type: 3}
       propertyPath: m_RootOrder
       value: 7
