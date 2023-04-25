@@ -112,3 +112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverColor: {fileID: 2100000, guid: 8efa9e668e833e544a8d9002df984e64, type: 2}
   offsetFromPlacer: {x: 0, y: 0, z: 0}
+  animationPrefab1: {fileID: 7225708610461788785, guid: 82d2077226666814cbfe6661ec25a559, type: 3}
+  animationPrefab2: {fileID: 2098220308625041649, guid: 2362b2f8a389fd045b7b12da301ff79b, type: 3}

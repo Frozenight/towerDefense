@@ -69,7 +69,7 @@ MonoBehaviour:
   _animator: {fileID: 8056469957312234759}
   damage: -100
   TimeBetweenAttacks: 5
-  speed: 1.2
+  speed: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -115,7 +115,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 4
-  m_Speed: 1.2
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

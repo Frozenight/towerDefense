@@ -57,8 +57,6 @@ public class BossManager : MonoBehaviour
 
     private void Update()
     {
-        
-        Debug.Log("BAAAAAAAAAAAAAAAAAAAAAAAAa" + _currentState.ToString());
         logger.Log("", Objective.buildingName);
         if (health.getHealth() <= 0)
         {
@@ -122,7 +120,7 @@ public class BossManager : MonoBehaviour
     private void _FinalMove()
     {
         Objective = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
-        if (Vector3.Distance(transform.position, Objective.transform.position) < 8)
+        if (Vector3.Distance(transform.position, Objective.transform.position) < 12)
         {
             _currentState = State.Attack;
         }
@@ -152,11 +150,11 @@ public class BossManager : MonoBehaviour
 
         if (Objective.tag == "Base")
         {
-            if (Vector3.Distance(transform.position, Objective.transform.position) > 15)
+            if (Vector3.Distance(transform.position, Objective.transform.position) > 12)
                 return;
             GetComponent<BossNavmesh>().Stop();
         }
-        else if (Vector3.Distance(transform.position, Objective.transform.position) > 15)
+        else if (Vector3.Distance(transform.position, Objective.transform.position) > 12)
         {
             return;
         }

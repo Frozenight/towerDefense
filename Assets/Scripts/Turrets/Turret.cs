@@ -11,6 +11,7 @@ public class Turret : ManageableBuilding
     private const float INCREASE_FIRERATE_MULT = 1.1f;
     private const float INCREASE_RANGE = 2.5f;
 
+
     protected Transform target;
     protected EnemyHealth nearestEnemyHealth;
 
@@ -33,23 +34,34 @@ public class Turret : ManageableBuilding
     public Transform firePoint;
 
     public float rotateX;
-
+    public int price;
 
     public override string buildingName { 
         get { return NAME_TURRET; } 
     }
 
-   
-    public override void UpgradeBuilding() { 
+    public override int buildingPrice
+    {
+        get { return price; }
+    }
+
+
+    public override void UpgradeBuilding() {
+              
         // Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
         if (gameController.resources < m_upgrade_price)
             return;
+        
+        
         range += INCREASE_RANGE;
         fireRate *= INCREASE_FIRERATE_MULT;
         damage += INCREASE_DAMAGE;
         gameController.resources -= m_upgrade_price;
         m_level += 1;
-        m_upgrade_price += 5;
+        m_upgrade_price = price + (m_level * 5);
+        Debug.Log(price + " " + m_level + " " + m_upgrade_price);
+        price = m_upgrade_price;
+
         if (m_level % 5 == 0 && UpdateObjectModel(out GameObject newModel)) {
             partToRotate = transform.Find(currModelName + "/Armature/main");
             // Debug.Log(currModelName + "/Armature/main");
@@ -67,7 +79,7 @@ public class Turret : ManageableBuilding
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_upgrade_price = price + (m_level * 5);
     }
 
     protected virtual void UpdateTarget()
@@ -114,7 +126,11 @@ public class Turret : ManageableBuilding
                 fireCountdown = 1f / fireRate;
             }
             fireCountdown -= Time.deltaTime;
+
+        
     }
+
+
 
     protected virtual void Fire(){
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
@@ -122,6 +138,7 @@ public class Turret : ManageableBuilding
         Ammunition bullet = newBullet.GetComponent<Ammunition>();
         newSmoke.transform.parent = this.transform;
         bullet.transform.parent = this.transform;
+        bullet.transform.LookAt(target);
         if(bullet==null){
             return;
         }
