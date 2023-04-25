@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeModels: []
+  price: 5
 --- !u!114 &5547942735176041356
 MonoBehaviour:
   m_ObjectHideFlags: 0

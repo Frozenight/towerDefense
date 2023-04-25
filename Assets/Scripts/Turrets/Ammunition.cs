@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class Ammunition : MonoBehaviour
@@ -35,7 +37,17 @@ public class Ammunition : MonoBehaviour
         transform.Translate(dir.normalized*distancePerFrame, Space.World);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     public bool HitTarget(){
+        
         return true;
     }
 }
