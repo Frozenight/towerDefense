@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public static GameController instance { get; private set; }
     public List<TrashObject> trashObjects;
     public GameOverPowerUP gameOverScreen;
+    public BossAppear bossAppear;
     public int resources = 0;
     [SerializeField] private int trashGainSpawned;
     [SerializeField] private int trashGainEnemyDroped;
@@ -39,6 +40,11 @@ public class GameController : MonoBehaviour
         rounds.NewGame();
         gameOverScreen.Setup();
 
+    }
+
+    public void BossWarning()
+    {
+        bossAppear.Setup();
     }
 
     public void AddCountRecource(string name)

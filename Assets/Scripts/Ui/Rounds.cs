@@ -27,6 +27,7 @@ public class Rounds : MonoBehaviour
         }
         else
         {
+            if (current_round == enemySpawner.instance.bossWave-1) { GameController.instance.BossWarning(); }
             ChangeDefendingText();
         }
     }
@@ -35,8 +36,6 @@ public class Rounds : MonoBehaviour
     {
         eventController.currentState = EventManager.Event.preparation;
     }
-
-
 
     private void ChangeRoundText()
     {

@@ -20,23 +20,22 @@ public class WorkerAnimation : MonoBehaviour
     {
         if(animator != null)
         {
-
-            //to go towards trash
-            if(worker.goingBackward == false && pickup.HasTrash == false)
-            {
-                animator.SetBool("GoingBackward", false);
-                animator.SetBool("HasTrash", false);
-            }
-            //to go back with trash
-            if (worker.goingBackward == true && pickup.HasTrash == true)
-            {
-                animator.SetBool("GoingBackward", true);
-            }
-            //to pick up trash
-            if (pickup.HasTrash == true)
-            {
-                animator.SetBool("HasTrash", true);
-            }
+            ////to go towards trash
+            //if(worker.goingBackward == false && pickup.HasTrash == false)
+            //{
+            //    animator.SetBool("GoingBackward", false);
+            //    animator.SetBool("HasTrash", false);
+            //}
+            ////to go back with trash
+            //if (worker.goingBackward == true && pickup.HasTrash == true)
+            //{
+            //    animator.SetBool("GoingBackward", true);
+            //}
+            ////to pick up trash
+            //if (pickup.HasTrash == true)
+            //{
+            //    animator.SetBool("HasTrash", true);
+            //}
 
         }
     }

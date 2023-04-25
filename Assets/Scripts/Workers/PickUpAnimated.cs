@@ -14,9 +14,11 @@ public class PickUpAnimated : MonoBehaviour
     private float timeDelay;
     private float timeDelay2;
     private Collider other;
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         HasTrash = false;
         time = 0f;
         timeDelay = 0.1f;
@@ -44,6 +46,7 @@ public class PickUpAnimated : MonoBehaviour
         {
             this.other = other;
             HasTrash = true;
+            animator.SetTrigger("PickUp");
             GameController.instance.AddCountRecource("trash");
             if(FloatingTextPrefab)
             {

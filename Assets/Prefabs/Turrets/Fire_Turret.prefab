@@ -30,12 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6016936162135373229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11, y: 0.2, z: 7}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6778737972445340390}
   - {fileID: 6450510539521585776}
+  - {fileID: 3368253037552735868}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60,8 +61,9 @@ MonoBehaviour:
   partToRotate: {fileID: 4380959857447676059}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
   explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
-  firePoint: {fileID: 4521465012709065170}
+  firePoint: {fileID: 3368253037552735868}
   rotateX: -90
+  price: 110
   fire_damage: 0.1
   burn_time: 5
 --- !u!114 &3065367882657682378
@@ -139,6 +141,37 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &8921771412198965033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3368253037552735868}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3368253037552735868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8921771412198965033}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.18, y: 1.8734398, z: 0.88}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6722609370373012785}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6777469206450771355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303,11 +336,6 @@ PrefabInstance:
 --- !u!4 &4380959857447676059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2107082562448933632, guid: 735d405461402284681d40787705353b, type: 3}
-  m_PrefabInstance: {fileID: 6777469206450771355}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4521465012709065170 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6967367881902527561, guid: 735d405461402284681d40787705353b, type: 3}
   m_PrefabInstance: {fileID: 6777469206450771355}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6450510539521585776 stripped

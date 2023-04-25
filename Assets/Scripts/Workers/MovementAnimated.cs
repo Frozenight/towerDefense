@@ -18,9 +18,12 @@ public class MovementAnimated : MonoBehaviour, IGameController
     private float timeDelay;
     private PickUpAnimated PickUp;
     private bool detectedRaidStart = true;
+
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         EventManager.changeWorkerState = ChangeRaidState;
         trashObjects = GameController.instance.trashObjects;
         time = 0f;
@@ -48,6 +51,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
                 {
                     PickUp.HasTrash = false;
                     goingBackward = false;
+                    animator.SetTrigger("GoForward");
                     // Stops worker at base until ongoingRaid is set to false 
                     if (ongoingRaid) {
                         speed = 0f;
@@ -65,7 +69,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
                 time += Time.deltaTime;
                 if (time > timeDelay)
                 {
-                
+                    animator.SetTrigger("GoBack");
                     goingBackward = true;
                     time = 0f;
                 }
