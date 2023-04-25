@@ -17,14 +17,13 @@ public class Building_Base : ManageableBuilding, IGameController
         get { return false; }
     }
 
-    private int _currentHealth;
+    public int _currentHealth { get; set; }
 
     public event Action<float> OnHealthChanged = delegate { };
 
     private void Start()
     {
         gameController = GameController.instance;
-        _currentHealth = maxHealth;
     }
 
     public override void UpgradeBuilding()
@@ -74,8 +73,6 @@ public class Building_Base : ManageableBuilding, IGameController
         }
     }
 
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
@@ -84,13 +81,39 @@ public class Building_Base : ManageableBuilding, IGameController
 
     public void LoadData(GameData data)
     {
-        this.maxHealth = data.maxHealth;
-        _currentHealth = maxHealth;
+        if(gameObject.tag == "Base")
+        {
+            this.maxHealth = data.maxBaseHealth;
+            _currentHealth = maxHealth;
+        }
+        if(gameObject.tag == "Tower")
+        {
+            this.maxHealth = data.towerHealth;
+            _currentHealth = maxHealth;
+        }
+        if (gameObject.tag == "Wall")
+        {
+            this.maxHealth = data.wallHealth;
+            _currentHealth = maxHealth;
+        }
+
     }
 
     public void SaveData(ref GameData data)
     {
-        data.maxHealth = this.maxHealth;
+        if (gameObject.tag == "Base")
+        {
+            data.maxBaseHealth = this.maxHealth;
+        }
+        if (gameObject.tag == "Tower")
+        {
+            data.towerHealth = this.maxHealth;
+        }
+        if (gameObject.tag == "Wall")
+        {
+            data.wallHealth = this.maxHealth;
+        }
+        
     }
 
     public void TestIncreaseHp()

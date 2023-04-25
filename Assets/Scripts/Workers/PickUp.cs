@@ -24,7 +24,15 @@ public class PickUp : MonoBehaviour
             Destroy(other.gameObject);
             GetComponent<Movement>().going = true;
             GameController.instance.AddCountRecource("trash");
-            Debug.Log(GameController.instance.resources);
+        }
+
+        if (other.gameObject.CompareTag("EnemyTrash"))
+        {
+            Debug.Log("EnemyTrash");
+            GameController.instance.trashObjects.Remove(other.gameObject.GetComponent<TrashObject>());
+            Destroy(other.gameObject);
+            GetComponent<Movement>().going = true;
+            GameController.instance.AddCountRecource("enemyTrash"); 
         }
     }
 }

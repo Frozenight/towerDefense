@@ -12,13 +12,17 @@ public class GameController : MonoBehaviour
     public List<TrashObject> trashObjects;
     public GameOverPowerUP gameOverScreen;
     public int resources = 0;
-    public int trashResourceGainAmount;
+    [SerializeField] private int trashGainSpawned;
+    [SerializeField] private int trashGainEnemyDroped;
     public Rounds rounds;
     public OpenAiAPI aiAPI;
 
     private GameData gameData;
     private List<IGameController> gameControllerObjects;
     private FileDataHandler dataHandler;
+
+    [SerializeField] private GridManager gridManager;
+    [SerializeField] private GameObject wall;
 
     private void Awake()
     {
@@ -34,14 +38,19 @@ public class GameController : MonoBehaviour
     {
         rounds.NewGame();
         gameOverScreen.Setup();
-        
+
     }
 
     public void AddCountRecource(string name)
     {
-        if(name == "trash")
+        if (name == "trash")
         {
-            resources += trashResourceGainAmount;
+            resources += trashGainSpawned;
+        }
+
+        else if (name == "enemyTrash")
+        {
+            resources += trashGainEnemyDroped;
         }
     }
 
@@ -55,12 +64,12 @@ public class GameController : MonoBehaviour
 
     public int GetTurretHealth()
     {
-        return gameData.TowerHealth1;
+        return gameData.towerHealth;
     }
 
     public int GetWallHealth()
     {
-        return gameData.TowerHealth1;
+        return gameData.towerHealth;
     }
 
     private List<IGameController> FindAllGameControllerObjects()
@@ -80,13 +89,13 @@ public class GameController : MonoBehaviour
     {
         this.gameData = dataHandler.Load();
 
-        if(this.gameData == null)
+        if (this.gameData == null)
         {
             Debug.Log("No data was found. Initializing data to defaults");
             NewGame();
         }
 
-        foreach(IGameController gameControllerObj in gameControllerObjects)
+        foreach (IGameController gameControllerObj in gameControllerObjects)
         {
             gameControllerObj.LoadData(gameData);
         }
@@ -95,7 +104,7 @@ public class GameController : MonoBehaviour
     //Saves game
     public void SaveGame()
     {
-        foreach(IGameController gameControllerObj in gameControllerObjects)
+        foreach (IGameController gameControllerObj in gameControllerObjects)
         {
             gameControllerObj.SaveData(ref gameData);
         }
@@ -107,5 +116,20 @@ public class GameController : MonoBehaviour
     public void OnApplicationQuit()
     {
         SaveGame();
+    }
+
+    public void SpawnWalls()
+    {
+        Quaternion quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, -90, gridManager.tiles[1].gameObject.transform.rotation.z);
+        for (int i = 126; i < 130; i++)
+        {
+            GameObject turret = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+        }
+        quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, 90, gridManager.tiles[1].gameObject.transform.rotation.z);
+        for (int i = 100; i < 104; i++)
+        {
+            GameObject turret = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+        }
+
     }
 }

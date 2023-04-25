@@ -5,10 +5,12 @@ using UnityEngine;
 public class Wall : ManageableBuilding
 {
     private enemySpawner enemyController;
-    private void Awake()
+
+    private void Start()
     {
         enemyController = enemySpawner.instance;
         GetComponent<Building_Base>().maxHealth = GameController.instance.GetWallHealth();
+        GetComponent<Building_Base>()._currentHealth = GameController.instance.GetWallHealth();
     }
     public override string buildingName
     {
