@@ -43,6 +43,8 @@ public class Show_BuildingSelection : MonoBehaviour
 
     public void Hide_Panel()
     {
+        if (isHidden)
+            return;
         Vector3 newPosition = panel.anchoredPosition - new Vector2(xOffset, 0);
         StartCoroutine(SlideOverTime(panel.anchoredPosition, newPosition));
         panel.GetChild(1).GetComponent<Image>().sprite = show_arrow;

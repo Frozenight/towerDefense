@@ -9,14 +9,15 @@ public class Rounds : MonoBehaviour
     [SerializeField] TextMeshProUGUI rounds_text;
     [SerializeField] TextMeshProUGUI rounds;
     EventManager eventController;
-    GameMode gameMode;
+    [SerializeField] GameMode gameMode;
     private int current_round = 0;
+    [SerializeField] Button hide_button;
+    [SerializeField] Show_BuildingSelection show_BuildingSelection;
 
     private void Start()
     {
         EventManager.onRoundChange += NextRound;
         eventController = GetComponent<EventManager>();
-        gameMode = GameController.instance.GetComponent<GameMode>();
     }
 
     public void NextRound()
@@ -26,9 +27,12 @@ public class Rounds : MonoBehaviour
             gameMode.changeGameMode(5);
             current_round++;
             ChangeRoundText();
+            show_BuildingSelection.Hide_Panel();
+            hide_button.interactable = false;
         }
         else
         {
+            hide_button.interactable = true;
             if (current_round == enemySpawner.instance.bossWave-1) { GameController.instance.BossWarning(); }
             ChangeDefendingText();
         }
