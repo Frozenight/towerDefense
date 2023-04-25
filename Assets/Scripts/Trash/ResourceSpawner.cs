@@ -79,7 +79,7 @@ public class ResourceSpawner: MonoBehaviour
                     TrashObject trash;
 
                     trash = Instantiate(objectToSpawn, randomPosition, Quaternion.identity).GetComponent<TrashObject>();
-
+                    trash.transform.parent = this.transform;
                     GameController.instance.AddTrash(trash);
 
                     spawnNumber = spawnNumber - 1;

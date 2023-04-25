@@ -57,6 +57,7 @@ public class PickUpAnimated : MonoBehaviour
         {
             this.other = other;
             HasTrash = true;
+            animator.SetTrigger("PickUp");
             GameController.instance.AddCountRecource("enemyTrash");
             if (FloatingTextPrefab)
             {

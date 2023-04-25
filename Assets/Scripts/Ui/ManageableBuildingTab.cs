@@ -108,6 +108,7 @@ public class ManageableBuildingTab : MonoBehaviour
     }
 
     public void Destroy() {
+        assignedBuilding?.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().ChangePlacedState();
         assignedBuilding?.DestroyBuilding();
         m_closeTab?.Invoke();
     }

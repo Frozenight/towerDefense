@@ -6,6 +6,7 @@ public class Building_Base : ManageableBuilding, IGameController
 {
     public int maxHealth { get; set; }
     public GameOverScreen gameOverScreen;
+    public GameObject tile;
 
     private const int HEALTH_INCREASE = 50;
 

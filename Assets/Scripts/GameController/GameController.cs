@@ -24,6 +24,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private GridManager gridManager;
     [SerializeField] private GameObject wall;
+    [SerializeField] public GameObject vfx;
+    [SerializeField] public GameObject turrets;
+    [SerializeField] public GameObject walls;
 
     private void Awake()
     {
@@ -66,6 +69,8 @@ public class GameController : MonoBehaviour
         this.gameControllerObjects = FindAllGameControllerObjects();
         LoadGame();
         aiAPI.GetData();
+        vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
+        turrets = (GameObject)Instantiate(turrets, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     public int GetTurretHealth()
@@ -126,15 +131,18 @@ public class GameController : MonoBehaviour
 
     public void SpawnWalls()
     {
+        walls = (GameObject)Instantiate(walls, new Vector3(0, 0, 0), Quaternion.identity);
         Quaternion quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, -90, gridManager.tiles[1].gameObject.transform.rotation.z);
         for (int i = 126; i < 130; i++)
         {
-            GameObject turret = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+            GameObject startWall = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+            startWall.transform.parent = walls.transform;
         }
         quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, 90, gridManager.tiles[1].gameObject.transform.rotation.z);
         for (int i = 100; i < 104; i++)
         {
-            GameObject turret = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+            GameObject startWall = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+            startWall.transform.parent = walls.transform;
         }
 
     }

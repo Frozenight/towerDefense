@@ -114,3 +114,5 @@ MonoBehaviour:
   offsetFromPlacer: {x: 0, y: 0, z: 0}
   animationPrefab1: {fileID: 7225708610461788785, guid: 82d2077226666814cbfe6661ec25a559, type: 3}
   animationPrefab2: {fileID: 2098220308625041649, guid: 2362b2f8a389fd045b7b12da301ff79b, type: 3}
+  placed: 0
+  vfx: {fileID: 5205143363580656914, guid: 17bc20d2f07bc834ca441d346be2076c, type: 3}

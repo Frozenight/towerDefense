@@ -13,15 +13,11 @@ public class Wall : ManageableBuilding
         enemyController = enemySpawner.instance;
         GetComponent<Building_Base>().maxHealth = GameController.instance.GetWallHealth();
         GetComponent<Building_Base>()._currentHealth = GameController.instance.GetWallHealth();
+        m_upgrade_price = price + (m_level * 5);
     }
     public override string buildingName
     {
         get { return NAME_WALL; }
-    }
-
-    void Start()
-    {
-        m_upgrade_price = price + (m_level * 5);
     }
 
     public override void UpgradeBuilding()

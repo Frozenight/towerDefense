@@ -42,21 +42,17 @@ public class enemySpawner : MonoBehaviour
 
     public void spawnWave()
     {
-
         waveCnt++;
         
-
-        if (waveCnt == bossWave)
-
         if (!isInPlayMode)
             return;
-        for(int i = 0; i < waveComponents.enemyAmount; i++)
 
-        {
+        if (waveCnt == bossWave)
+            for (int i = 0; i < waveComponents.enemyAmount; i++)
+            {
             var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
             Instantiate(waveComponents.BossPrefab, transform.position + offset, Quaternion.identity).transform.parent = this.transform;
-
-        }
+            }
         else
             for (int i = 0; i < waveComponents.enemyAmount; i++)
             {
