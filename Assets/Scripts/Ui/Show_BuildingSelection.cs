@@ -12,11 +12,14 @@ public class Show_BuildingSelection : MonoBehaviour
     [SerializeField] private RectTransform panel;
     [SerializeField] private Sprite hide_arrow;
     [SerializeField] private Sprite show_arrow;
+    private Vector3 targetPos;
 
     private void Start()
     {
         isHidden = true;
         gameMode = FindObjectOfType<GameController>().GetComponent<GameMode>();
+        TileOnWhichToPlace.SetBoundaries(panel.GetComponent<RectTransform>());
+        targetPos = panel.anchoredPosition;
     }
 
     public void Change_Panel()
@@ -35,8 +38,8 @@ public class Show_BuildingSelection : MonoBehaviour
 
     private void Show_Panel()
     {
-        Vector3 newPosition = panel.anchoredPosition + new Vector2(xOffset, 0);
-        StartCoroutine(SlideOverTime(panel.anchoredPosition, newPosition));
+        targetPos = targetPos + new Vector3(xOffset, 0, 0);
+        StartCoroutine(SlideOverTime(panel.anchoredPosition, targetPos));
         panel.GetChild(1).GetComponent<Image>().sprite = hide_arrow;
         isHidden = false;
     }
@@ -45,8 +48,8 @@ public class Show_BuildingSelection : MonoBehaviour
     {
         if (isHidden)
             return;
-        Vector3 newPosition = panel.anchoredPosition - new Vector2(xOffset, 0);
-        StartCoroutine(SlideOverTime(panel.anchoredPosition, newPosition));
+        targetPos = targetPos - new Vector3(xOffset, 0, 0);
+        StartCoroutine(SlideOverTime(panel.anchoredPosition, targetPos));
         panel.GetChild(1).GetComponent<Image>().sprite = show_arrow;
         isHidden = true;
     }
@@ -63,5 +66,6 @@ public class Show_BuildingSelection : MonoBehaviour
         }
 
         panel.anchoredPosition = newPosition;
+        TileOnWhichToPlace.SetBoundaries(panel.GetComponent<RectTransform>());
     }
 }

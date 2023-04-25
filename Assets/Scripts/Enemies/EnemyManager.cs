@@ -168,6 +168,7 @@ public class EnemyManager : MonoBehaviour
     private void OnDestroy()
     {
         _roundController.CheckForEndOfRound();
+        gameObject.GetComponent<EnemyTrashSpawn>().SpawnTrash();
     }
     
     public void ReduceSpeed(float reduce, float reduce_time)

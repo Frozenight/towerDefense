@@ -86,7 +86,7 @@ MonoBehaviour:
   - {fileID: 134015296191264017, guid: 1bd8161c16563204088b4492bcd126a3, type: 3}
   - {fileID: 6139106547975946548, guid: 477b9989b749ce444b30ba7c3181dd4d, type: 3}
   IsShooting: 0
-  range: 15
+  range: 20
   fireRate: 1
   fireCountdown: 0
   damage: 10
@@ -95,8 +95,8 @@ MonoBehaviour:
   explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
   firePoint: {fileID: 7224792988095242527}
   rotateX: -90
-  price: 0
-  Earth_Turret: {fileID: 6308971644287959954, guid: d1b83efe96c778d47bd145bc8cd8492b, type: 3}
+  price: 25
+  Earth_Turret: {fileID: 6016936162135373229, guid: 53df4ad3999c38e43a4254c8ced6818f, type: 3}
   Fire_Turret: {fileID: 6016936162135373229, guid: 31dc1f8b73c3a3c4b841cd4c55afb975, type: 3}
   Frost_Turret: {fileID: 8866188744923808478, guid: c39222154f846f542822c8b386bd1d1a, type: 3}
 --- !u!114 &105746014081162816
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   gameOverScreen: {fileID: 0}
+  tile: {fileID: 0}
 --- !u!95 &4613402665312923862
 Animator:
   serializedVersion: 4

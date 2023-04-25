@@ -52,6 +52,10 @@ public class EnemyHealth : MonoBehaviour
         health -= damage;
         float currentHealthPct = (float)health / (float)maxHealth;
         OnHealthChanged(currentHealthPct);
+        if (GetComponent<EnemyNavmesh>() != null)
+            GetComponent<EnemyNavmesh>().UpdateSpeed();
+        else
+            GetComponent<BossNavmesh>().UpdateSpeed();
     }
     public float getHealth()
     {

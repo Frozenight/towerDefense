@@ -47,7 +47,7 @@ public class PickUpAnimated : MonoBehaviour
             this.other = other;
             HasTrash = true;
             animator.SetTrigger("PickUp");
-            GameController.instance.AddCountRecource("trash");
+            GameController.instance.AddCountResource("trash");
             if(FloatingTextPrefab)
             {
                 ShowFloatingText("+5");
@@ -58,10 +58,10 @@ public class PickUpAnimated : MonoBehaviour
             this.other = other;
             HasTrash = true;
             animator.SetTrigger("PickUp");
-            GameController.instance.AddCountRecource("enemyTrash");
+            GameController.instance.AddCountResource("enemyTrash");
             if (FloatingTextPrefab)
             {
-                ShowFloatingText("+3");
+                ShowFloatingText("+6");
             }
         }
     }

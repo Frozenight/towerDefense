@@ -5,13 +5,14 @@ using UnityEngine;
 public class MovementAnimated : MonoBehaviour, IGameController
 {
 
-    private const float SPEED_INC_ON_UPGRADE = 3f;
+    private const float SPEED_INC_ON_UPGRADE = 5f;
 
     public static bool ongoingRaid {get; private set;}
 
     public List<TrashObject> trashObjects;
-    public float speed = 1f;
-    private float savedSpeed;    
+    public float speed = 10f;
+    private float savedSpeed;
+    private float savedSpeedAfterRaid;
     public bool goingBackward = false;
     public GameObject PointB;     //end point of movement (resource collection point)
     private float time;
@@ -54,6 +55,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
                     animator.SetTrigger("GoForward");
                     // Stops worker at base until ongoingRaid is set to false 
                     if (ongoingRaid) {
+                        savedSpeedAfterRaid = speed;
                         speed = 0f;
                     }
                 }
@@ -117,21 +119,19 @@ public class MovementAnimated : MonoBehaviour, IGameController
 
     public void IncreaseMS()
     {
-        speed += 1f;
-        savedSpeed = speed;
+        savedSpeed += 1f;
     }
 
     public void Upgrade()
     {
         speed += SPEED_INC_ON_UPGRADE;
-        savedSpeed = speed;
     }
 
     private void ChangeRaidState() {
         Debug.Log($"ChangeRaidState to {!ongoingRaid}");
         ongoingRaid = !ongoingRaid;
         if (!ongoingRaid) {
-            speed = savedSpeed;
+            speed = savedSpeedAfterRaid;
             if (!PickUp.HasTrash)
                 goingBackward = false;
         } else {

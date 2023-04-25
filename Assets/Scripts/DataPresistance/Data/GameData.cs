@@ -17,6 +17,6 @@ public class GameData
         this.towerHealth = 200;
         this.wallHealth = 200;
         this.towerDamage1 = 5;
-        this.workerSpeed = 3.5f;
+        this.workerSpeed = 10f;
     }
 }

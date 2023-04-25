@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6016936162135373229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: -12, y: 0.2, z: 25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54,11 +54,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   IsShooting: 0
-  range: 15
-  fireRate: 1
+  range: 30
+  fireRate: 1.4641
   fireCountdown: 0
-  damage: 5
-  partToRotate: {fileID: 4380959857447676059}
+  damage: 30
+  partToRotate: {fileID: 5520268817022992133}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
   explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
   firePoint: {fileID: 3368253037552735868}
@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   gameOverScreen: {fileID: 0}
+  tile: {fileID: 0}
 --- !u!65 &3686414825287529246
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -333,9 +334,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 735d405461402284681d40787705353b, type: 3}
---- !u!4 &4380959857447676059 stripped
+--- !u!4 &5520268817022992133 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -2107082562448933632, guid: 735d405461402284681d40787705353b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1339125346602560158, guid: 735d405461402284681d40787705353b, type: 3}
   m_PrefabInstance: {fileID: 6777469206450771355}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6450510539521585776 stripped

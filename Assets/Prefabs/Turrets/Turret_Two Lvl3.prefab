@@ -62,6 +62,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 0}
   firePoint: {fileID: 0}
   rotateX: 0
+  price: 0
 --- !u!65 &3147274877484959971
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -101,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   gameOverScreen: {fileID: 0}
+  tile: {fileID: 0}
 --- !u!95 &5827592046922417833
 Animator:
   serializedVersion: 4

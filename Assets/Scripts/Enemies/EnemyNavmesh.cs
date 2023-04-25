@@ -71,4 +71,8 @@ public class EnemyNavmesh : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         CheckIfPathAvailable();
     }
+    public void UpdateSpeed()
+    {
+        spawnPosition.speed = GetComponent<EnemyManager>().speed;
+    }
 }

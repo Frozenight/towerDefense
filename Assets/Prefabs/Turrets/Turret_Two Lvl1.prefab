@@ -54,14 +54,15 @@ MonoBehaviour:
   UpgradeModels: []
   IsShooting: 0
   range: 25
-  fireRate: 1
+  fireRate: 0.5
   fireCountdown: 0
-  damage: 10
+  damage: 20
   partToRotate: {fileID: 8903818474638440663}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
   explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
-  firePoint: {fileID: 8903818474638440663}
+  firePoint: {fileID: 5906054194684897306}
   rotateX: 0
+  price: 25
 --- !u!114 &1330796160399620939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   gameOverScreen: {fileID: 0}
+  tile: {fileID: 0}
 --- !u!65 &3147274877484959971
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -87,7 +89,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.78, y: 1.99, z: 1.91}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0, y: 0.83, z: 0}
 --- !u!114 &-3586066729954027874
 MonoBehaviour:
@@ -131,12 +133,43 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 1.5, y: 0.5, z: 1.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!1 &5705864565627230678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5906054194684897306}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5906054194684897306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705864565627230678}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0.00004, y: -0.00263, z: 0.0087}
+  m_LocalScale: {x: 0.005, y: 0.005000001, z: 0.005000001}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5661863921879880411}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5267032608079705392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,15 +187,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb510782ec81891458585d5cc41d7dc1, type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb510782ec81891458585d5cc41d7dc1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb510782ec81891458585d5cc41d7dc1, type: 3}
       propertyPath: m_LocalScale.z
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb510782ec81891458585d5cc41d7dc1, type: 3}
       propertyPath: m_LocalPosition.x

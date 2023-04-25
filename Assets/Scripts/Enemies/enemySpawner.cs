@@ -13,6 +13,7 @@ public class enemySpawner : MonoBehaviour
 
     private bool isInPlayMode = false;
 
+    [SerializeField] private int scalingHealth  = 40;
 
 
     [System.Serializable]
@@ -48,18 +49,18 @@ public class enemySpawner : MonoBehaviour
             return;
 
         if (waveCnt == bossWave)
-            for (int i = 0; i < waveComponents.enemyAmount; i++)
-            {
+        { 
             var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
             Instantiate(waveComponents.BossPrefab, transform.position + offset, Quaternion.identity).transform.parent = this.transform;
-            }
+        }
         else
             for (int i = 0; i < waveComponents.enemyAmount; i++)
             {
                 var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
-                Instantiate(waveComponents.enemyPrefab, transform.position + offset, Quaternion.identity).transform.parent = this.transform;
-                    
+                var enemy = Instantiate(waveComponents.enemyPrefab, transform.position + offset, Quaternion.identity);
+                enemy.GetComponent<EnemyHealth>().health = scalingHealth; 
             }
+        scalingHealth += 10;
         waveComponents.enemyAmount++;
     }
 

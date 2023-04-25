@@ -36,7 +36,8 @@ public class ManageableBuilding : MonoBehaviour {
 
     protected int m_level = 1;
     protected int m_upgrade_price = 5;
-    
+    protected int worker_upgrade_price = 25;
+
     [SerializeField] private GameObject[] UpgradeModels = new GameObject[] {};  
     private int nextModel = 0;
     protected GameController gameController;
@@ -69,7 +70,7 @@ public class ManageableBuilding : MonoBehaviour {
             // Debug.Log("This building is unselected: " + this.GetHashCode());
         } else {
             selectedBuilding = this;
-            gameMode = gameController.GetComponent<GameMode>();
+            gameMode = GameController.instance.GetComponent<GameMode>();
             gameMode.changeGameMode(4);
             // Debug.Log("This building is selected: " + this.GetHashCode());
         }

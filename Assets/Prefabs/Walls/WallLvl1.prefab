@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeModels: []
-  price: 5
+  price: 3
 --- !u!114 &5547942735176041356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   gameOverScreen: {fileID: 0}
+  tile: {fileID: 0}
 --- !u!208 &2710281921159500779
 NavMeshObstacle:
   m_ObjectHideFlags: 0

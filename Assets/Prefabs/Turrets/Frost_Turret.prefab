@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383397089023014870}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.16, y: 1.8734398, z: 0.89}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.7072302, z: -0.7069834, w: 0}
+  m_LocalPosition: {x: -0.0016000082, y: 0.008906522, z: 0.00716212}
+  m_LocalScale: {x: 0.009999995, y: 0.009999998, z: 0.009999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8485051791083063874}
-  m_RootOrder: 2
+  m_Father: {fileID: 7210433438591338614}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8866188744923808478
 GameObject:
@@ -61,13 +61,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8866188744923808478}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: -16, y: 0.2, z: 29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8546036014761219477}
   - {fileID: 8146911771699905795}
-  - {fileID: 8296185086967654356}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85,17 +84,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   IsShooting: 0
-  range: 15
-  fireRate: 1
+  range: 30
+  fireRate: 1.4641
   fireCountdown: 0
-  damage: 5
-  partToRotate: {fileID: 1461206939142578152}
+  damage: 13
+  partToRotate: {fileID: 7210433438591338614}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
   explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
   firePoint: {fileID: 8296185086967654356}
   rotateX: -90
   price: 110
-  reduce_Speed: 0.5
+  reduce_Speed: -2
   reduce_Time: 3
 --- !u!114 &144444931760727225
 MonoBehaviour:
@@ -111,6 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   gameOverScreen: {fileID: 0}
+  tile: {fileID: 0}
 --- !u!65 &1991632271793767533
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -476,9 +476,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: 735d405461402284681d40787705353b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 735d405461402284681d40787705353b, type: 3}
---- !u!4 &1461206939142578152 stripped
+--- !u!4 &7210433438591338614 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -2107082562448933632, guid: 735d405461402284681d40787705353b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1339125346602560158, guid: 735d405461402284681d40787705353b, type: 3}
   m_PrefabInstance: {fileID: 8540263513831138024}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8146911771699905795 stripped

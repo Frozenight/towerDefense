@@ -5,6 +5,7 @@ using UnityEngine;
 public class Frost_Turret : Turret
 {
     EnemyManager nearestEnemyManager;
+    BossManager nearestBossManager;
     public float reduce_Speed;
     public float reduce_Time;
 
@@ -31,7 +32,10 @@ public class Frost_Turret : Turret
         {
             target = nearestEnemy.transform;
             nearestEnemyHealth = nearestEnemy.GetComponent<EnemyHealth>();
-            nearestEnemyManager = nearestEnemy.GetComponent<EnemyManager>();
+            if(nearestEnemy.GetComponent<EnemyManager>()!=null)
+                nearestEnemyManager = nearestEnemy.GetComponent<EnemyManager>();
+            else
+                nearestBossManager = nearestEnemy.GetComponent<BossManager>();
         }
         else
         {
@@ -41,6 +45,10 @@ public class Frost_Turret : Turret
     }
     protected override void Bullet_Effect()
     {
+        if (nearestEnemyManager != null)
             nearestEnemyManager.ReduceSpeed(reduce_Speed, reduce_Time);
+        else
+            nearestBossManager.ReduceSpeed(reduce_Speed, reduce_Time);
+
 ;   }
 }

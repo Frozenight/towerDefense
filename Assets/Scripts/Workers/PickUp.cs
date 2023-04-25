@@ -23,7 +23,7 @@ public class PickUp : MonoBehaviour
             GameController.instance.trashObjects.Remove(other.gameObject.GetComponent<TrashObject>());
             Destroy(other.gameObject);
             GetComponent<Movement>().going = true;
-            GameController.instance.AddCountRecource("trash");
+            GameController.instance.AddCountResource("trash");
         }
 
         if (other.gameObject.CompareTag("EnemyTrash"))
@@ -32,7 +32,7 @@ public class PickUp : MonoBehaviour
             GameController.instance.trashObjects.Remove(other.gameObject.GetComponent<TrashObject>());
             Destroy(other.gameObject);
             GetComponent<Movement>().going = true;
-            GameController.instance.AddCountRecource("enemyTrash"); 
+            GameController.instance.AddCountResource("enemyTrash"); 
         }
     }
 }

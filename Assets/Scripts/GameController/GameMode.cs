@@ -61,7 +61,8 @@ public class GameMode : MonoBehaviour
     {
         isDefendMode = false;
         isBiuldMode = false;
-        cameraMovement.enabled = true;
+        if(cameraMovement != null)
+            cameraMovement.enabled = true;
     }
     private void buildMode()
     {

@@ -58,15 +58,16 @@ public class Turret : ManageableBuilding
         damage += INCREASE_DAMAGE;
         GameController.instance.resources -= m_upgrade_price;
         m_level += 1;
-        m_upgrade_price = price + (m_level * 5);
-        Debug.Log(price + " " + m_level + " " + m_upgrade_price);
         price = m_upgrade_price;
+        m_upgrade_price = price + (m_level * 2);
+        Debug.Log(price + " " + m_level + " " + m_upgrade_price);
+        
 
-        if (m_level % 5 == 0 && UpdateObjectModel(out GameObject newModel)) {
-            partToRotate = transform.Find(currModelName + "/Armature/main");
-            // Debug.Log(currModelName + "/Armature/main");
-            // Debug.Log(partToRotate.GetHashCode());
-        }
+        //if (m_level % 5 == 0 && UpdateObjectModel(out GameObject newModel)) {
+        //    partToRotate = transform.Find(currModelName + "/Armature/main");
+        //    // Debug.Log(currModelName + "/Armature/main");
+        //    // Debug.Log(partToRotate.GetHashCode());
+        //}
     }
 
     // Start is called before the first frame update
@@ -76,7 +77,7 @@ public class Turret : ManageableBuilding
         enemyController = enemySpawner.instance;
         GetComponent<Building_Base>().maxHealth = GameController.instance.GetTurretHealth();
         GetComponent<Building_Base>()._currentHealth = GameController.instance.GetTurretHealth();
-        m_upgrade_price = price + (m_level * 5);
+        m_upgrade_price = 5 + (m_level * 2);
     }
 
     protected virtual void UpdateTarget()

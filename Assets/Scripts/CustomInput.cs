@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 public class CustomInput : MonoBehaviour
 {
     public static bool GetOneTouchDown() {
@@ -36,5 +38,4 @@ public class CustomInput : MonoBehaviour
         }
         return false;
     }
-
 }

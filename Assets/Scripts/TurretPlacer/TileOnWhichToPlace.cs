@@ -21,6 +21,11 @@ public class TileOnWhichToPlace : MonoBehaviour
 
     protected GameMode gameMode;
 
+    private static float minXOfTab = 0f;
+    private static float maxXOfTab = 0f;
+    private static float minYOfTab = 0f;
+    private static float maxYOfTab = 0f;
+
 
     BuildingManager buildingManager;
     void Start(){        
@@ -37,9 +42,31 @@ public class TileOnWhichToPlace : MonoBehaviour
         DetectTileClick();
     }
 
+    public static void SetBoundaries(RectTransform rect)
+    {
+        Vector3[] corners = new Vector3[4];
+        rect.GetWorldCorners(corners);
+        minXOfTab = corners[0].x;
+        maxXOfTab = corners[2].x;
+        minYOfTab = corners[0].y;
+        maxYOfTab = corners[2].y;
+    }
+
+    private bool PressedOnOpenTab(Vector3 mousePos)
+    {
+        if (Mathf.Clamp(mousePos.x, minXOfTab, maxXOfTab) == mousePos.x)
+        {
+            if (Mathf.Clamp(mousePos.y, minYOfTab, maxYOfTab) == mousePos.y)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void DetectTileClick()
     {
-        if (CustomInput.ClickedOnObject(this))
+        if (CustomInput.ClickedOnObject(this) && !PressedOnOpenTab(Input.mousePosition))
             BuildStructure();
     }
 
@@ -90,14 +117,6 @@ public class TileOnWhichToPlace : MonoBehaviour
 
         turret = (GameObject)Instantiate(selectedTurret, transform.position + offsetFromPlacer, transform.rotation);
         turret.gameObject.GetComponent<Building_Base>().tile = gameObject;
-        if(turret.CompareTag("Wall"))
-        {
-            turret.transform.parent = gameController.walls.transform;
-        }
-        else if(turret.CompareTag("Tower"))
-        {
-            turret.transform.parent = gameController.turrets.transform;
-        }
     }
 
     public void ChangePlacedState()

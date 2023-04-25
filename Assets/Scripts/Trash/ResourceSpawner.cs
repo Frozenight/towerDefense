@@ -8,8 +8,7 @@ public class ResourceSpawner: MonoBehaviour
     public int spawnNumber;
     private Transform spawner;
 
-    [System.NonSerialized]
-    public int maxBagsPerRound = 9;
+    public int maxBagsPerRound = 5;
     [System.NonSerialized]
     public int bagsPerRound = 0;
 

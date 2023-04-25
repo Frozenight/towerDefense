@@ -41,6 +41,9 @@ public class Building_Base : ManageableBuilding, IGameController
     }
 
     public void UpgradeWorkers() {
+        if (gameController.resources < worker_upgrade_price)
+            return;
+        gameController.resources -= worker_upgrade_price;
         var workers = GameObject.FindGameObjectsWithTag("Worker");
         foreach (var w in workers)
             w.GetComponent<MovementAnimated>().Upgrade();
