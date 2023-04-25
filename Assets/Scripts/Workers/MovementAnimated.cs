@@ -11,7 +11,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
 
     public List<TrashObject> trashObjects;
     public float speed = 1f;
-    private float savedSpeed;
+    private float savedSpeed;    
     public bool goingBackward = false;
     public GameObject PointB;     //end point of movement (resource collection point)
     private float time;

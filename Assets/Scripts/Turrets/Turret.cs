@@ -49,14 +49,14 @@ public class Turret : ManageableBuilding
     public override void UpgradeBuilding() {
               
         // Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
-        if (gameController.resources < m_upgrade_price)
+        if (GameController.instance.resources < m_upgrade_price)
             return;
         
         
         range += INCREASE_RANGE;
         fireRate *= INCREASE_FIRERATE_MULT;
         damage += INCREASE_DAMAGE;
-        gameController.resources -= m_upgrade_price;
+        GameController.instance.resources -= m_upgrade_price;
         m_level += 1;
         m_upgrade_price = price + (m_level * 5);
         Debug.Log(price + " " + m_level + " " + m_upgrade_price);
@@ -69,16 +69,13 @@ public class Turret : ManageableBuilding
         }
     }
 
-    private void Awake()
-    {
-        InvokeRepeating("UpdateTarget", 0f, 0.1f);
-        gameController = GameController.instance;
-        enemyController = enemySpawner.instance;
-        GetComponent<Building_Base>().maxHealth = gameController.GetTurretHealth();
-    }
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("UpdateTarget", 0f, 0.1f);
+        enemyController = enemySpawner.instance;
+        GetComponent<Building_Base>().maxHealth = GameController.instance.GetTurretHealth();
+        GetComponent<Building_Base>()._currentHealth = GameController.instance.GetTurretHealth();
         m_upgrade_price = price + (m_level * 5);
     }
 
@@ -163,7 +160,7 @@ public class Turret : ManageableBuilding
             sell_price += one_level_price;
             one_level_price += 5;
         }
-        gameController.resources += sell_price / 2;
+        GameController.instance.resources += sell_price / 2;
         Destroy(gameObject);
     }
 

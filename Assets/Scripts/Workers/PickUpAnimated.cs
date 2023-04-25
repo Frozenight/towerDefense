@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using TreeEditor;
 using UnityEngine;
 
 public class PickUpAnimated : MonoBehaviour
 {
+    public GameObject FloatingTextPrefab;
     public bool HasTrash;
     public bool Idle;
     private float time;
@@ -44,6 +48,29 @@ public class PickUpAnimated : MonoBehaviour
             HasTrash = true;
             animator.SetTrigger("PickUp");
             GameController.instance.AddCountRecource("trash");
+            if(FloatingTextPrefab)
+            {
+                ShowFloatingText("+5");
+            }
         }
+        else if (other.gameObject.CompareTag("EnemyTrash"))
+        {
+            this.other = other;
+            HasTrash = true;
+            GameController.instance.AddCountRecource("enemyTrash");
+            if (FloatingTextPrefab)
+            {
+                ShowFloatingText("+3");
+            }
+        }
+    }
+
+    private void ShowFloatingText(string text)
+    {
+        Vector3 position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z) ;
+        var textObject = Instantiate(FloatingTextPrefab, position, Quaternion.identity, transform);
+        textObject.transform.LookAt(Camera.main.transform);
+        textObject.transform.Rotate(0, 180, 0);
+        textObject.GetComponent<TextMeshPro>().text = text;
     }
 }

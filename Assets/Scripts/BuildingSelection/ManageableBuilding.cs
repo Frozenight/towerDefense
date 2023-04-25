@@ -47,7 +47,7 @@ public class ManageableBuilding : MonoBehaviour {
     } }
 
     private void Start() {
-        gameController = GameController.instance;        
+      
     }
 
     public virtual void DestroyBuilding() {
@@ -58,7 +58,7 @@ public class ManageableBuilding : MonoBehaviour {
             sell_price += one_level_price;
             one_level_price += 5;
         }
-        gameController.resources += (int)Mathf.Ceil(sell_price / 2f);
+        GameController.instance.resources += (int)Mathf.Ceil(sell_price / 2f);
         Destroy(gameObject);
     }
 
@@ -73,9 +73,9 @@ public class ManageableBuilding : MonoBehaviour {
     }
 
     public virtual void UpgradeBuilding() {
-        if (gameController.resources < m_upgrade_price)
+        if (GameController.instance.resources < m_upgrade_price)
             return;
-        gameController.resources -= m_upgrade_price;
+        GameController.instance.resources -= m_upgrade_price;
         m_level += 1;
         m_upgrade_price += 5;
         if (m_level % 5 == 0)

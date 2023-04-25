@@ -98,9 +98,6 @@ public class Movement : MonoBehaviour, IGameController
                 nearestObj = trash;
             }
         }
-        //Debug.Log(nearestObj);
-        //Debug.DrawLine(gameObject.transform.position, nearestObj.transform.position, Color.red, duration: 2);
-
         return nearestObj;
     }
 
