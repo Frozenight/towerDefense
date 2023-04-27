@@ -18,6 +18,8 @@ public class BuildingSelectionManager : MonoBehaviour
     private float minYOfTab = 0f;
     private float maxYOfTab = 0f;
 
+    private ManageableBuilding oldBuilding;
+
 
     private int clickType = -1;
     RaycastHit lastRaycast;
@@ -32,12 +34,18 @@ public class BuildingSelectionManager : MonoBehaviour
         maxYOfTab = corners[2].y;        
         manageBuildingTab.closeTab = UnselectB;
         manageBuildingTab.gameObject.SetActive(false);
+        
     }
 
     private void SelectB(RaycastHit _hit)
     {
+        if (ManageableBuilding.selectedBuilding != null)
+        {
+            ManageableBuilding.selectedBuilding.GetComponent<Outline>().enabled = false;
+        }
         ManageableBuilding building =
             _hit.collider.GetComponent<ManageableBuilding>();
+        oldBuilding = building;
         building.SelectBuilding();
         if (manageBuildingTab.gameObject.activeSelf)
             manageBuildingTab.ResetNamePulse();
@@ -45,10 +53,12 @@ public class BuildingSelectionManager : MonoBehaviour
             manageBuildingTab.gameObject.SetActive(true);
         manageBuildingTab.FillBuildingData(building);
         manageTabOpen = true;
+        building.GetComponent<Outline>().enabled = true;
     }
 
     private void UnselectB()
     {
+        ManageableBuilding.selectedBuilding.GetComponent<Outline>().enabled = false;
         ManageableBuilding.selectedBuilding = null;
         manageBuildingTab.gameObject.SetActive(false);
         manageTabOpen = false;
