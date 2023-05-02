@@ -6,20 +6,29 @@ using UnityEngine.UI;
 public class Show_BuildingSelection : MonoBehaviour
 {
     private float xOffset = 420f;
-    private float animationTime = 1f;
+    private float animationTime = .3f;
     public bool isHidden;
     private GameMode gameMode;
     [SerializeField] private RectTransform panel;
+    [SerializeField] private RectTransform buttonRect;
+    [SerializeField] private Image buttonImage;
     [SerializeField] private Sprite hide_arrow;
     [SerializeField] private Sprite show_arrow;
     private Vector3 targetPos;
+    
 
     private void Start()
     {
-        isHidden = true;
+        Invoke("DelayedStart", .01f);
+    }
+
+    private void DelayedStart() 
+    {
+        targetPos = panel.anchoredPosition;
+        xOffset = panel.rect.width - buttonRect.rect.width;
+        HidePanelInstant();
         gameMode = FindObjectOfType<GameController>().GetComponent<GameMode>();
         TileOnWhichToPlace.SetBoundaries(panel.GetComponent<RectTransform>());
-        targetPos = panel.anchoredPosition;
     }
 
     public void Change_Panel()
@@ -38,19 +47,30 @@ public class Show_BuildingSelection : MonoBehaviour
 
     private void Show_Panel()
     {
+        Debug.Log("Show");
         targetPos = targetPos + new Vector3(xOffset, 0, 0);
         StartCoroutine(SlideOverTime(panel.anchoredPosition, targetPos));
-        panel.GetChild(1).GetComponent<Image>().sprite = hide_arrow;
+        buttonImage.sprite = show_arrow;
         isHidden = false;
     }
 
     public void Hide_Panel()
     {
+        Debug.Log("Hide");
         if (isHidden)
             return;
         targetPos = targetPos - new Vector3(xOffset, 0, 0);
         StartCoroutine(SlideOverTime(panel.anchoredPosition, targetPos));
-        panel.GetChild(1).GetComponent<Image>().sprite = show_arrow;
+        buttonImage.sprite = hide_arrow;
+        isHidden = true;
+    }
+
+    private void HidePanelInstant() {
+        if (isHidden)
+            return;
+        targetPos = targetPos - new Vector3(xOffset, 0, 0);
+        panel.anchoredPosition = targetPos;
+        buttonImage.sprite = hide_arrow;
         isHidden = true;
     }
 

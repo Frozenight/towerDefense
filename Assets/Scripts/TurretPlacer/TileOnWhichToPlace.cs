@@ -73,11 +73,14 @@ public class TileOnWhichToPlace : MonoBehaviour
     void BuildStructure(){
         if ((turret != null) || (buildingManager.GetTurret() == null) || (gameMode.isBiuldMode == false)) 
         { 
+
+            Debug.Log($"{turret != null} {buildingManager.GetTurret() == null} {gameMode.isBiuldMode == false}");
                 return;
         }
         
         GameObject selectedTurret = buildingManager.GetTurret();
         ManageableBuilding manageableBuilding = selectedTurret.GetComponent<ManageableBuilding>();
+        Debug.Log($"{manageableBuilding != null} {!placed} {gameController.resources} {manageableBuilding.buildingPrice}");
         if (manageableBuilding != null && !placed
             && gameController.resources >= manageableBuilding.buildingPrice) {
             animationPrefab1 = (GameObject)Instantiate(animationPrefab1, transform.position + offsetFromPlacer, transform.rotation);
@@ -115,7 +118,7 @@ public class TileOnWhichToPlace : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        turret = (GameObject)Instantiate(selectedTurret, transform.position + offsetFromPlacer, transform.rotation);
+        turret = (GameObject)Instantiate(selectedTurret, transform.position + offsetFromPlacer + selectedTurret.transform.position, transform.rotation);
         turret.gameObject.GetComponent<Building_Base>().tile = gameObject;
     }
 

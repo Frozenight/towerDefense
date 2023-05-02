@@ -8,9 +8,13 @@ public class BuildingManager : MonoBehaviour
 
     [SerializeField] private GameObject turret1;
     [SerializeField] private GameObject turret2;
-    [SerializeField] private GameObject wall;
+    [SerializeField] private GameObject wall1;
+    [SerializeField] private GameObject wall2;
+    [SerializeField] private GameObject wall3;
+    [SerializeField] private GameObject wall4;
+    [SerializeField] private GameObject wall5;
 
-    private GameObject selectedTurret;
+    private GameObject selectedBuilding;
 
     void Awake (){
         if(instance!=null){
@@ -20,29 +24,48 @@ public class BuildingManager : MonoBehaviour
         instance=this;
     }
 
-    // Start is called before the first frame update
     public GameObject GetTurret(){
-        return selectedTurret;
+        return selectedBuilding;
     }
 
     void Start()
     {
-        selectedTurret = turret1;
+        selectedBuilding = turret1;
     }
 
 
     public void SelectTurret1()
     {
-        selectedTurret = turret1;
+        selectedBuilding = turret1;
     }
 
     public void SelectTurret2()
     {
-        selectedTurret = turret2;
+        selectedBuilding = turret2;
     }
 
-    public void SelectWall()
+    public void SelectWall1()
     {
-        selectedTurret = wall;
+        selectedBuilding = wall1;
+    }
+
+    public void SelectWall2()
+    {
+        selectedBuilding = wall2;
+    }
+
+    public void SelectWall3()
+    {
+        selectedBuilding = wall3;
+    }
+
+    public void SelectWall4()
+    {
+        selectedBuilding = wall4;
+    }
+
+    public void SelectWall5()
+    {
+        selectedBuilding = wall5;
     }
 }
