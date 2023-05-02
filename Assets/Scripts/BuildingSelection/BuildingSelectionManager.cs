@@ -58,7 +58,10 @@ public class BuildingSelectionManager : MonoBehaviour
 
     private void UnselectB()
     {
-        ManageableBuilding.selectedBuilding.GetComponent<Outline>().enabled = false;
+        if (ManageableBuilding.selectedBuilding != null)
+        {
+            ManageableBuilding.selectedBuilding.GetComponent<Outline>().enabled = false;
+        }
         ManageableBuilding.selectedBuilding = null;
         manageBuildingTab.gameObject.SetActive(false);
         manageTabOpen = false;
