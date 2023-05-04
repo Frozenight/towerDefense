@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 269928153212305229}
   - component: {fileID: 3686414825287529246}
   - component: {fileID: 8342835443500227442}
-  - component: {fileID: 7601424471907244516}
   - component: {fileID: 6372507379767207621}
   - component: {fileID: 6569830012434985148}
   m_Layer: 6
@@ -31,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6016936162135373229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.999999, y: 0.2, z: 25}
+  m_LocalPosition: {x: -8, y: 0.2, z: 25}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -75,7 +74,7 @@ MonoBehaviour:
   damage: 40
   partToRotate: {fileID: 5520268817022992133}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
-  explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
+  explosionPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
   firePoint: {fileID: 3368253037552735868}
   rotateX: 0
   price: 0
@@ -114,18 +113,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7601424471907244516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6016936162135373229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89a297dabc587004d85e1549dbdab932, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!208 &6372507379767207621
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -26265,7 +26252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8921771412198965033}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.0017999903, y: -0.00880001, z: 0.007165225}
+  m_LocalPosition: {x: 0.0017999903, y: -0.0119, z: 0.0072}
   m_LocalScale: {x: 0.01, y: 0.010000003, z: 0.010000003}
   m_ConstrainProportionsScale: 0
   m_Children: []

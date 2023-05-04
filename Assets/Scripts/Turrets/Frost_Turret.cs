@@ -43,6 +43,25 @@ public class Frost_Turret : Turret
             target = null;
         }
     }
+    protected override void Fire()
+    {
+        animator.SetTrigger("Shoot");
+        GameObject newBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject newSmoke = (GameObject)Instantiate(explosionPrefab, firePoint.position, firePoint.rotation);
+        Ammunition bullet = newBullet.GetComponent<Ammunition>();
+        newSmoke.transform.parent = this.transform;
+        bullet.transform.parent = this.transform;
+        if (bullet == null)
+        {
+            return;
+        }
+        bullet.Seek(target);
+        if (bullet.HitTarget() == true)
+        {
+            //nearestEnemyHealth.GetHit(damage);
+            Bullet_Effect();
+        }
+    }
     protected override void Bullet_Effect()
     {
         if (nearestEnemyManager != null)

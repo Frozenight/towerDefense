@@ -13,6 +13,7 @@ public class Fire_Turret : Turret
     }
     protected override void Fire()
     {
+        animator.SetTrigger("Shoot");
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         GameObject newSmoke = (GameObject)Instantiate(explosionPrefab, firePoint.position, firePoint.rotation);
         Ammunition bullet = newBullet.GetComponent<Ammunition>();

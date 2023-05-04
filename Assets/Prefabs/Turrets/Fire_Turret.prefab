@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3065367882657682378}
   - component: {fileID: 3686414825287529246}
   - component: {fileID: 8342835443500227442}
-  - component: {fileID: 7601424471907244516}
   - component: {fileID: 6372507379767207621}
   - component: {fileID: 2968435230769165515}
   m_Layer: 6
@@ -31,13 +30,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6016936162135373229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12, y: 0.2, z: 25}
+  m_LocalPosition: {x: -4, y: 0.2, z: 25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6778737972445340390}
   - {fileID: 6450510539521585776}
-  - {fileID: 3368253037552735868}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61,7 +59,7 @@ MonoBehaviour:
   damage: 30
   partToRotate: {fileID: 5520268817022992133}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
-  explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
+  explosionPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
   firePoint: {fileID: 3368253037552735868}
   rotateX: -90
   price: 110
@@ -115,18 +113,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7601424471907244516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6016936162135373229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89a297dabc587004d85e1549dbdab932, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!208 &6372507379767207621
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -26265,13 +26251,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8921771412198965033}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18, y: 1.8734398, z: 0.88}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0.0017999911, y: -0.012, z: 0.0072}
+  m_LocalScale: {x: 0.01, y: 0.010000002, z: 0.010000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6722609370373012785}
-  m_RootOrder: 2
+  m_Father: {fileID: 5520268817022992133}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6777469206450771355
 PrefabInstance:

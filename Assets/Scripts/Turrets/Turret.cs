@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Turret : ManageableBuilding
 {
     private enemySpawner enemyController;
+    protected Animator animator;
 
     public bool IsShooting;
     private const float INCREASE_DAMAGE = 5f;
@@ -77,6 +79,7 @@ public class Turret : ManageableBuilding
         enemyController = enemySpawner.instance;
         GetComponent<Building_Base>().maxHealth = GameController.instance.GetTurretHealth();
         GetComponent<Building_Base>()._currentHealth = GameController.instance.GetTurretHealth();
+        animator = GetComponent<Animator>();
         m_upgrade_price = 5 + (m_level * 2);
     }
 
@@ -131,6 +134,7 @@ public class Turret : ManageableBuilding
 
 
     protected virtual void Fire(){
+        animator.SetTrigger("Shoot");
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         GameObject newSmoke = (GameObject)Instantiate(explosionPrefab, firePoint.position, firePoint.rotation);
         Ammunition bullet = newBullet.GetComponent<Ammunition>();
