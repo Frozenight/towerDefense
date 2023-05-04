@@ -28,13 +28,11 @@ public class EnemyNavmesh : MonoBehaviour
             spawnPosition.destination = goal.position;
             spawnPosition.speed = GetComponent<EnemyManager>().speed;
             GetComponent<EnemyManager>().ChangeEnemyStateToFinal();
-            Debug.Log("Path available");
         }
         else
         {
             pathAvailable = false;
             DestroyBuildings();
-            Debug.Log("Path not available");
         }
     }
 

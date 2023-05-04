@@ -114,22 +114,18 @@ public class EnemyManager : MonoBehaviour
         {
             Objective = hit.transform.GetComponent<Building_Base>();
         }
-        Debug.DrawRay(transform.position + centerOffset, forwardDirection * searchDistance, Color.green);
 
         // Raycast slightly to the right
         if (!Objective && Physics.Raycast(transform.position + centerOffset, forwardDirection + (rightDirection / 4), out hit, searchDistance, layerMask))
         {
             Objective = hit.transform.GetComponent<Building_Base>();
         }
-        Debug.DrawRay(transform.position + centerOffset, (forwardDirection + (rightDirection / 4)) * searchDistance, Color.yellow);
 
         // Raycast slightly to the left
         if (!Objective && Physics.Raycast(transform.position + centerOffset, forwardDirection - (rightDirection / 4), out hit, searchDistance, layerMask))
         {
             Objective = hit.transform.GetComponent<Building_Base>();
         }
-        Debug.DrawRay(transform.position + centerOffset, (forwardDirection - (rightDirection / 4)) * searchDistance, Color.yellow);
-
     }
 
     IEnumerator MoveBack()
