@@ -50,7 +50,7 @@ public class Timer : MonoBehaviour
         if (eventController.currentState == EventManager.Event.preparation)
         {
             if(startButton.gameObject != null)
-            startButton.gameObject.SetActive(true);
+                startButton.gameObject.SetActive(true);
         }
         else if (eventController.currentState == EventManager.Event.building)
         {
@@ -67,7 +67,8 @@ public class Timer : MonoBehaviour
             curreentTime = defenseTime;
             timerOn = false;
             timer.text = string.Empty;
-            if(GameBase.activeSelf)
+            startButton.gameObject.SetActive(false);
+            if (GameBase.activeSelf)
             {
                 spawner.spawnWave();
             }

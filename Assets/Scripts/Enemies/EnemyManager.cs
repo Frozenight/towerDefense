@@ -33,11 +33,17 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     private float searchDistance = 4f;
 
+    bool stuck = false;
+    bool tryingToUnStuck = false;
+    float stuckTime = 0f;
+    EnemyNavmesh navmesh;
+
+
     private void Start()
     {
         Objective = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
         health = gameObject.GetComponent<EnemyHealth>();
-
+        navmesh = GetComponent<EnemyNavmesh>();
         _roundController = Timer.instance;
     }
 
@@ -52,7 +58,10 @@ public class EnemyManager : MonoBehaviour
         _animator.Play("run");
         _currentState = State.Final;
     }
-
+    public void ResetStuck()
+    {
+        stuck = false;
+    }
     private void Update()
     {
         if (health.getHealth() <= 0)
@@ -65,7 +74,12 @@ public class EnemyManager : MonoBehaviour
         if (_currentState == State.Idle)
             _Idle();
         if (_currentState == State.Attack)
+        {
             _Attack();
+            checkForStuckStatus();
+            if (stuck)
+                StartCoroutine(MoveBack());
+        }
         if (_currentState == State.Final)
             _FinalMove();
         if (slowed == true)
@@ -74,22 +88,89 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    void checkForStuckStatus()
+    {
+        AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        if (navmesh.spawnPosition.velocity == Vector3.zero && stateInfo.IsName("run"))
+        {
+            stuckTime += Time.deltaTime;
+            if (stuckTime > 1)
+            {
+                stuck = true;
+                stuckTime = 0;
+            }
+        }
+    }
+
     private void SearchForBuild()
     {
+        Vector3 centerOffset = new Vector3(0, 1, 0);
+        Vector3 forwardDirection = transform.TransformDirection(Vector3.forward);
+        Vector3 rightDirection = transform.TransformDirection(Vector3.right);
         RaycastHit hit;
-        // For debuging to check if raycast is correct
-        if (Physics.Raycast(transform.position + new Vector3(0, 1), transform.TransformDirection(Vector3.forward), out hit, searchDistance, layerMask))
+
+        // Raycast in the center
+        if (Physics.Raycast(transform.position + centerOffset, forwardDirection, out hit, searchDistance, layerMask))
         {
             Objective = hit.transform.GetComponent<Building_Base>();
         }
-        else if (Physics.Raycast(transform.position + new Vector3(0, 1), transform.TransformDirection(Vector3.forward + (transform.right / 4)), out hit, searchDistance, layerMask))
+        Debug.DrawRay(transform.position + centerOffset, forwardDirection * searchDistance, Color.green);
+
+        // Raycast slightly to the right
+        if (!Objective && Physics.Raycast(transform.position + centerOffset, forwardDirection + (rightDirection / 4), out hit, searchDistance, layerMask))
         {
             Objective = hit.transform.GetComponent<Building_Base>();
         }
-        else if (Physics.Raycast(transform.position + new Vector3(0, 1), transform.TransformDirection(Vector3.forward - (transform.right / 4)), out hit, searchDistance, layerMask))
+        Debug.DrawRay(transform.position + centerOffset, (forwardDirection + (rightDirection / 4)) * searchDistance, Color.yellow);
+
+        // Raycast slightly to the left
+        if (!Objective && Physics.Raycast(transform.position + centerOffset, forwardDirection - (rightDirection / 4), out hit, searchDistance, layerMask))
         {
             Objective = hit.transform.GetComponent<Building_Base>();
         }
+        Debug.DrawRay(transform.position + centerOffset, (forwardDirection - (rightDirection / 4)) * searchDistance, Color.yellow);
+
+    }
+
+    IEnumerator MoveBack()
+    {
+        stuck = false;
+        tryingToUnStuck = true;
+        navmesh.spawnPosition.obstacleAvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.NoObstacleAvoidance;
+
+        transform.rotation = Quaternion.LookRotation(-transform.forward);
+        // Walk for 2 seconds
+        float moveTimer = 0f;
+
+        while (moveTimer < 1f)
+        {
+            transform.position += transform.forward * speed * Time.deltaTime;
+            moveTimer += Time.deltaTime;
+            yield return null;
+        }
+        GetNewWall();
+        navmesh.spawnPosition.obstacleAvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.MedQualityObstacleAvoidance;
+    }
+
+    private void GetNewWall()
+    {
+        GameObject closestWall = null;
+        float closestDistance = Mathf.Infinity;
+
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+        foreach (GameObject wall in walls)
+        {
+            float distance = Vector3.Distance(transform.position, wall.transform.position);
+            if (distance < closestDistance)
+            {
+                closestWall = wall;
+                closestDistance = distance;
+            }
+        }
+
+        Objective = closestWall.transform.GetComponent<Building_Base>();
+        tryingToUnStuck = false;
+        _currentState = State.Moveto;
     }
     public void ResetObjective()
     {
@@ -113,12 +194,16 @@ public class EnemyManager : MonoBehaviour
     private void _MoveTo()
     {
         transform.LookAt(Objective.transform);
+        tryingToUnStuck = false;
         if (Vector3.Distance(transform.position, Objective.transform.position) > 3)
         {
             transform.position = Vector3.MoveTowards(transform.position, Objective.transform.position, speed * Time.deltaTime);
         }
         else
+        {
             _currentState = State.Attack;
+        }
+
     }
 
 
@@ -128,6 +213,8 @@ public class EnemyManager : MonoBehaviour
     }
     private void _Attack()
     {
+        if (tryingToUnStuck)
+            return;
         if (!Objective.isActiveAndEnabled)
             _currentState = State.Idle;
 
@@ -137,7 +224,7 @@ public class EnemyManager : MonoBehaviour
                 return;
             GetComponent<EnemyNavmesh>().Stop();
         }
-        else if (Vector3.Distance(transform.position, Objective.transform.position) > 3)
+        else if (Vector3.Distance(transform.position, Objective.transform.position) > 2.5f)
         {
             return;
         }
@@ -175,7 +262,6 @@ public class EnemyManager : MonoBehaviour
     {
         if (slowed == false)
         {
-            Debug.Log("SlowHit");
             temp = speed;
             slowed = true;
             speed = speed * reduce;

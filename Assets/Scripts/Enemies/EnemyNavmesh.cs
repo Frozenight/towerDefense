@@ -69,6 +69,7 @@ public class EnemyNavmesh : MonoBehaviour
     IEnumerator waitForCheck()
     {
         yield return new WaitForSeconds(0.2f);
+        GetComponent<EnemyManager>().ResetStuck();
         CheckIfPathAvailable();
     }
     public void UpdateSpeed()
