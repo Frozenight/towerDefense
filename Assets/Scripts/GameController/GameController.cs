@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -13,8 +14,17 @@ public class GameController : MonoBehaviour
     public GameOverPowerUP gameOverScreen;
     public BossAppear bossAppear;
     public int resources = 0;
+    public GameObject BuildingSelectUI;
+    public Show_BuildingSelection buildingSelection;
+    public Image Tower1;
+    public Image Wall;
+    public Sprite Tower1Color;
+    public Sprite WallColor;
+    public Sprite Tower1Grey;
+    public Sprite WallGrey;
     [SerializeField] private int trashGainSpawned;
     [SerializeField] private int trashGainEnemyDroped;
+
     public Rounds rounds;
     public OpenAiAPI aiAPI;
 
@@ -62,11 +72,32 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        BuildingSelectUI.SetActive(false);
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.gameControllerObjects = FindAllGameControllerObjects();
         LoadGame();
         aiAPI.GetData();
         vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
+    }
+
+    private void Update()
+    {
+        if(resources < 25)
+        {
+            Tower1.sprite = Tower1Grey;
+        }
+        else
+        {
+            Tower1.sprite = Tower1Color;
+        }
+        if(resources < 3)
+        {
+            Wall.sprite = WallGrey;
+        }
+        else
+        {
+            Wall.sprite = WallColor;
+        }
     }
 
     public int GetTurretHealth()

@@ -11,8 +11,6 @@ public class Rounds : MonoBehaviour
     EventManager eventController;
     [SerializeField] GameMode gameMode;
     private int current_round = 0;
-    [SerializeField] Button hide_button;
-    [SerializeField] Show_BuildingSelection show_BuildingSelection;
 
     private void Start()
     {
@@ -24,15 +22,14 @@ public class Rounds : MonoBehaviour
     {
         if (eventController.currentState == EventManager.Event.defending)
         {
-            gameMode.changeGameMode(5);
+            Debug.Log("TEST AR VEIKIA");
+            gameMode.changeGameMode(4);
             current_round++;
             ChangeRoundText();
-            show_BuildingSelection.Hide_Panel();
-            hide_button.interactable = false;
         }
         else
         {
-            hide_button.interactable = true;
+            gameMode.changeGameMode(5);
             if (current_round == enemySpawner.instance.bossWave-1) { GameController.instance.BossWarning(); }
             ChangeDefendingText();
         }

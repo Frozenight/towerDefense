@@ -71,7 +71,7 @@ public class ManageableBuilding : MonoBehaviour {
         } else {
             selectedBuilding = this;
             gameMode = GameController.instance.GetComponent<GameMode>();
-            gameMode.changeGameMode(4);
+            gameMode.changeGameMode(1);
             // Debug.Log("This building is selected: " + this.GetHashCode());
         }
     }
