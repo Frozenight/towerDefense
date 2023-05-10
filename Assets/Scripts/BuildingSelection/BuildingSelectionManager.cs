@@ -66,7 +66,7 @@ public class BuildingSelectionManager : MonoBehaviour
         manageBuildingTab.gameObject.SetActive(false);
         manageTabOpen = false;
         gameMode = GameController.instance.GetComponent<GameMode>();
-        gameMode.changeTabMode();
+        gameMode.changeGameMode(1);
         // Debug.Log("Unselected building");
     }
 

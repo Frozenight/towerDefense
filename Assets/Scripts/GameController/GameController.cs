@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -13,8 +14,17 @@ public class GameController : MonoBehaviour
     public GameOverPowerUP gameOverScreen;
     public BossAppear bossAppear;
     public int resources = 0;
+    public GameObject BuildingSelectUI;
+    public Show_BuildingSelection buildingSelection;
+    public Image Tower1;
+    public Image Wall;
+    public Sprite Tower1Color;
+    public Sprite WallColor;
+    public Sprite Tower1Grey;
+    public Sprite WallGrey;
     [SerializeField] private int trashGainSpawned;
     [SerializeField] private int trashGainEnemyDroped;
+
     public Rounds rounds;
     public OpenAiAPI aiAPI;
 
@@ -62,11 +72,32 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        BuildingSelectUI.SetActive(false);
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.gameControllerObjects = FindAllGameControllerObjects();
         LoadGame();
         aiAPI.GetData();
         vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
+    }
+
+    private void Update()
+    {
+        if(resources < 25)
+        {
+            Tower1.sprite = Tower1Grey;
+        }
+        else
+        {
+            Tower1.sprite = Tower1Color;
+        }
+        if(resources < 3)
+        {
+            Wall.sprite = WallGrey;
+        }
+        else
+        {
+            Wall.sprite = WallColor;
+        }
     }
 
     public int GetTurretHealth()
@@ -128,14 +159,18 @@ public class GameController : MonoBehaviour
     public void SpawnWalls()
     {
         Quaternion quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, -90, gridManager.tiles[1].gameObject.transform.rotation.z);
-        for (int i = 126; i < 130; i++)
+        for (int i = 123; i < 127; i++)
         {
             GameObject startWall = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+            startWall.GetComponent<Building_Base>().tile = gridManager.tiles[i];
+            startWall.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().placed = true;
         }
         quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, 90, gridManager.tiles[1].gameObject.transform.rotation.z);
         for (int i = 100; i < 104; i++)
         {
             GameObject startWall = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+            startWall.GetComponent<Building_Base>().tile = gridManager.tiles[i];
+            startWall.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().placed = true;
         }
 
     }

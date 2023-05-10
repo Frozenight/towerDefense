@@ -16,6 +16,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] float testRotation = 10f;
     [SerializeField] float testZoomMult = 1.1f;
     [SerializeField] float testZoomMult2 = 0.9f;
+    public TextMeshProUGUI testDebug;
     private ScaleGestureRecognizer scaleGesture;
     private RotateGestureRecognizer rotateGesture;
     private Vector3 lastPos;
@@ -28,8 +29,12 @@ public class CameraMovement : MonoBehaviour
     private float currentDragZMin = 0f;
     private float currentDragZMax = 0f;
     private bool cameraDragOngoing = false;
-    private void Start() {
-        transform.position = new Vector3 (
+
+    public static bool canMove = false;
+    private float distanceThreshold = 100;
+    private void Start()
+    {
+        transform.position = new Vector3(
             transform.position.x,
             maxY,
             transform.position.z
@@ -62,19 +67,23 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
-    public void RotateCameraCaller() {
+    public void RotateCameraCaller()
+    {
         RotateCamera(testRotation);
     }
 
-    public void RotateCameraCaller2() {
+    public void RotateCameraCaller2()
+    {
         RotateCamera(-testRotation);
     }
 
-    public void ZoomCameraCaller() {
+    public void ZoomCameraCaller()
+    {
         ZoomCamera(testZoomMult);
     }
 
-    public void ZoomCameraCalle2() {
+    public void ZoomCameraCalle2()
+    {
         ZoomCamera(testZoomMult2);
     }
 
@@ -98,22 +107,35 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveByDrag()
     {
-        if (CustomInput.GetOneTouchDown())
+        if (CustomInput.TouchDown())
         {
-            if (!cameraDragOngoing) {
+            canMove = false;
+            if (!cameraDragOngoing)
+            {
                 cameraDragOngoing = true;
                 lastPos = Input.mousePosition;
             }
             return;
         }
-        if (cameraDragOngoing) {
-            if (!CustomInput.GetOneTouchDrag()) {
+        if (cameraDragOngoing)
+        {
+            if (!CustomInput.GetOneTouchDrag())
+            {
                 cameraDragOngoing = false;
                 return;
             }
-        } else return;
+        }
+        else return;
 
-        Vector3 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - lastPos);
+        Touch touch = Input.touches[0];
+        Vector2 currentPosition = touch.position;
+        //Debug.Log(CustomInput.startPosition + " " + currentPosition);
+        Vector3 pos = Vector3.zero;
+        if (Vector2.Distance(CustomInput.startPosition, currentPosition) > distanceThreshold || canMove)
+        {
+            canMove = true;
+            pos = Camera.main.ScreenToViewportPoint(Input.mousePosition - lastPos);
+        }
         float xS = pos.x * sinY;
         float xC = pos.x * cosY;
         float zS = pos.y * sinY;
@@ -153,7 +175,8 @@ public class CameraMovement : MonoBehaviour
         );
     }
 
-    private void RotateCamera(float angleEuler, bool debugging = false) {
+    private void RotateCamera(float angleEuler, bool debugging = false)
+    {
         if (testRotation == 0)
             return;
         float currY = transform.position.y;
@@ -164,11 +187,12 @@ public class CameraMovement : MonoBehaviour
         );
         Vector3 centerPoint = vectorB + transform.position;
         float angleRadians = angleEuler * Mathf.PI / 180f;
-        float magnitudeB = Mathf.Sqrt(currY * currY + 1); 
+        float magnitudeB = Mathf.Sqrt(currY * currY + 1);
 
         float sinNewAngle = Mathf.Sin(angleRadians);
         float tanNewAngle = Mathf.Sqrt(1 / (1 - sinNewAngle * sinNewAngle) - 1);
-        if (angleEuler > -90) {
+        if (angleEuler > -90)
+        {
             if (angleEuler < 0)
                 tanNewAngle *= -1;
         }
@@ -180,7 +204,8 @@ public class CameraMovement : MonoBehaviour
         Vector3 vectorA = new Vector3(magnitudeA * cosY, 0f, magnitudeA * -sinY);
         Vector3 newPosXZ = centerPoint - (vectorB - vectorA) * magnitudeB / magnitudeC;
 
-        if (debugging) {
+        if (debugging)
+        {
             Debug.Log($"Real: {Mathf.Tan(angleRadians)} | Optimised: {tanNewAngle} | angle: {angleEuler} | mod: {((angleEuler % 180) + 180) % 180}");
             Debug.DrawRay(transform.position, vectorB, Color.cyan);
             Debug.DrawRay(transform.position, vectorA, Color.red);
