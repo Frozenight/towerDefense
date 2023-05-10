@@ -91,4 +91,9 @@ public class Timer : MonoBehaviour
     {
         EventManager.onRoundChange -= ChangeSGameState;
     }
+
+    public void TutorialTimer(float time)
+    {
+        timer.text = time.ToString();
+    }
 }

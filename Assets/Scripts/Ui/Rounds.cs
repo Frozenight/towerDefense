@@ -10,7 +10,7 @@ public class Rounds : MonoBehaviour
     [SerializeField] TextMeshProUGUI rounds;
     EventManager eventController;
     [SerializeField] GameMode gameMode;
-    private int current_round = 0;
+    public int current_round = 0;
     [SerializeField] Button hide_button;
     [SerializeField] Show_BuildingSelection show_BuildingSelection;
 
