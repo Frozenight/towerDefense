@@ -85,6 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeModels: []
   IsShooting: 0
+  manageableBuildingTab: {fileID: 5380673723215028464, guid: 924d56c53f454584491cba4642672e4a, type: 3}
   range: 30
   fireRate: 1.4641
   fireCountdown: 0

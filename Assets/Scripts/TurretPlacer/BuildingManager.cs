@@ -58,7 +58,6 @@ public class BuildingManager : MonoBehaviour
     {
         GameObject selectedTurret = GetTurret();
         ManageableBuilding manageableBuilding = selectedTurret.GetComponent<ManageableBuilding>();
-        Debug.Log(manageableBuilding);
 
         if (manageableBuilding != null && !selectedTile.placed
             && GameController.instance.resources >= manageableBuilding.buildingPrice)

@@ -11,7 +11,6 @@ public class Turret : ManageableBuilding
     private const float INCREASE_FIRERATE_MULT = 1.1f;
     private const float INCREASE_RANGE = 2.5f;
 
-
     protected Transform target;
     protected EnemyHealth nearestEnemyHealth;
 
@@ -60,8 +59,6 @@ public class Turret : ManageableBuilding
         m_level += 1;
         price = m_upgrade_price;
         m_upgrade_price = price + (m_level * 2);
-        Debug.Log(price + " " + m_level + " " + m_upgrade_price);
-        
 
         //if (m_level % 5 == 0 && UpdateObjectModel(out GameObject newModel)) {
         //    partToRotate = transform.Find(currModelName + "/Armature/main");
@@ -179,5 +176,18 @@ public class Turret : ManageableBuilding
     private void OnDestroy()
     {
         enemyController.OnBuildingDestroyed();
+    }
+
+    public float GetUpgradeDamage()
+    {
+        return INCREASE_DAMAGE;
+    }
+    public float GetUpgradeAttackSpeed()
+    {
+        return INCREASE_FIRERATE_MULT;
+    }
+    public float GetUpgradeRange()
+    {
+        return INCREASE_RANGE;
     }
 }

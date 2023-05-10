@@ -31,7 +31,6 @@ public class TileOnWhichToPlace : MonoBehaviour
     void Start()
     {
         gameController = GameController.instance;
-        Debug.Log(BuildingManager.instance);
         //buildingManager = BuildingManager.instance;
         rend = GetComponent<Renderer>();
         startColor=rend.material;
@@ -84,10 +83,8 @@ public class TileOnWhichToPlace : MonoBehaviour
     }
     void BuildStructure()
     {
-        Debug.Log("Defend mode:" + gameMode.isDefendMode);
         if (gameMode.isDefendMode == true)
         {
-            Debug.Log("neturetu stayt:");
             return;
         }
         GameController.instance.BuildingSelectUI.SetActive(true);

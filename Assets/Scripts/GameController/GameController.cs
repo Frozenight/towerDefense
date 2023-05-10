@@ -159,14 +159,18 @@ public class GameController : MonoBehaviour
     public void SpawnWalls()
     {
         Quaternion quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, -90, gridManager.tiles[1].gameObject.transform.rotation.z);
-        for (int i = 126; i < 130; i++)
+        for (int i = 123; i < 127; i++)
         {
             GameObject startWall = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+            startWall.GetComponent<Building_Base>().tile = gridManager.tiles[i];
+            startWall.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().placed = true;
         }
         quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, 90, gridManager.tiles[1].gameObject.transform.rotation.z);
         for (int i = 100; i < 104; i++)
         {
             GameObject startWall = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
+            startWall.GetComponent<Building_Base>().tile = gridManager.tiles[i];
+            startWall.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().placed = true;
         }
 
     }
