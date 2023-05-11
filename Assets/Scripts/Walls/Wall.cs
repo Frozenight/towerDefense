@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
 public class Wall : ManageableBuilding
@@ -10,6 +7,7 @@ public class Wall : ManageableBuilding
     
     private void Start()
     {
+        Debug.Log(GameController.instance.GetWallHealth());
         enemyController = enemySpawner.instance;
         GetComponent<Building_Base>().maxHealth = GameController.instance.GetWallHealth();
         GetComponent<Building_Base>()._currentHealth = GameController.instance.GetWallHealth();

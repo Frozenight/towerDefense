@@ -29,7 +29,7 @@ public class ManageableBuildingTab : MonoBehaviour
     [SerializeField] public GameObject Turret_type;
 
     [SerializeField] public RectTransform Stats;
-    [SerializeField] public GameObject SatsWindow;
+    [SerializeField] public GameObject StatsWindow;
     [SerializeField] private TextMeshProUGUI Damage;
     [SerializeField] private TextMeshProUGUI Range;
     [SerializeField] private TextMeshProUGUI AttackSpeed;
@@ -241,14 +241,14 @@ public class ManageableBuildingTab : MonoBehaviour
 
     public void SetStatsActive()
     {
-        SatsWindow.SetActive(true);
+        StatsWindow.SetActive(true);
         Time.timeScale = 0;
         gameMode.changeGameMode(2);
     }
 
     public void CloseStats()
     {
-        SatsWindow.SetActive(false);
+        StatsWindow.SetActive(false);
         Time.timeScale = 1;
         gameMode.changeGameMode(1);
     }

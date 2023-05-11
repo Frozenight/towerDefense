@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour
     public BossAppear bossAppear;
     public int resources = 0;
     public GameObject BuildingSelectUI;
-    public Show_BuildingSelection buildingSelection;
     public Image Tower1;
     public Image Wall;
     public Sprite Tower1Color;
@@ -74,6 +73,7 @@ public class GameController : MonoBehaviour
         BuildingSelectUI.SetActive(false);
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.gameControllerObjects = FindAllGameControllerObjects();
+        Debug.Log("Load");
         LoadGame();
         aiAPI.GetData();
         vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
@@ -124,6 +124,7 @@ public class GameController : MonoBehaviour
     //Loads game
     public void LoadGame()
     {
+        
         this.gameData = dataHandler.Load();
 
         if (this.gameData == null)
