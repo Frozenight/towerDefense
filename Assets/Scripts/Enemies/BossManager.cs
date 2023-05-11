@@ -27,7 +27,7 @@ public class BossManager : MonoBehaviour
 
     private float Slow_Amount;
     private float Slow_Time;
-    private bool slowed = false;
+    public  bool slowed = false;
     float timer = 0;
 
     private EnemyHealth health;
@@ -47,6 +47,7 @@ public class BossManager : MonoBehaviour
         _roundController = Timer.instance;
     }
 
+
     private void PlaySpawnSound()
     {
         if (spawnSound != null)
@@ -62,7 +63,7 @@ public class BossManager : MonoBehaviour
         _currentState = State.Moveto;
     }
 
-    public void ChangeEnemyStateToFinal()
+    public  void ChangeEnemyStateToFinal()
     {
         //_animator.Play("run");
         _currentState = State.Final;
@@ -120,7 +121,7 @@ public class BossManager : MonoBehaviour
             Objective = hit.transform.GetComponent<Building_Base>();
         }
     }
-    public void ResetObjective()
+    public  void ResetObjective()
     {
         try
         {
@@ -206,7 +207,7 @@ public class BossManager : MonoBehaviour
         _roundController.CheckForEndOfRound();
     }
 
-    public void ReduceSpeed(float reduce, float reduce_time)
+    public  void ReduceSpeed(float reduce, float reduce_time)
     {
         if (slowed == false)
         {

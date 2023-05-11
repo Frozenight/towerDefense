@@ -25,7 +25,7 @@ public class EnemyManager : MonoBehaviour
 
     private float Slow_Amount;
     private float Slow_Time;
-    private bool slowed = false;
+    public bool slowed = false;
     float timer = 0;
 
     private EnemyHealth health;
