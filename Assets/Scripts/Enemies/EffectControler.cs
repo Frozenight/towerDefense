@@ -6,10 +6,12 @@ public class EffectControler : MonoBehaviour
 {
     private EnemyHealth enemyHealth;
     private EnemyManager enemyManager;
+    private BossManager bossManager;
     [SerializeField]
     private GameObject fireEffect;
     [SerializeField]
     private GameObject iceEffect;
+    private bool isBoss;
     private void Start()
     { 
         fireEffect.SetActive(false);
@@ -17,10 +19,16 @@ public class EffectControler : MonoBehaviour
 
         enemyHealth = GetComponent<EnemyHealth>();
         if (GetComponent<BossManager>() != null)
-            enemyManager = GetComponent<BossManager>();
+        {
+            bossManager = GetComponent<BossManager>();
+            isBoss = true;
+        }
         else
+        {
             enemyManager = GetComponent<EnemyManager>();
-        
+            isBoss = false;
+        }
+
     }
 
     // Update is called once per frame
@@ -35,13 +43,36 @@ public class EffectControler : MonoBehaviour
             fireEffect.SetActive(false);
         }
 
-        if (enemyManager.slowed == true)
+        SlowCheck(isBoss);
+      
+    }
+
+    private void SlowCheck(bool isBoss)
+    {
+        switch (isBoss)
+        {
+            case true:
+                if (bossManager.slowed == true)
+                {
+                    iceEffect.SetActive(true);
+                }
+                else
+                {
+                    iceEffect.SetActive(false);
+                }
+                break;
+
+            case false:
+                if (enemyManager.slowed == true)
         {
             iceEffect.SetActive(true);
         }
         else
         {
             iceEffect.SetActive(false);
+        }
+                break;
+            default:
         }
     }
 }

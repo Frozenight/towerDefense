@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossManager : EnemyManager
+public class BossManager : MonoBehaviour
 {
     private static ILogger logger = Debug.unityLogger;
     private static string kTAG = "MyGameTag";
@@ -18,14 +18,14 @@ public class BossManager : EnemyManager
     [SerializeField] private Animator _animator;
     private Timer _roundController;
 
-    public new int damage;
-    public new float TimeBetweenAttacks;
-    public new float speed;
+    public int damage;
+    public float TimeBetweenAttacks;
+    public float speed;
     private float temp;
 
     private float Slow_Amount;
     private float Slow_Time;
-    private new bool slowed = false;
+    public  bool slowed = false;
     float timer = 0;
 
     private EnemyHealth health;
@@ -43,13 +43,13 @@ public class BossManager : EnemyManager
         _roundController = Timer.instance;
     }
 
-    public new void ChangeEnemeyStateMoveTo()
+    public  void ChangeEnemeyStateMoveTo()
     {
         //_animator.Play("run");
         _currentState = State.Moveto;
     }
 
-    public new void ChangeEnemyStateToFinal()
+    public  void ChangeEnemyStateToFinal()
     {
         //_animator.Play("run");
         _currentState = State.Final;
@@ -107,7 +107,7 @@ public class BossManager : EnemyManager
             Objective = hit.transform.GetComponent<Building_Base>();
         }
     }
-    public new void ResetObjective()
+    public  void ResetObjective()
     {
         try
         {
@@ -193,7 +193,7 @@ public class BossManager : EnemyManager
         _roundController.CheckForEndOfRound();
     }
 
-    public new void ReduceSpeed(float reduce, float reduce_time)
+    public  void ReduceSpeed(float reduce, float reduce_time)
     {
         if (slowed == false)
         {
