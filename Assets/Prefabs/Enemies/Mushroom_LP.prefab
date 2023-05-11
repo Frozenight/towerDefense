@@ -622,7 +622,6 @@ GameObject:
   - component: {fileID: 5038191818613586628}
   - component: {fileID: 2767825008586190478}
   - component: {fileID: 6542133434015607285}
-  - component: {fileID: 2549285978068886635}
   - component: {fileID: 3022394942151592869}
   m_Layer: 0
   m_Name: Mushroom_LP
@@ -697,6 +696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a38de09d81cef44a851f610f90807f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSound: {fileID: 0}
+  FloatingTextPrefab: {fileID: 8734338700987599484, guid: 014b378a2791925478d11b6356bb423b, type: 3}
   _animator: {fileID: 2826626434886593607}
   damage: -10
   TimeBetweenAttacks: 1
@@ -756,20 +757,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 40
   burning: 0
---- !u!114 &2549285978068886635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4034088204673293557}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f3e21cb2b1e7c489487f1cb7386255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 7644171321544803483, guid: 9bb69983c81c89b468078ba8e8ffb807, type: 3}
-  tag: EnemyTrash
 --- !u!114 &3022394942151592869
 MonoBehaviour:
   m_ObjectHideFlags: 0

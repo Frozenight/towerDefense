@@ -148,7 +148,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
 
     private void ShowFloatingText(string text)
     {
-        Vector3 position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z) ;
+        Vector3 position = new Vector3(transform.position.x, transform.position.y + 7, transform.position.z) ;
         var textObject = Instantiate(FloatingTextPrefab, position, Quaternion.identity);
         textObject.transform.LookAt(Camera.main.transform);
         textObject.transform.Rotate(0, 180, 0);

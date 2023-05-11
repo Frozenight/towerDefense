@@ -6,6 +6,8 @@ public class BossManager : MonoBehaviour
 {
     public AudioClip spawnSound;
     private AudioSource audioSource;
+    public AudioClip bossThemeSound;
+    private AudioSource audioSource2;
     private static ILogger logger = Debug.unityLogger;
     private static string kTAG = "MyGameTag";
     private enum State
@@ -40,7 +42,9 @@ public class BossManager : MonoBehaviour
     private void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource2 = gameObject.AddComponent<AudioSource>();
         PlaySpawnSound();
+        PlayThemeSound();
         Objective = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
         health = gameObject.GetComponent<EnemyHealth>();
 
@@ -54,6 +58,14 @@ public class BossManager : MonoBehaviour
         {
             audioSource.clip = spawnSound;
             audioSource.Play();
+        }
+    }
+    private void PlayThemeSound()
+    {
+        if (bossThemeSound != null)
+        {
+            audioSource2.clip = bossThemeSound;
+            audioSource2.Play();
         }
     }
 

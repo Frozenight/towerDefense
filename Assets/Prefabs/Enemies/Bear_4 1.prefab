@@ -2111,7 +2111,6 @@ GameObject:
   - component: {fileID: 1889772373915270724}
   - component: {fileID: -6676106583402865063}
   - component: {fileID: 2071285896653635930}
-  - component: {fileID: 2622359315665989292}
   - component: {fileID: 24671275080104403}
   m_Layer: 0
   m_Name: Bear_4 1
@@ -2142,7 +2141,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: -203.71999, z: 0}
 --- !u!95 &3021149002330467325
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2159,8 +2158,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &1889772373915270727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2169,18 +2167,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8378590293030824765}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.6006371, z: 1.8941051}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0.0000000014662138, y: 0.6369044, z: 0.08775824}
 --- !u!114 &1889772373915270842
 MonoBehaviour:
@@ -2195,6 +2185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnSound: {fileID: 8300000, guid: 4802402aa8ae85e699c7c3d87b59027e, type: 3}
+  FloatingTextPrefab: {fileID: 0}
   _animator: {fileID: 3021149002330467325}
   damage: -10
   TimeBetweenAttacks: 1
@@ -2254,20 +2245,6 @@ MonoBehaviour:
   spawnPosition: {fileID: -6676106583402865063}
   goal: {fileID: 0}
   pathAvailable: 0
---- !u!114 &2622359315665989292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8378590293030824765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f3e21cb2b1e7c489487f1cb7386255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 7644171321544803483, guid: 9bb69983c81c89b468078ba8e8ffb807, type: 3}
-  tag: EnemyTrash
 --- !u!114 &24671275080104403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2445,7 +2422,6 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 3
     m_TransformParent: {fileID: 9155092185657586055}
     m_Modifications:
     - target: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
@@ -2541,9 +2517,6 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
 --- !u!224 &3898897502237554382 stripped
 RectTransform:

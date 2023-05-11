@@ -23,22 +23,22 @@ public class EnemyHealth : MonoBehaviour
     {
         if (burning == true)
         {
-            //Burn();
-            StartCoroutine(Burn());
+            Burn();
+            //StartCoroutine(Burn());
         }
     }
-    IEnumerator Burn()
-    {
-        float elapsedTime = 0f;
-        while (elapsedTime < Burn_Time)
-        {
-            GetHit((Fire_Damage + Turret_Damage) * 0.1f * Time.deltaTime * 0.1f);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        burning = false;
+    //IEnumerator Burn()
+    //{
+    //    float elapsedTime = 0f;
+    //    while (elapsedTime < Burn_Time)
+    //    {
+    //        GetHit((Fire_Damage + Turret_Damage) * 0.1f * Time.deltaTime * 0.1f);
+    //        elapsedTime += Time.deltaTime;
+    //        yield return null;
+    //    }
+    //    burning = false;
 
-    }
+    //}
     public void SetFire(float fireDamage, float burnTime, float turretDamage)
     {
         hit = true;
@@ -67,23 +67,23 @@ public class EnemyHealth : MonoBehaviour
         return health;
     }
 
-    //private void Burn()
-    //{
-    //    if (hit == true)
-    //    {
-    //        elapsedTime = 0;
-    //        hit = false;
-    //    }
-    //    if (elapsedTime < Burn_Time)
-    //    {
-    //        elapsedTime += Time.deltaTime;
-    //        health -= ((Fire_Damage + Turret_Damage) * 0.1f) * Time.deltaTime;
-    //    }
-    //    else
-    //    {
-    //        elapsedTime = 0;
-    //        burning = false;
-    //    }
+    private void Burn()
+    {
+        if (hit == true)
+        {
+            elapsedTime = 0;
+            hit = false;
+        }
+        if (elapsedTime < Burn_Time)
+        {
+            elapsedTime += Time.deltaTime;
+            health -= ((Fire_Damage + Turret_Damage) * 0.1f) * Time.deltaTime;
+        }
+        else
+        {
+            elapsedTime = 0;
+            burning = false;
+        }
 
-    //}
+    }
 }

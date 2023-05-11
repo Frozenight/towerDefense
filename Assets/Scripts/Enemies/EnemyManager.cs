@@ -196,11 +196,16 @@ public class EnemyManager : MonoBehaviour
     }
     private void _FinalMove()
     {
-        Objective = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
-        if (Vector3.Distance(transform.position, Objective.transform.position) < 8)
+        try
         {
-            _currentState = State.Attack;
+            Objective = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
+            if (Vector3.Distance(transform.position, Objective.transform.position) < 8)
+            {
+                _currentState = State.Attack;
+            }
         }
+        catch { }
+
     }
 
     private void _MoveTo()
@@ -272,7 +277,6 @@ public class EnemyManager : MonoBehaviour
     private void OnDestroy()
     {
         _roundController.CheckForEndOfRound();
-        gameObject.GetComponent<EnemyTrashSpawn>().SpawnTrash();
     }
     
     public void ReduceSpeed(float reduce, float reduce_time)

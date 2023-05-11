@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  burning: 0
 --- !u!114 &7588992546844137675
 MonoBehaviour:
   m_ObjectHideFlags: 0

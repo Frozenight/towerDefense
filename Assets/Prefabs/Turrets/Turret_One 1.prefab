@@ -106,7 +106,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: 3d02a17bb67d82d4eae78d308665ca15, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -114,7 +114,7 @@ Light:
     serializedVersion: 2
     m_Bits: 1
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -180,11 +180,11 @@ MonoBehaviour:
   UpgradeModels:
   - {fileID: 134015296191264017, guid: 1bd8161c16563204088b4492bcd126a3, type: 3}
   - {fileID: 6139106547975946548, guid: 477b9989b749ce444b30ba7c3181dd4d, type: 3}
-  fireSound: {fileID: 8300000, guid: 3545ed7dc476c362893c3d92982e19a5, type: 3}
   rangeIndicator: {fileID: 1546720296803199531}
   offsetRangeHeight: 0.2
+  fireSound: {fileID: 8300000, guid: 3545ed7dc476c362893c3d92982e19a5, type: 3}
   IsShooting: 0
-  range: 20
+  range: 18
   fireRate: 1
   fireCountdown: 0
   damage: 10

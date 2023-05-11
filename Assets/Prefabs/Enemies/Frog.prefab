@@ -112,7 +112,6 @@ GameObject:
   - component: {fileID: 4252816154653886093}
   - component: {fileID: 5397520545178477130}
   - component: {fileID: 5640190923584859644}
-  - component: {fileID: 2476349421414065865}
   - component: {fileID: 8435588377669799475}
   m_Layer: 0
   m_Name: Frog
@@ -191,6 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a38de09d81cef44a851f610f90807f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSound: {fileID: 0}
+  FloatingTextPrefab: {fileID: 8734338700987599484, guid: 014b378a2791925478d11b6356bb423b, type: 3}
   _animator: {fileID: 7454000215737479773}
   damage: -10
   TimeBetweenAttacks: 1
@@ -250,20 +251,6 @@ MonoBehaviour:
   spawnPosition: {fileID: 5397520545178477130}
   goal: {fileID: 0}
   pathAvailable: 0
---- !u!114 &2476349421414065865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 903103808535759336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f3e21cb2b1e7c489487f1cb7386255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 7644171321544803483, guid: 9bb69983c81c89b468078ba8e8ffb807, type: 3}
-  tag: EnemyTrash
 --- !u!114 &8435588377669799475
 MonoBehaviour:
   m_ObjectHideFlags: 0

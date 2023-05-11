@@ -2111,7 +2111,6 @@ GameObject:
   - component: {fileID: 1889772373915270724}
   - component: {fileID: -6676106583402865063}
   - component: {fileID: 2071285896653635930}
-  - component: {fileID: 2622359315665989292}
   - component: {fileID: 24671275080104403}
   m_Layer: 0
   m_Name: Bear_4 2
@@ -2185,6 +2184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a38de09d81cef44a851f610f90807f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSound: {fileID: 0}
   FloatingTextPrefab: {fileID: 8734338700987599484, guid: 014b378a2791925478d11b6356bb423b, type: 3}
   _animator: {fileID: 3021149002330467325}
   damage: -10
@@ -2245,20 +2245,6 @@ MonoBehaviour:
   spawnPosition: {fileID: -6676106583402865063}
   goal: {fileID: 0}
   pathAvailable: 0
---- !u!114 &2622359315665989292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8378590293030824765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f3e21cb2b1e7c489487f1cb7386255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 7644171321544803483, guid: 9bb69983c81c89b468078ba8e8ffb807, type: 3}
-  tag: EnemyTrash
 --- !u!114 &24671275080104403
 MonoBehaviour:
   m_ObjectHideFlags: 0

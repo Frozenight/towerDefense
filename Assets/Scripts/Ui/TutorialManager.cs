@@ -11,7 +11,7 @@ public class TutorialManager : MonoBehaviour
     public Canvas MainUi;
     [SerializeField] private Canvas tip;
     private Timer timer;
-    private Building_Base Base;
+    [SerializeField] private Building_Base Base;
     private float delayBeforeAttack;
     private float time;
     private int index;
@@ -24,13 +24,17 @@ public class TutorialManager : MonoBehaviour
     {
         timer = MainUi.GetComponent<Timer>();
         eventManager = MainUi.GetComponent<EventManager>();
-        Base = FindObjectOfType<Building_Base>();
-        timer.HideButton();
+        
         index = 0;
+        if(!PlayerPrefs.HasKey("firstTime"))
+        {
+            PlayerPrefs.SetInt("firstTime", 0);
+        }
         if (PlayerPrefs.HasKey("firstTime") && PlayerPrefs.GetInt("firstTime") > 1)
             this.gameObject.SetActive(false);
         else if (PlayerPrefs.HasKey("firstTime") && PlayerPrefs.GetInt("firstTime") != 1)
         {
+            timer.HideButton();
             PlayerPrefs.SetInt("firstTime", PlayerPrefs.GetInt("firstTime")+1);
             PlayerPrefs.Save();
             delayBeforeAttack = 3f;

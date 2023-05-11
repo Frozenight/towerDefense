@@ -60,7 +60,7 @@ public class enemySpawner : MonoBehaviour
                 var enemy = Instantiate(waveComponents.enemyPrefab, transform.position + offset, Quaternion.Euler(0, 180, 0));
                 enemy.GetComponent<EnemyHealth>().health = scalingHealth; 
             }
-        scalingHealth += 10;
+        scalingHealth = scalingHealth+(waveComponents.enemyAmount-1)*6;
         waveComponents.enemyAmount++;
     }
 

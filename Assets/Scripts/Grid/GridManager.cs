@@ -14,7 +14,7 @@ public class GridManager : MonoBehaviour
     void Start()
     {
         GenerateGrid();
-        GenerateFakeGrid();
+        //GenerateFakeGrid();
         GameController.instance.SpawnWalls();
     }
 

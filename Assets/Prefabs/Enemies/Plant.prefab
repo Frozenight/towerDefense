@@ -920,7 +920,6 @@ GameObject:
   - component: {fileID: 1722347866382385755}
   - component: {fileID: 1428024733287100316}
   - component: {fileID: 7453091591654644533}
-  - component: {fileID: 7951183008024616529}
   - component: {fileID: 8898716724010430006}
   m_Layer: 0
   m_Name: Plant
@@ -994,6 +993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a38de09d81cef44a851f610f90807f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSound: {fileID: 8300000, guid: 4802402aa8ae85e699c7c3d87b59027e, type: 3}
+  FloatingTextPrefab: {fileID: 8734338700987599484, guid: 014b378a2791925478d11b6356bb423b, type: 3}
   _animator: {fileID: 2252597501258268466}
   damage: -10
   TimeBetweenAttacks: 1
@@ -1053,20 +1054,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 40
   burning: 0
---- !u!114 &7951183008024616529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5116344779794610806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f3e21cb2b1e7c489487f1cb7386255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 7644171321544803483, guid: 9bb69983c81c89b468078ba8e8ffb807, type: 3}
-  tag: EnemyTrash
 --- !u!114 &8898716724010430006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1740,7 +1727,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1760,11 +1747,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -3.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.6300001
+      value: 5.46
       objectReference: {fileID: 0}
     - target: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1777,6 +1764,10 @@ PrefabInstance:
     - target: {fileID: 4208250496405140086, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6992687997884451223, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_Name

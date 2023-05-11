@@ -71,10 +71,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnSound: {fileID: 8300000, guid: c2f3d0e153ec5017fba597dec777c35a, type: 3}
+  bossThemeSound: {fileID: 8300000, guid: 56a0a92c1e47f4b83a8969cd288e4340, type: 3}
   _animator: {fileID: 8056469957312234759}
   damage: -100
   TimeBetweenAttacks: 5
   speed: 1
+  slowed: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 64
