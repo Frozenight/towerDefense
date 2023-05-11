@@ -1,3 +1,4 @@
+using System.Numerics;
 using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject turret1;
     [SerializeField] private GameObject turret2;
     [SerializeField] private GameObject wall;
+    private TileOnWhichToPlace selectedTile;
 
     private GameObject selectedTurret;
 
@@ -18,6 +20,11 @@ public class BuildingManager : MonoBehaviour
             return;
         }
         instance=this;
+    }
+
+    public void SetSelectedTile(TileOnWhichToPlace tile)
+    {
+        selectedTile = tile;
     }
 
     // Start is called before the first frame update
@@ -30,10 +37,10 @@ public class BuildingManager : MonoBehaviour
         selectedTurret = turret1;
     }
 
-
     public void SelectTurret1()
     {
         selectedTurret = turret1;
+        BuildTower();
     }
 
     public void SelectTurret2()
@@ -44,5 +51,28 @@ public class BuildingManager : MonoBehaviour
     public void SelectWall()
     {
         selectedTurret = wall;
+        BuildTower();
+    }
+
+    public void BuildTower()
+    {
+        GameObject selectedTurret = GetTurret();
+        ManageableBuilding manageableBuilding = selectedTurret.GetComponent<ManageableBuilding>();
+
+        if (manageableBuilding != null && !selectedTile.placed
+            && GameController.instance.resources >= manageableBuilding.buildingPrice)
+        {
+            selectedTile.animationPrefab1 = (GameObject)Instantiate(selectedTile.animationPrefab1, selectedTile.transform.position + selectedTile.offsetFromPlacer, selectedTile.transform.rotation);
+            selectedTile.animationPrefab2 = (GameObject)Instantiate(selectedTile.animationPrefab2, selectedTile.transform.position + selectedTile.offsetFromPlacer, selectedTile.transform.rotation);
+            selectedTile.animationPrefab1.transform.parent = GameController.instance.vfx.transform;
+            selectedTile.animationPrefab2.transform.parent = GameController.instance.vfx.transform;
+            selectedTile.animationPrefab1.SetActive(true);
+            selectedTile.animationPrefab2.SetActive(true);
+            StartCoroutine(selectedTile.AnimationTimer(selectedTile.timeDelay * 2));
+            StartCoroutine(selectedTile.SpawnTurretAfterTime(selectedTile.timeDelay, selectedTurret));
+
+            GameController.instance.resources -= manageableBuilding.buildingPrice;
+            selectedTile.placed = true;
+        }
     }
 }

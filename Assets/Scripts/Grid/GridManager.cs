@@ -24,12 +24,15 @@ public class GridManager : MonoBehaviour
         {
             for(int y = -3; y < _height; y = y + 4)
             {
-                var spawnedTile = Instantiate(block, new Vector3(x, 0.2f, y), Quaternion.identity);
-                
-                spawnedTile.name = $"Tile {x} {y}";
-                //Debug.Log($"{x},{y}");
-                spawnedTile.transform.parent = this.transform;
-                tiles.Add(spawnedTile);
+                if(!((x == -8 && y == 37) ||( x == -8 && y == 41) || (x == -8 && y == 45)))
+                {
+                    var spawnedTile = Instantiate(block, new Vector3(x, 0.2f, y), Quaternion.identity);
+
+                    spawnedTile.name = $"Tile {x} {y}";
+                    //Debug.Log($"{x},{y}");
+                    spawnedTile.transform.parent = this.transform;
+                    tiles.Add(spawnedTile);
+                }
             }
         }
     }

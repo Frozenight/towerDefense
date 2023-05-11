@@ -22,13 +22,24 @@ public class ManageableBuildingTab : MonoBehaviour
     [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private TextMeshProUGUI PriceText;
     [SerializeField] private TextMeshProUGUI Description;
+    [SerializeField] public TextMeshProUGUI WorkerPrice;
     [SerializeField] public Button Fire_Turret;
     [SerializeField] public Button Frost_Turret;
     [SerializeField] public Button Earth_Turret;
-    
+    [SerializeField] public GameObject Turret_type;
+
+    [SerializeField] public RectTransform Stats;
+    [SerializeField] public GameObject SatsWindow;
+    [SerializeField] private TextMeshProUGUI Damage;
+    [SerializeField] private TextMeshProUGUI Range;
+    [SerializeField] private TextMeshProUGUI AttackSpeed;
+    [SerializeField] private TextMeshProUGUI DamageUpgrade;
+    [SerializeField] private TextMeshProUGUI RangeUpgrade;
+    [SerializeField] private TextMeshProUGUI AttackSpeedUpgrade;
+
     private ManageableBuilding assignedBuilding;
     private UnityAction m_closeTab;
-
+    [SerializeField] private GameMode gameMode;
 
     public UnityAction closeTab {
         set {
@@ -58,13 +69,37 @@ public class ManageableBuildingTab : MonoBehaviour
 
     public void FillBuildingData(ManageableBuilding mBuilding) {
         RemoveB.gameObject.SetActive(mBuilding.canDestroyManually);
-        WorkerB.gameObject.SetActive(
-            mBuilding.buildingName == ManageableBuilding.NAME_BASE);
+        WorkerB.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_BASE);
         RotationL_B.gameObject.SetActive(mBuilding.tag == "Wall");
         RotationR_B.gameObject.SetActive(mBuilding.tag == "Wall");
+        Turret_type.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET);
+        WorkerPrice.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_BASE);
+        UpgradeB.gameObject.SetActive(mBuilding.buildingName != ManageableBuilding.NAME_WALL);
+        PriceText.gameObject.SetActive(mBuilding.buildingName != ManageableBuilding.NAME_WALL);
+        LevelText.gameObject.SetActive(mBuilding.buildingName != ManageableBuilding.NAME_WALL);
+
+        if (mBuilding.level == 5 && mBuilding.buildingName == ManageableBuilding.NAME_TURRET)
+        {
+            UpgradeB.gameObject.SetActive(false);
+            PriceText.gameObject.SetActive(false);
+            SetInteractiveType(true);
+        }
+
         Fire_Turret.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET);
         Frost_Turret.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET);
         Earth_Turret.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET);
+        Stats.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_FROST_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET);
+        if(mBuilding.buildingName == ManageableBuilding.NAME_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_FROST_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET)
+        {
+            UpdateStats(mBuilding.GetComponent<Turret>());
+        }
+        
         assignedBuilding = mBuilding;
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;
@@ -86,8 +121,23 @@ public class ManageableBuildingTab : MonoBehaviour
     }
 
     public void Upgrade() {
-        assignedBuilding?.UpgradeBuilding();
-        UpdateBuildingStats();
+        if (assignedBuilding?.level != 5 && assignedBuilding?.buildingName == ManageableBuilding.NAME_TURRET)
+        {
+            assignedBuilding?.UpgradeBuilding();
+            UpdateStats(assignedBuilding?.GetComponent<Turret>());
+            UpdateBuildingStats();
+        }
+        else if(assignedBuilding?.buildingName != ManageableBuilding.NAME_TURRET)
+        {
+            assignedBuilding?.UpgradeBuilding();
+            if (assignedBuilding?.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
+                assignedBuilding?.buildingName == ManageableBuilding.NAME_FROST_TURRET ||
+                assignedBuilding?.buildingName == ManageableBuilding.NAME_EARTH_TURRET)
+            {
+                UpdateStats(assignedBuilding?.GetComponent<Turret>());
+            }
+            UpdateBuildingStats();
+        }
     }
 
     public void ChangeBiulding_EarthTurret()
@@ -135,10 +185,16 @@ public class ManageableBuildingTab : MonoBehaviour
     }
 
     private void UpdateBuildingStats() {
+        if(assignedBuilding.level == 5 && assignedBuilding.buildingName == ManageableBuilding.NAME_TURRET)
+        {
+            LevelText.text = "Level: " + assignedBuilding.level;
+            PriceText.gameObject.SetActive(false);
+            SetInteractiveType(true);
+            return;
+        }
         LevelText.text = "Level: " + assignedBuilding.level;
         PriceText.text = "Upgrade price: " + assignedBuilding.upgrade_Price;
-        if (assignedBuilding.level >= 5)
-            SetInteractiveType(true);
+            
     }
 
     IEnumerator LabelScaleAnim() {   
@@ -181,5 +237,29 @@ public class ManageableBuildingTab : MonoBehaviour
         LevelText.text = "";
         assignedBuilding = null;
         StopNamePulse();
+    }
+
+    public void SetStatsActive()
+    {
+        SatsWindow.SetActive(true);
+        Time.timeScale = 0;
+        gameMode.changeGameMode(2);
+    }
+
+    public void CloseStats()
+    {
+        SatsWindow.SetActive(false);
+        Time.timeScale = 1;
+        gameMode.changeGameMode(1);
+    }
+
+    public void UpdateStats(Turret mBuilding)
+    {
+        Damage.text = "Damage: " + mBuilding.damage.ToString();
+        Range.text = "Range: " + mBuilding.range.ToString();
+        AttackSpeed.text = "Attack speed: " + mBuilding.fireRate.ToString("F2");
+        DamageUpgrade.text = "Damage +" + mBuilding.GetUpgradeDamage().ToString();
+        RangeUpgrade.text = "Range +" + mBuilding.GetUpgradeRange().ToString();
+        AttackSpeedUpgrade.text = "Attack speed +" + (mBuilding.GetUpgradeAttackSpeed() * 100 - 100).ToString() + "%";
     }
 }

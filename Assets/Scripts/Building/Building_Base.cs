@@ -69,6 +69,7 @@ public class Building_Base : ManageableBuilding, IGameController
         {
             if (GetComponent<Turret>() != null || GetComponent<Wall>() != null)
             {
+                tile.GetComponent<TileOnWhichToPlace>().ChangePlacedState();
                 Destroy(gameObject);
             }
             else

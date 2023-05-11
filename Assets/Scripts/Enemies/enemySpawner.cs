@@ -51,13 +51,13 @@ public class enemySpawner : MonoBehaviour
         if (waveCnt == bossWave)
         { 
             var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
-            Instantiate(waveComponents.BossPrefab, transform.position + offset, Quaternion.identity).transform.parent = this.transform;
+            Instantiate(waveComponents.BossPrefab, transform.position + offset, Quaternion.Euler(0, 180, 0)).transform.parent = this.transform;
         }
         else
             for (int i = 0; i < waveComponents.enemyAmount; i++)
             {
                 var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
-                var enemy = Instantiate(waveComponents.enemyPrefab, transform.position + offset, Quaternion.identity);
+                var enemy = Instantiate(waveComponents.enemyPrefab, transform.position + offset, Quaternion.Euler(0, 180, 0));
                 enemy.GetComponent<EnemyHealth>().health = scalingHealth; 
             }
         scalingHealth += 10;
