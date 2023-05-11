@@ -14,6 +14,8 @@ public class ResourceSpawner: MonoBehaviour
 
     [SerializeField]
     private float spawnTimer = 3f;
+    [SerializeField] float offsetX = 3f;
+    [SerializeField] float offsetZ = 3f;
 
     [SerializeField] private EventManager eventManager;
 
@@ -40,9 +42,9 @@ public class ResourceSpawner: MonoBehaviour
         while (spawnNumber != 0)
         {
             Vector3 randomPosition = new Vector3(
-                Random.Range(spawner.position.x - 3, spawner.position.x + 3),
+                Random.Range(spawner.position.x - offsetX, spawner.position.x + offsetX),
                 Random.Range(spawner.position.y, spawner.position.y),
-                Random.Range(spawner.position.z - 3, spawner.position.z + 3)
+                Random.Range(spawner.position.z - offsetZ, spawner.position.z + offsetZ)
             );
 
             TrashObject trash;

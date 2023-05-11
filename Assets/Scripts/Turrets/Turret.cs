@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Turret : ManageableBuilding
 {
+    [SerializeField] GameObject rangeIndicator;
+    [SerializeField] float offsetRangeHeight;
+
+
     private enemySpawner enemyController;
 
     public bool IsShooting;
@@ -35,6 +39,8 @@ public class Turret : ManageableBuilding
 
     public float rotateX;
     public int price;
+
+    
 
     public override string buildingName { 
         get { return NAME_TURRET; } 
@@ -73,6 +79,7 @@ public class Turret : ManageableBuilding
     // Start is called before the first frame update
     void Start()
     {
+        UnhighlightBuilding();
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
         enemyController = enemySpawner.instance;
         GetComponent<Building_Base>().maxHealth = GameController.instance.GetTurretHealth();
@@ -163,6 +170,17 @@ public class Turret : ManageableBuilding
         }
         GameController.instance.resources += sell_price / 2;
         Destroy(gameObject);
+    }
+
+    public override void HighlightBuilding()
+    {
+        rangeIndicator.SetActive(true);
+        rangeIndicator.transform.localPosition = new Vector3(0, offsetRangeHeight + range * 2f, 0);
+    }
+
+    public override void UnhighlightBuilding()
+    {
+        rangeIndicator.SetActive(false);
     }
 
     void OnDrawGizmosSelected ()

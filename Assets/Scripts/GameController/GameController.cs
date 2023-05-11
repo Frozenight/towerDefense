@@ -53,7 +53,6 @@ public class GameController : MonoBehaviour
         {
             resources += trashGainSpawned;
         }
-
         else if (name == "enemyTrash")
         {
             resources += trashGainEnemyDroped;
