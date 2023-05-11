@@ -2185,6 +2185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a38de09d81cef44a851f610f90807f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FloatingTextPrefab: {fileID: 8734338700987599484, guid: 014b378a2791925478d11b6356bb423b, type: 3}
   _animator: {fileID: 3021149002330467325}
   damage: -10
   TimeBetweenAttacks: 1

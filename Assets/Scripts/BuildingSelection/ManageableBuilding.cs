@@ -14,6 +14,7 @@ public class ManageableBuilding : MonoBehaviour {
     public static ManageableBuilding selectedBuilding = null;
     private GameMode gameMode;
 
+
     public virtual int buildingPrice {
         get { return 5; }
     }
@@ -108,4 +109,13 @@ public class ManageableBuilding : MonoBehaviour {
         newModel = null;
         return false;        
     }
+
+    public virtual void HighlightBuilding() {
+
+    }
+
+    public virtual void UnhighlightBuilding() {
+
+    }
+
 }

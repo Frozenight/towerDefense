@@ -18,7 +18,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] float testZoomMult2 = 0.9f;
     public TextMeshProUGUI testDebug;
     private ScaleGestureRecognizer scaleGesture;
-    private RotateGestureRecognizer rotateGesture;
+    // private RotateGestureRecognizer rotateGesture;
     private Vector3 lastPos;
     private float zoomSpeed = 15f;
     private float rotY = 0f;
@@ -44,7 +44,8 @@ public class CameraMovement : MonoBehaviour
         currentDragZMin = defaultDragZMin;
         currentDragZMax = defaultDragZMax;
         CreateScaleGesture();
-        CreateRotateGesture();
+        // uncomment for camera rotation
+        // CreateRotateGesture();
         SetTrigonometricData();
         SetXZLimits();
     }
@@ -229,12 +230,13 @@ public class CameraMovement : MonoBehaviour
         FingersScript.Instance.AddGesture(scaleGesture);
     }
 
-    private void CreateRotateGesture()
-    {
-        rotateGesture = new RotateGestureRecognizer();
-        rotateGesture.StateUpdated += RotateGestureCallback;
-        FingersScript.Instance.AddGesture(rotateGesture);
-    }
+    // uncomment for camera rotation
+    // private void CreateRotateGesture()
+    // {
+    //     rotateGesture = new RotateGestureRecognizer();
+    //     rotateGesture.StateUpdated += RotateGestureCallback;
+    //     FingersScript.Instance.AddGesture(rotateGesture);
+    // }
 
     private void ScaleGestureCallback(GestureRecognizer gesture)
     {
@@ -244,11 +246,12 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
-    private void RotateGestureCallback(GestureRecognizer gesture)
-    {
-        if (gesture.State == GestureRecognizerState.Executing)
-        {
-            RotateCamera(-rotateGesture.RotationDegreesDelta);
-        }
-    }
+    // uncomment for camera rotation 
+    // private void RotateGestureCallback(GestureRecognizer gesture)
+    // {
+    //     if (gesture.State == GestureRecognizerState.Executing)
+    //     {
+    //         RotateCamera(-rotateGesture.RotationDegreesDelta);
+    //     }
+    // }
 }

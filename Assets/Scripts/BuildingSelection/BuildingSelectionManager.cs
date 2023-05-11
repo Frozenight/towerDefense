@@ -41,12 +41,16 @@ public class BuildingSelectionManager : MonoBehaviour
     {
         if (ManageableBuilding.selectedBuilding != null)
         {
+            ManageableBuilding.selectedBuilding.UnhighlightBuilding();
             ManageableBuilding.selectedBuilding.GetComponent<Outline>().enabled = false;
         }
+        Debug.Log(_hit.collider.gameObject.name);
+       
         ManageableBuilding building =
             _hit.collider.GetComponent<ManageableBuilding>();
         oldBuilding = building;
         building.SelectBuilding();
+        building.HighlightBuilding();
         if (manageBuildingTab.gameObject.activeSelf)
             manageBuildingTab.ResetNamePulse();
         else
@@ -60,6 +64,7 @@ public class BuildingSelectionManager : MonoBehaviour
     {
         if (ManageableBuilding.selectedBuilding != null)
         {
+            ManageableBuilding.selectedBuilding.UnhighlightBuilding();
             ManageableBuilding.selectedBuilding.GetComponent<Outline>().enabled = false;
         }
         ManageableBuilding.selectedBuilding = null;

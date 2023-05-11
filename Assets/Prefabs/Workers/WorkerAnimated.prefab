@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68957570f679024ab393ef6a68eb26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FloatingTextPrefab: {fileID: 8734338700987599484, guid: 014b378a2791925478d11b6356bb423b, type: 3}
   trashObjects: []
   speed: 3.5
   goingBackward: 0

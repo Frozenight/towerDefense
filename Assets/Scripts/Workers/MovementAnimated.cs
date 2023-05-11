@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class MovementAnimated : MonoBehaviour, IGameController
 {
-
+    public GameObject FloatingTextPrefab;
     private const float SPEED_INC_ON_UPGRADE = 5f;
 
     public static bool ongoingRaid {get; private set;}
@@ -50,8 +50,15 @@ public class MovementAnimated : MonoBehaviour, IGameController
                 
                 if (Vector3.Distance(transform.position, PointB.transform.position) < 0.001f)
                 {
-                    PickUp.HasTrash = false;
-                    goingBackward = false;
+                    if (PickUp.HasTrash) {
+                        PickUp.HasTrash = false;
+                        GameController.instance.AddCountResource("trash");
+                        if (FloatingTextPrefab)
+                        {
+                            ShowFloatingText("+5");
+                        }
+                    }
+                    goingBackward = false;                    
                     animator.SetTrigger("GoForward");
                     // Stops worker at base until ongoingRaid is set to false 
                     if (ongoingRaid) {
@@ -137,5 +144,14 @@ public class MovementAnimated : MonoBehaviour, IGameController
         } else {
             detectedRaidStart = false;
         }
+    }
+
+    private void ShowFloatingText(string text)
+    {
+        Vector3 position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z) ;
+        var textObject = Instantiate(FloatingTextPrefab, position, Quaternion.identity);
+        textObject.transform.LookAt(Camera.main.transform);
+        textObject.transform.Rotate(0, 180, 0);
+        textObject.GetComponent<TextMeshPro>().text = text;
     }
 }

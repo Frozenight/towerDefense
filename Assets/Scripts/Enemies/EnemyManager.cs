@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyManager : MonoBehaviour
 {
     public AudioClip spawnSound;
     private AudioSource audioSource;
+    public GameObject FloatingTextPrefab;
     private enum State
     {
         Idle,
@@ -34,6 +36,7 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private LayerMask layerMask;
     private float searchDistance = 4f;
+    private bool resourceBonusGiven = false;
 
     bool stuck = false;
     bool tryingToUnStuck = false;
@@ -257,6 +260,11 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator die()
     {
+        if (!resourceBonusGiven) {
+            GameController.instance.AddCountResource("enemyTrash");
+            ShowFloatingText("+6");
+            resourceBonusGiven = true;
+        }
         yield return new WaitForSeconds(4);
         Destroy(gameObject);
     }
@@ -290,5 +298,14 @@ public class EnemyManager : MonoBehaviour
             speed = temp;
         }
 
+    }
+
+    private void ShowFloatingText(string text)
+    {
+        Vector3 position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z) ;
+        var textObject = Instantiate(FloatingTextPrefab, position, Quaternion.identity, transform);
+        textObject.transform.LookAt(Camera.main.transform);
+        textObject.transform.Rotate(0, 180, 0);
+        textObject.GetComponent<TextMeshPro>().text = text;
     }
 }
