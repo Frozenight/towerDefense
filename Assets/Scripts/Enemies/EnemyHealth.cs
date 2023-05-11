@@ -7,12 +7,13 @@ public class EnemyHealth : MonoBehaviour
 {
     private float maxHealth;
     public float health;
-    private bool burning = false;
+    public bool burning = false;
     private float Fire_Damage;
     private float Burn_Time;
     private float Turret_Damage;
-
+    float elapsedTime = 0f;
     public event Action<float> OnHealthChanged = delegate { };
+    bool hit;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (burning == true)
         {
+            //Burn();
             StartCoroutine(Burn());
         }
     }
@@ -39,11 +41,15 @@ public class EnemyHealth : MonoBehaviour
     }
     public void SetFire(float fireDamage, float burnTime, float turretDamage)
     {
+        hit = true;
         Fire_Damage = fireDamage;
         if (GetComponent<BossManager>() != null) { Fire_Damage *= 1.5f; }
             
         Burn_Time = burnTime;
-        burning = true;
+        if (burning == false)
+        {
+            burning = true;
+        }
         Turret_Damage = turretDamage;
     }
     public void GetHit(float damage)
@@ -60,4 +66,24 @@ public class EnemyHealth : MonoBehaviour
     {
         return health;
     }
+
+    //private void Burn()
+    //{
+    //    if (hit == true)
+    //    {
+    //        elapsedTime = 0;
+    //        hit = false;
+    //    }
+    //    if (elapsedTime < Burn_Time)
+    //    {
+    //        elapsedTime += Time.deltaTime;
+    //        health -= ((Fire_Damage + Turret_Damage) * 0.1f) * Time.deltaTime;
+    //    }
+    //    else
+    //    {
+    //        elapsedTime = 0;
+    //        burning = false;
+    //    }
+
+    //}
 }
