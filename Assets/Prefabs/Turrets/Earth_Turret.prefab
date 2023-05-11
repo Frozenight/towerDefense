@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6722609370373012785}
-  - component: {fileID: 3065367882657682378}
   - component: {fileID: 269928153212305229}
+  - component: {fileID: 3065367882657682378}
   - component: {fileID: 3686414825287529246}
   - component: {fileID: 8342835443500227442}
-  - component: {fileID: 7601424471907244516}
   - component: {fileID: 6372507379767207621}
   - component: {fileID: 6569830012434985148}
   m_Layer: 6
@@ -31,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6016936162135373229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: 0.2, z: 37}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -28, y: 0.2, z: 9}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6778737972445340390}
@@ -40,21 +39,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3065367882657682378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6016936162135373229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4afcd4b8c19bee4488e6bb45348a291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpgradeModels: []
-  gameOverScreen: {fileID: 0}
-  tile: {fileID: 0}
 --- !u!114 &269928153212305229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,12 +60,27 @@ MonoBehaviour:
   damage: 40
   partToRotate: {fileID: 5520268817022992133}
   bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
-  explosionPrefab: {fileID: 4847495747336109064, guid: 86ca64e1b64b34ffa92cc40b8cabfba2, type: 3}
+  explosionPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
   firePoint: {fileID: 3368253037552735868}
-  rotateX: 0
+  rotateX: -90
   price: 0
   damageMultiplier: 3
   FireRateSlow: 0.5
+--- !u!114 &3065367882657682378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016936162135373229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4afcd4b8c19bee4488e6bb45348a291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeModels: []
+  gameOverScreen: {fileID: 0}
+  tile: {fileID: 0}
 --- !u!65 &3686414825287529246
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -115,18 +114,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7601424471907244516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6016936162135373229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89a297dabc587004d85e1549dbdab932, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!208 &6372507379767207621
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -137,7 +124,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 1.5, y: 0.5, z: 1.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -26266,7 +26253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8921771412198965033}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.0017999903, y: -0.00880001, z: 0.007165225}
+  m_LocalPosition: {x: 0.0017999903, y: -0.0119, z: 0.0072}
   m_LocalScale: {x: 0.01, y: 0.010000003, z: 0.010000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26294,7 +26281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 735d405461402284681d40787705353b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 735d405461402284681d40787705353b, type: 3}
       propertyPath: m_LocalPosition.z

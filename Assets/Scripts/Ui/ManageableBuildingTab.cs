@@ -10,7 +10,8 @@ public class ManageableBuildingTab : MonoBehaviour
     private IEnumerator labelScaleAnim;
     private int animTime = 15; // 100 == 1 sec
     private float targetScale = 1.2f;
-
+    [SerializeField] private Canvas canv;
+    EventManager eventController;
     [SerializeField] private Button WorkerB;
     [SerializeField] private Button UpgradeB;
     [SerializeField] private Button RemoveB;
@@ -43,6 +44,26 @@ public class ManageableBuildingTab : MonoBehaviour
     public UnityAction closeTab {
         set {
             m_closeTab = value;
+        }
+    }
+
+    public void Start()
+    {
+        eventController = canv.GetComponent<EventManager>();
+    }
+
+    private void Update()
+    {
+        if (RemoveB.gameObject.active)
+        {
+            if (eventController.currentState == EventManager.Event.defending)
+            {
+                RemoveB.interactable = false;
+            }
+            else
+            {
+                RemoveB.interactable = true;
+            }
         }
     }
 

@@ -34,7 +34,7 @@ public class TileOnWhichToPlace : MonoBehaviour
         //buildingManager = BuildingManager.instance;
         rend = GetComponent<Renderer>();
         startColor=rend.material;
-        timeDelay = 0.5f;
+        timeDelay = 0.3f;
         gameMode = gameController.GetComponent<GameMode>();
     }
 
