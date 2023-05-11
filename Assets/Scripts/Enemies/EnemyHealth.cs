@@ -30,7 +30,7 @@ public class EnemyHealth : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < Burn_Time)
         {
-            health -= ((Fire_Damage + Turret_Damage) * 0.1f) * Time.deltaTime * 0.1f;
+            GetHit((Fire_Damage + Turret_Damage) * 0.1f * Time.deltaTime * 0.1f);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -39,7 +39,6 @@ public class EnemyHealth : MonoBehaviour
     }
     public void SetFire(float fireDamage, float burnTime, float turretDamage)
     {
-
         Fire_Damage = fireDamage;
         if (GetComponent<BossManager>() != null) { Fire_Damage *= 1.5f; }
             

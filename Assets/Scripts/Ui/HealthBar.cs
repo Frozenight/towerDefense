@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Image foregroundImage;
+    [SerializeField] private Image foregroundImageDelayed;
     [SerializeField] private float updateSpeedSeconds = 0.5f;
 
     private Image backgroundImage;
@@ -14,6 +15,10 @@ public class HealthBar : MonoBehaviour
     private float fadeInTime = 1f;
 
     private Coroutine fadeOutCoroutine; // declare a variable to store the running fadeOut coroutine
+
+    bool hit = false;
+
+    private float healthPerFrame = 200f;
 
     private void Awake()
     {
@@ -33,12 +38,18 @@ public class HealthBar : MonoBehaviour
         fadeOutCoroutine = StartCoroutine(FadeOut());
     }
 
+    private void Update()
+    {
+        ShowDelayedDamage();
+    }
+
     private void HandleHealthChanged(float pct)
     {
         if (this.isActiveAndEnabled)
         {
             StartCoroutine(ChangeToPct(pct));
-            StartCoroutine(FadeIn());
+            if (!hit)
+                StartCoroutine(FadeIn());
         }
     }
 
@@ -56,6 +67,16 @@ public class HealthBar : MonoBehaviour
         foregroundImage.fillAmount = pct;
     }
 
+
+    private void ShowDelayedDamage()
+    {
+        float difference = foregroundImageDelayed.fillAmount - foregroundImage.fillAmount;
+        if (difference > 0)
+        {
+            foregroundImageDelayed.fillAmount -= healthPerFrame * Time.deltaTime * (difference/100);
+        }
+    }
+
     private void LateUpdate()
     {
         transform.LookAt(Camera.main.transform);
@@ -67,17 +88,21 @@ public class HealthBar : MonoBehaviour
         float startTime = Time.time;
         Color originalColor1 = foregroundImage.color;
         Color originalColor2 = backgroundImage.color;
+        Color originalColor3 = foregroundImageDelayed.color;
         while (Time.time < startTime + fadeOutTime)
         {
             float t = (Time.time - startTime) / fadeOutTime;
-            foregroundImage.color = new Color(originalColor1.r, originalColor1.g, originalColor1.b, Mathf.Lerp(1, 0, t));
-            backgroundImage.color = new Color(originalColor2.r, originalColor2.g, originalColor2.b, Mathf.Lerp(1, 0, t));
+            float alpha = Mathf.Lerp(1, 0f, t);
+            foregroundImage.color = new Color(originalColor1.r, originalColor1.g, originalColor1.b, alpha);
+            backgroundImage.color = new Color(originalColor2.r, originalColor2.g, originalColor2.b, alpha);
+            foregroundImageDelayed.color = new Color(originalColor3.r, originalColor3.g, originalColor3.b, alpha);
             yield return null;
         }
     }
 
     IEnumerator FadeIn()
     {
+        hit = true;
         // if there's a running fadeOut coroutine, stop it
         if (fadeOutCoroutine != null)
         {
@@ -85,14 +110,17 @@ public class HealthBar : MonoBehaviour
         }
         foregroundImage.color = new Color(foregroundImage.color.r, foregroundImage.color.g, foregroundImage.color.b, 0f);
         backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 0f);
+        foregroundImageDelayed.color = new Color(foregroundImageDelayed.color.r, foregroundImageDelayed.color.g, foregroundImageDelayed.color.b, 0f);
         float startTime = Time.time;
         Color originalColor = foregroundImage.color;
         Color originalColor1 = backgroundImage.color;
+        Color originalColor2 = foregroundImageDelayed.color;
         while (Time.time < startTime + fadeInTime)
         {
             float t = (Time.time - startTime) / fadeInTime;
             foregroundImage.color = new Color(originalColor.r, originalColor.g, originalColor.b, Mathf.Lerp(0, 1, t));
             backgroundImage.color = new Color(originalColor1.r, originalColor1.g, originalColor1.b, Mathf.Lerp(0, 1, t));
+            foregroundImageDelayed.color = new Color(originalColor2.r, originalColor2.g, originalColor2.b, Mathf.Lerp(0, 1, t));
             yield return null;
         }
     }
