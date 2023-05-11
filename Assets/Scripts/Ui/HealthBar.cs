@@ -92,7 +92,7 @@ public class HealthBar : MonoBehaviour
         while (Time.time < startTime + fadeOutTime)
         {
             float t = (Time.time - startTime) / fadeOutTime;
-            float alpha = Mathf.Lerp(1, 0.01f, t);
+            float alpha = Mathf.Lerp(1, 0f, t);
             foregroundImage.color = new Color(originalColor1.r, originalColor1.g, originalColor1.b, alpha);
             backgroundImage.color = new Color(originalColor2.r, originalColor2.g, originalColor2.b, alpha);
             foregroundImageDelayed.color = new Color(originalColor3.r, originalColor3.g, originalColor3.b, alpha);
