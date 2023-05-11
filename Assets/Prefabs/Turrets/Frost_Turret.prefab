@@ -83,8 +83,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeModels: []
+  fireSound: {fileID: 8300000, guid: 6740ad3fdc2a19345a405d8d26166cee, type: 3}
   IsShooting: 0
-  manageableBuildingTab: {fileID: 5380673723215028464, guid: 924d56c53f454584491cba4642672e4a, type: 3}
   range: 30
   fireRate: 1.4641
   fireCountdown: 0

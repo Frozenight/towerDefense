@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeModels: []
+  fireSound: {fileID: 8300000, guid: b338296468c65983a8a6b48d9cdcfadb, type: 3}
   IsShooting: 0
   range: 25
   fireRate: 0.5

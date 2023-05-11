@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public AudioClip spawnSound;
+    private AudioSource audioSource;
     private enum State
     {
         Idle,
@@ -41,10 +43,21 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        PlaySpawnSound();
         Objective = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
         health = gameObject.GetComponent<EnemyHealth>();
         navmesh = GetComponent<EnemyNavmesh>();
         _roundController = Timer.instance;
+    }
+
+    private void PlaySpawnSound()
+    {
+        if (spawnSound != null)
+        {
+            audioSource.clip = spawnSound;
+            audioSource.Play();
+        }
     }
 
     public void ChangeEnemeyStateMoveTo()

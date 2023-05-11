@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
+    public AudioClip spawnSound;
+    private AudioSource audioSource;
     private static ILogger logger = Debug.unityLogger;
     private static string kTAG = "MyGameTag";
     private enum State
@@ -37,13 +39,25 @@ public class BossManager : MonoBehaviour
 
     private void Start()
     {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        PlaySpawnSound();
         Objective = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
         health = gameObject.GetComponent<EnemyHealth>();
 
         _roundController = Timer.instance;
     }
 
-    public  void ChangeEnemeyStateMoveTo()
+
+    private void PlaySpawnSound()
+    {
+        if (spawnSound != null)
+        {
+            audioSource.clip = spawnSound;
+            audioSource.Play();
+        }
+    }
+
+    public void ChangeEnemeyStateMoveTo()
     {
         //_animator.Play("run");
         _currentState = State.Moveto;

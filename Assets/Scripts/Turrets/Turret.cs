@@ -8,6 +8,9 @@ public class Turret : ManageableBuilding
     private enemySpawner enemyController;
     protected Animator animator;
 
+    public AudioClip fireSound;
+    private AudioSource audioSource;
+
     public bool IsShooting;
     private const float INCREASE_DAMAGE = 5f;
     private const float INCREASE_FIRERATE_MULT = 1.1f;
@@ -131,6 +134,12 @@ public class Turret : ManageableBuilding
 
 
     protected virtual void Fire(){
+        audioSource = gameObject.AddComponent<AudioSource>();
+        if (fireSound != null)
+        {
+            audioSource.clip = fireSound;
+            audioSource.Play();
+        }
         animator.SetTrigger("Shoot");
         GameObject newBullet = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         GameObject newSmoke = (GameObject)Instantiate(explosionPrefab, firePoint.position, firePoint.rotation);
