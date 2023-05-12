@@ -79,6 +79,10 @@ public class Timer : MonoBehaviour
     {
         startButton.gameObject.SetActive(false);
     }
+    public void ShowButton()
+    {
+        startButton.gameObject.SetActive(true);
+    }
 
     public void CheckForEndOfRound()
     {

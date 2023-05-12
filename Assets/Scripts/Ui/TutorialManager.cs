@@ -88,6 +88,12 @@ public class TutorialManager : MonoBehaviour
         tutorials[index].SetActive(false);
         Time.timeScale = 1;
         index++;
+        if (index == tutorials.Length)
+        {
+            Debug.Log("Show Ready");
+            timer.ShowButton();
+        }
+
     }
 
     private void PreparationTime()
