@@ -56,12 +56,17 @@ public class ManageableBuilding : MonoBehaviour {
     public virtual void DestroyBuilding() {
         int sell_price =  buildingPrice;
         int one_level_price = 5;
+        float healthRatio = 1f;
+        var bbase = this.gameObject.GetComponent<Building_Base>();
+        if (bbase != null) {
+            healthRatio = bbase.healthRatio;
+        }
         for (int i = 1; i < m_level; i++)
         {
             sell_price += one_level_price;
             one_level_price += 5;
         }
-        GameController.instance.resources += (int)Mathf.Ceil(sell_price / 2f);
+        GameController.instance.resources += Mathf.RoundToInt(sell_price * healthRatio / 2f);
         Destroy(gameObject);
     }
 

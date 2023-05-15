@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -34,10 +35,61 @@ public class GameController : MonoBehaviour
     [SerializeField] private GridManager gridManager;
     [SerializeField] private GameObject wall;
     [SerializeField] public GameObject vfx;
+    [SerializeField] private TextMeshProUGUI bonusText;
+    private int resourceBonusFlat = 0;
+    private int m_currResourceGain = 0;
+
+    public int currResourceGain {
+        get {
+            return m_currResourceGain;
+        }
+    }
 
     private void Awake()
     {
         instance = this;
+    }
+
+    public void AddBonusToGameData() {
+        if (instance == this) {
+            float randomFloat = UnityEngine.Random.Range(0f, 1f);
+            GameBonus bonus = null;
+            if (randomFloat > 0.5f) {
+                int val = UnityEngine.Random.Range(1, 6);
+                float value = (float)val / 100f;
+                bonus = new GameBonus(BonusType.BaseToughness, value);
+                gameData.bonuses.Add(bonus);   
+                Building_Base[] buildings = UnityEngine.Object.FindObjectsOfType<Building_Base>();
+                foreach (var building in buildings) {
+                    building.SetArmorMultiplier();
+                }
+            } else {
+                float value = (float)UnityEngine.Random.Range(1, 4);
+                bonus = new GameBonus(BonusType.ResourceGainFlat, value);
+                gameData.bonuses.Add(bonus);  
+                SetResourceBonus();
+            }
+            StartCoroutine(ShowBonusInfo(bonus));
+        }
+    }
+
+    IEnumerator ShowBonusInfo(GameBonus bonus) {
+        bonusText.gameObject.SetActive(true);
+        bonusText.text = GameTexts.NewBonus(bonus.Type, bonus.Value);
+        yield return new WaitForSeconds(3f);
+        bonusText.gameObject.SetActive(false);
+    }
+
+    public List<float> GetBonusValues(BonusType bonusType) {
+        List<float> vals = new List<float>();
+        if (this == instance) {
+            foreach (var bonus in gameData.bonuses) {
+                if (bonus.Type == bonusType) {
+                    vals.Add(bonus.Value);
+                }
+            }
+        }
+        return vals;
     }
 
     public void AddTrash(TrashObject trash)
@@ -60,7 +112,7 @@ public class GameController : MonoBehaviour
     {
         if (name == "trash")
         {
-            resources += trashGainSpawned;
+            resources += m_currResourceGain;
         }
         else if (name == "enemyTrash")
         {
@@ -77,6 +129,8 @@ public class GameController : MonoBehaviour
         LoadGame();
         aiAPI.GetData();
         vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
+        SetResourceBonus();
+        bonusText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -173,5 +227,17 @@ public class GameController : MonoBehaviour
             startWall.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().placed = true;
         }
 
+    }
+
+    private void SetResourceBonus() {
+        if (instance == this) {
+            resourceBonusFlat = 0;
+            foreach (var bonus in gameData.bonuses) {
+                if (bonus.Type == BonusType.ResourceGainFlat) {
+                    resourceBonusFlat += (int)bonus.Value;
+                }
+            }
+            m_currResourceGain = trashGainSpawned + resourceBonusFlat;
+        }
     }
 }

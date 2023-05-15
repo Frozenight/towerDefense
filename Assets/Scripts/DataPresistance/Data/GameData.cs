@@ -10,6 +10,7 @@ public class GameData
     public int towerDamage1;
     public int wallHealth;
     public float workerSpeed;
+    public List<GameBonus> bonuses;
 
     public GameData()
     {
@@ -18,5 +19,6 @@ public class GameData
         this.wallHealth = 200;
         this.towerDamage1 = 5;
         this.workerSpeed = 10f;
+        bonuses = new List<GameBonus>();
     }
 }
