@@ -38,6 +38,7 @@ public class BossManager : MonoBehaviour
 
     [SerializeField] private LayerMask layerMask;
     private float searchDistance = 4f;
+    private bool m_bonusGiven = false;
 
     private void Start()
     {
@@ -211,7 +212,10 @@ public class BossManager : MonoBehaviour
     IEnumerator die()
     {
         yield return new WaitForSeconds(4);
-        GameController.instance.AddBonusToGameData();
+        if (!m_bonusGiven) {
+            GameController.instance.AddBonusToGameData();
+            m_bonusGiven = true;
+        }
         Destroy(gameObject);
     }
 

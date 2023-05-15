@@ -67,6 +67,7 @@ public class Building_Base : ManageableBuilding, IGameController
         foreach(var value in values) {
             reverseArmorMult += value;
         }
+        Debug.Log("Reverse armor mult: " + reverseArmorMult);
     }
 
     private void OnEnable()

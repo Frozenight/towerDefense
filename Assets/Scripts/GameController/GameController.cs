@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour
     IEnumerator ShowBonusInfo(GameBonus bonus) {
         bonusText.gameObject.SetActive(true);
         bonusText.text = GameTexts.NewBonus(bonus.Type, bonus.Value);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(7f);
         bonusText.gameObject.SetActive(false);
     }
 
