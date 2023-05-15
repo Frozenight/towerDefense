@@ -59,7 +59,6 @@ public class Turret : ManageableBuilding
             return;
         
         
-        range += INCREASE_RANGE;
         fireRate *= INCREASE_FIRERATE_MULT;
         damage += INCREASE_DAMAGE;
         GameController.instance.resources -= m_upgrade_price;
@@ -161,9 +160,9 @@ public class Turret : ManageableBuilding
 
     public override void DestroyBuilding()
     {
-        int sell_price = 0;
+        int sell_price = buildingPrice;
         int one_level_price = 5;
-        for (int i = 0; i < m_level; i++)
+        for (int i = 1; i < m_level; i++)
         {
             sell_price += one_level_price;
             one_level_price += 5;

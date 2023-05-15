@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Building_Base : ManageableBuilding, IGameController
 {
@@ -9,6 +10,7 @@ public class Building_Base : ManageableBuilding, IGameController
     public GameObject tile;
 
     private const int HEALTH_INCREASE = 50;
+    private float reverseArmorMult = 0f;
 
     public override string buildingName { 
         get { return NAME_BASE; }
@@ -25,7 +27,15 @@ public class Building_Base : ManageableBuilding, IGameController
     private void Start()
     {
         gameController = GameController.instance;
+        SetArmorMultiplier();
     }
+
+    public float healthRatio {
+        get {
+            return (float) _currentHealth / maxHealth;
+        }
+    }
+
 
     public override void UpgradeBuilding()
     {
@@ -49,6 +59,16 @@ public class Building_Base : ManageableBuilding, IGameController
             w.GetComponent<MovementAnimated>().Upgrade();
     }
 
+    public void SetArmorMultiplier() {
+        if (gameObject.tag != "Base") 
+            return;
+        List<float> values = GameController.instance.GetBonusValues(BonusType.BaseToughness);
+        reverseArmorMult = 0f;
+        foreach(var value in values) {
+            reverseArmorMult += value;
+        }
+    }
+
     private void OnEnable()
     {
         _currentHealth = maxHealth;
@@ -56,6 +76,9 @@ public class Building_Base : ManageableBuilding, IGameController
 
     public void ModifyHealth(int amount)
     {
+        if (amount < 0 && gameObject.tag == "Base") {
+            amount = (int)(amount * (1f - reverseArmorMult));
+        }
         _currentHealth += amount;
 
         float currentHealthPct = (float)_currentHealth / (float)maxHealth;

@@ -55,7 +55,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
                         GameController.instance.AddCountResource("trash");
                         if (FloatingTextPrefab)
                         {
-                            ShowFloatingText("+5");
+                            ShowFloatingText("+" + GameController.instance.currResourceGain);
                         }
                     }
                     goingBackward = false;                    

@@ -185,6 +185,7 @@ public class BossManager : MonoBehaviour
     IEnumerator die()
     {
         yield return new WaitForSeconds(4);
+        GameController.instance.AddBonusToGameData();
         Destroy(gameObject);
     }
 
