@@ -5,9 +5,17 @@ using System.Linq;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using System.Threading.Tasks;
 
 public class GameController : MonoBehaviour
 {
+    [Header("Building Prefabs")]
+    [SerializeField] private GameObject wall;
+    [SerializeField] private GameObject turret_normal;
+    [SerializeField] private GameObject turret_frost;
+    [SerializeField] private GameObject turret_fire;
+    [SerializeField] private GameObject turret_earth;
+
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
     public static GameController instance { get; private set; }
@@ -33,11 +41,39 @@ public class GameController : MonoBehaviour
     private FileDataHandler dataHandler;
 
     [SerializeField] private GridManager gridManager;
-    [SerializeField] private GameObject wall;
     [SerializeField] public GameObject vfx;
     [SerializeField] private TextMeshProUGUI bonusText;
     private int resourceBonusFlat = 0;
     private int m_currResourceGain = 0;
+
+    void LoadSessionData() {
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        SessionData session = dataHandler.LoadSessionData();
+        bool newSession = session == null;
+        if (newSession) {
+            SpawnWalls();
+        } else {
+            Quaternion quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, 90, gridManager.tiles[1].gameObject.transform.rotation.z);
+            foreach (var b in session.buildings) {
+                switch(b.BuildingType) {
+                    case Normal_Turret.m_typeIndex:
+                        GameObject obj = PlaceBuilding(b.TileIndex, turret_normal, quaternion);
+                        foreach (var t in obj.GetComponents<ManageableBuilding>())
+                            if (t.GetType() != typeof(Building_Base))
+                                t.ImportSessionData(b);
+                        break;
+                }
+            }
+            return;
+        }
+    }
+
+    private GameObject PlaceBuilding(int i, GameObject prefab, Quaternion quaternion) {
+        GameObject building = Instantiate(prefab, gridManager.tiles[i].gameObject.transform.position, quaternion);
+        building.GetComponent<Building_Base>().tile = gridManager.tiles[i];
+        gridManager.tiles[i].GetComponent<TileOnWhichToPlace>().placed = true;
+        return building;
+    }
 
     public int currResourceGain {
         get {
@@ -48,6 +84,8 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        gridManager.GenerateGrid();
+        LoadSessionData();
     }
 
     public void AddBonusToGameData() {
@@ -123,9 +161,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         BuildingSelectUI.SetActive(false);
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.gameControllerObjects = FindAllGameControllerObjects();
-        Debug.Log("Load");
         LoadGame();
         aiAPI.GetData();
         vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
@@ -179,7 +215,7 @@ public class GameController : MonoBehaviour
     public void LoadGame()
     {
         
-        this.gameData = dataHandler.Load();
+        this.gameData = dataHandler.LoadGameData();
 
         if (this.gameData == null)
         {
@@ -201,13 +237,17 @@ public class GameController : MonoBehaviour
             gameControllerObj.SaveData(ref gameData);
         }
 
-        dataHandler.Save(gameData);
+        dataHandler.SaveGameData(gameData);
     }
 
     //Saves game when you close it
     public void OnApplicationQuit()
     {
         SaveGame();
+    }
+
+    public int GetTileIndex(GameObject tile) {
+        return gridManager.tiles.IndexOf(tile);
     }
 
     public void SpawnWalls()
@@ -219,7 +259,6 @@ public class GameController : MonoBehaviour
             startWall.GetComponent<Building_Base>().tile = gridManager.tiles[i];
             startWall.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().placed = true;
         }
-        quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, 90, gridManager.tiles[1].gameObject.transform.rotation.z);
         for (int i = 100; i < 104; i++)
         {
             GameObject startWall = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
@@ -227,6 +266,22 @@ public class GameController : MonoBehaviour
             startWall.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().placed = true;
         }
 
+    }
+
+    public void SaveSession() {
+        SessionData session = new SessionData();
+        ManageableBuilding[] buildings = UnityEngine.Object.FindObjectsOfType<ManageableBuilding>();
+        foreach(var b in buildings) {
+            if (b.GetType() == typeof(Building_Base) && b.gameObject.tag != "Base")
+                continue;
+            session.buildings.Add(b.GetExportedData());
+        }
+        dataHandler.SaveSessionData(session);
+    }
+
+    public void NullifySessionData() {
+        dataHandler.SaveSessionData(default(SessionData));
+        return;
     }
 
     private void SetResourceBonus() {

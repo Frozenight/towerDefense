@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class Building_Base : ManageableBuilding, IGameController
 {
+    public new const int m_typeIndex =0;
+    
     public int maxHealth { get; set; }
     public GameOverScreen gameOverScreen;
     public GameObject tile;
@@ -24,6 +26,8 @@ public class Building_Base : ManageableBuilding, IGameController
 
     public event Action<float> OnHealthChanged = delegate { };
 
+    private int m_workerLevel = 1;
+
     private void Start()
     {
         gameController = GameController.instance;
@@ -36,6 +40,19 @@ public class Building_Base : ManageableBuilding, IGameController
         }
     }
 
+    /// <summary>
+    /// GetExportedData method override. Call this method only from the main base object.
+    /// </summary>
+    /// <returns>Exported tower data.</returns>
+    public override BuildingData GetExportedData() {
+        return new BuildingMainBaseData(
+            -1,
+            m_level,
+            buildingPrice,
+            m_workerLevel,
+            m_typeIndex
+        );
+    }
 
     public override void UpgradeBuilding()
     {
@@ -50,10 +67,17 @@ public class Building_Base : ManageableBuilding, IGameController
         ModifyHealth(maxHealth - _currentHealth);
     }
 
-    public void UpgradeWorkers() {
+    public void UpgradeWorkers()
+    {
         if (gameController.resources < worker_upgrade_price)
             return;
         gameController.resources -= worker_upgrade_price;
+        UpgradeEachWorker();
+        m_workerLevel++;
+    }
+
+    private static void UpgradeEachWorker()
+    {
         var workers = GameObject.FindGameObjectsWithTag("Worker");
         foreach (var w in workers)
             w.GetComponent<MovementAnimated>().Upgrade();

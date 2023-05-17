@@ -2,9 +2,21 @@ using UnityEngine;
 
 public class Wall : ManageableBuilding
 {
+    public new const int m_typeIndex =1;
+
     private enemySpawner enemyController;
     public int price;
     
+    public override BuildingData GetExportedData() {
+        return new BuildingData(
+            GameController.instance.GetTileIndex(
+                gameObject.GetComponent<Building_Base>().tile),
+            m_level,
+            buildingPrice,
+            m_typeIndex
+        );
+    }
+
     private void Start()
     {
         Debug.Log(GameController.instance.GetWallHealth());

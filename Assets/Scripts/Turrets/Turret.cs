@@ -5,9 +5,20 @@ using UnityEngine;
 
 public class Turret : ManageableBuilding
 {
+    public new const int m_typeIndex =2;
+    
     [SerializeField] GameObject rangeIndicator;
     [SerializeField] float offsetRangeHeight;
 
+    public override BuildingData GetExportedData() {
+        return new BuildingData(
+            GameController.instance.GetTileIndex(
+                gameObject.GetComponent<Building_Base>().tile),
+            m_level,
+            buildingPrice,
+            m_typeIndex
+        );
+    }
 
     private enemySpawner enemyController;
     protected Animator animator;
@@ -44,7 +55,6 @@ public class Turret : ManageableBuilding
     public float rotateX;
     public int price;
 
-    
 
     public override string buildingName { 
         get { return NAME_TURRET; } 
@@ -56,25 +66,28 @@ public class Turret : ManageableBuilding
     }
 
 
-    public override void UpgradeBuilding() {
-              
+    public override void UpgradeBuilding()
+    {
+
         // Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
         if (GameController.instance.resources < m_upgrade_price)
             return;
-        
-        
-        fireRate *= INCREASE_FIRERATE_MULT;
-        damage += INCREASE_DAMAGE;
+
+
         GameController.instance.resources -= m_upgrade_price;
         m_level += 1;
-        price = m_upgrade_price;
-        m_upgrade_price = price + (m_level * 2);
+        Upgrade();
+    }
 
-        //if (m_level % 5 == 0 && UpdateObjectModel(out GameObject newModel)) {
-        //    partToRotate = transform.Find(currModelName + "/Armature/main");
-        //    // Debug.Log(currModelName + "/Armature/main");
-        //    // Debug.Log(partToRotate.GetHashCode());
-        //}
+    protected override void Upgrade()
+    {
+        price += m_upgrade_price;        
+        m_upgrade_price = 5 + (1 * 2);
+        for (int i = 2; i <= m_level; i++) {
+            m_upgrade_price += (m_level * 2);
+        }
+        fireRate *= INCREASE_FIRERATE_MULT;
+        damage += INCREASE_DAMAGE;
     }
 
     // Start is called before the first frame update
@@ -86,7 +99,6 @@ public class Turret : ManageableBuilding
         GetComponent<Building_Base>().maxHealth = GameController.instance.GetTurretHealth();
         GetComponent<Building_Base>()._currentHealth = GameController.instance.GetTurretHealth();
         animator = GetComponent<Animator>();
-        m_upgrade_price = 5 + (m_level * 2);
     }
 
     protected virtual void UpdateTarget()
@@ -111,33 +123,6 @@ public class Turret : ManageableBuilding
             target=null;
         }
     }
-
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        if (target == null)
-        {
-            IsShooting = false;
-            return;
-        }
-            IsShooting = true;
-        Vector3 dir = target.position - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 rotation = lookRotation.eulerAngles;
-        partToRotate.rotation = Quaternion.Euler(rotateX, rotation.y, rotation.z);
-
-        if (fireCountdown <= 0f)
-            {
-
-                Fire();
-                fireCountdown = 1f / fireRate;
-            }
-            fireCountdown -= Time.deltaTime;
-
-        
-    }
-
-
 
     protected virtual void Fire(){
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -219,5 +204,28 @@ public class Turret : ManageableBuilding
     public float GetUpgradeRange()
     {
         return INCREASE_RANGE;
+    }
+
+    // Update is called once per frame
+    protected virtual void Update()
+    {
+        if (target == null)
+        {
+            IsShooting = false;
+            return;
+        }
+            IsShooting = true;
+        Vector3 dir = target.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        Vector3 rotation = lookRotation.eulerAngles;
+        partToRotate.rotation = Quaternion.Euler(rotateX, rotation.y, rotation.z);
+
+        if (fireCountdown <= 0f)
+            {
+
+                Fire();
+                fireCountdown = 1f / fireRate;
+            }
+            fireCountdown -= Time.deltaTime;        
     }
 }

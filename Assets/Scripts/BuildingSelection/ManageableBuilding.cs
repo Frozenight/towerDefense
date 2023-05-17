@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ManageableBuilding : MonoBehaviour {
+    public const int m_typeIndex = -1;
+
     public static string NAME_UNCATEGORISED = "Uncategorised building";
     public static string NAME_TURRET = "Turret";
     public static string NAME_BASE = "Recycling Centre";
@@ -34,9 +36,9 @@ public class ManageableBuilding : MonoBehaviour {
     public int upgrade_Price {
         get { return m_upgrade_price; }
     }
-
+    
     protected int m_level = 1;
-    protected int m_upgrade_price = 5;
+    [SerializeField] protected int m_upgrade_price = 5;
     protected int worker_upgrade_price = 25;
 
     [SerializeField] private GameObject[] UpgradeModels = new GameObject[] {};  
@@ -51,6 +53,23 @@ public class ManageableBuilding : MonoBehaviour {
 
     private void Start() {
       
+    }
+
+    public virtual BuildingData GetExportedData() {
+        return new BuildingData(
+            GameController.instance.GetTileIndex(
+                gameObject.GetComponent<Building_Base>().tile),
+            m_level,
+            buildingPrice,
+            m_typeIndex
+        );
+    }
+
+    public virtual void ImportSessionData(BuildingData data) {
+        m_level = data.Level;
+        for (int i = 2; i <= m_level; i++) {
+            Upgrade();
+        }
     }
 
     public virtual void DestroyBuilding() {
@@ -87,11 +106,17 @@ public class ManageableBuilding : MonoBehaviour {
             return;
         GameController.instance.resources -= m_upgrade_price;
         m_level += 1;
-        m_upgrade_price += 5;
+        
         if (m_level % 5 == 0)
             UpdateObjectModel(out GameObject newModel); 
         Debug.LogWarning("UpgradeBuilding() Base class method invoked. ");
     }
+
+    protected virtual void Upgrade() {
+        m_upgrade_price = 5 * m_level;
+    }
+
+
 
     //Methods for changing turret types
     public virtual void ChangeTypeFire()

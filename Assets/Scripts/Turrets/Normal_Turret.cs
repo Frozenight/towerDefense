@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class Normal_Turret : Turret
 {
+    public new const int m_typeIndex =3;
+    
     public GameObject Earth_Turret;
     public GameObject Fire_Turret;
     public GameObject Frost_Turret;
+
+    public override BuildingData GetExportedData() {
+        return new BuildingData(
+            GameController.instance.GetTileIndex(
+                gameObject.GetComponent<Building_Base>().tile),
+            m_level,
+            buildingPrice,
+            m_typeIndex
+        );
+    }
 
     public override void ChangeTypeFire()
     {
