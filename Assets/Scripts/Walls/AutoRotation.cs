@@ -11,19 +11,6 @@ public class AutoRotation : MonoBehaviour
     private float raycastDiagnolDistance = 6f;
     private float raycastHeightOffset = 1.5f;
 
-    void Update()
-    {
-        Vector3 center = transform.position + new Vector3(0, raycastHeightOffset, 0);
-        Vector3 North = transform.TransformDirection(Vector3.forward);
-        Vector3 South = transform.TransformDirection(Vector3.back);
-        Vector3 West = transform.TransformDirection(Vector3.left);
-        Vector3 East = transform.TransformDirection(Vector3.right);
-        Vector3 NorthEast = transform.TransformDirection(Quaternion.Euler(0, 45, 0) * Vector3.forward);
-        Vector3 NorthWest = transform.TransformDirection(Quaternion.Euler(0, -45, 0) * Vector3.forward);
-        Vector3 SouthEast = transform.TransformDirection(Quaternion.Euler(0, 45, 0) * Vector3.back);
-        Vector3 SouthWest = transform.TransformDirection(Quaternion.Euler(0, -45, 0) * Vector3.back);
-    }
-
     private void Start()
     {
         Recalculate(false);
@@ -107,6 +94,8 @@ public class AutoRotation : MonoBehaviour
         {
             sideWall.gameObject.SetActive(false);
             cornerWall.gameObject.SetActive(true);
+            transform.eulerAngles = Vector3.zero;
+            WallBuilder._instance.ShowWallSelection(this.gameObject);
             return;
         }
         if (hitCounter == 3)
@@ -125,6 +114,8 @@ public class AutoRotation : MonoBehaviour
                 }
                 sideWall.gameObject.SetActive(false);
                 cornerWall.gameObject.SetActive(true);
+                transform.eulerAngles = Vector3.zero;
+                WallBuilder._instance.ShowWallSelection(this.gameObject);
                 return;
             }
             if ((SouthHit) && (WestHit))
@@ -136,6 +127,8 @@ public class AutoRotation : MonoBehaviour
                 }
                 sideWall.gameObject.SetActive(false);
                 cornerWall.gameObject.SetActive(true);
+                transform.eulerAngles = Vector3.zero;
+                WallBuilder._instance.ShowWallSelection(this.gameObject);
                 return;
             }
             if ((NorthHit) && (WestHit))
@@ -147,6 +140,8 @@ public class AutoRotation : MonoBehaviour
                 }
                 sideWall.gameObject.SetActive(false);
                 cornerWall.gameObject.SetActive(true);
+                transform.eulerAngles = Vector3.zero;
+                WallBuilder._instance.ShowWallSelection(this.gameObject);
                 return;
             }
             if ((NorthHit) && (EastHit))
@@ -158,6 +153,8 @@ public class AutoRotation : MonoBehaviour
                 }
                 sideWall.gameObject.SetActive(false);
                 cornerWall.gameObject.SetActive(true);
+                transform.eulerAngles = Vector3.zero;
+                WallBuilder._instance.ShowWallSelection(this.gameObject);
                 return;
             }
             if ((NorthHit)&&(SouthHit))
@@ -169,10 +166,10 @@ public class AutoRotation : MonoBehaviour
         }
         else
         {
-
             if ((NorthHit) || (SouthHit))
             {
                 transform.Rotate(new Vector3(0, 90, 0));
+                WallBuilder._instance.ShowWallSelection(this.gameObject);
             }
             if (hitCounter == 1)
             {
@@ -244,6 +241,8 @@ public class AutoRotation : MonoBehaviour
                 myWall.GetComponent<AutoRotation>().ForceSwitch();
             }
         }
+
+        WallBuilder._instance.ShowWallSelection(this.gameObject);
     }
 
     void ForceSwitch()
@@ -289,6 +288,7 @@ public class AutoRotation : MonoBehaviour
         {
             sideWall.gameObject.SetActive(false);
             cornerWall.gameObject.SetActive(true);
+            transform.eulerAngles = Vector3.zero;
         }
 
     }
