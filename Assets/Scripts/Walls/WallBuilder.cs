@@ -7,6 +7,7 @@ public class WallBuilder : MonoBehaviour
     public static WallBuilder _instance;
     [SerializeField] GameObject selectableWall;
     [SerializeField] BuildingManager buildingManager;
+    [SerializeField] EventManager eventManager;
 
     float raycastHeightOffset = 1f;
     float distance = 4.0f;
@@ -32,6 +33,8 @@ public class WallBuilder : MonoBehaviour
     {
         if (_showing)
             HideWallSelection();
+        if (eventManager.currentState == EventManager.Event.defending)
+            return;
         _showing = true;
         selectedMainWall = mainWall;
         StartCoroutine(InstantiateSelectableWalls());

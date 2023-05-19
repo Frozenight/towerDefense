@@ -155,7 +155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8866188744923808478}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 17}
+  m_LocalPosition: {x: 0, y: 0.2, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -187,7 +187,7 @@ MonoBehaviour:
   fireCountdown: 0
   damage: 13
   partToRotate: {fileID: 775520742786848308}
-  bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
+  bulletPrefab: {fileID: 4994185992374360394, guid: 6b251bdae9ec93f4e99105edc46c68f0, type: 3}
   explosionPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
   firePoint: {fileID: 8698894323242274511}
   rotateX: -90
