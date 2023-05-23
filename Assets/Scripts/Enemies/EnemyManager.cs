@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.AI;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -257,6 +258,7 @@ public class EnemyManager : MonoBehaviour
     private void _Die()
     {
         GetComponent<EnemyNavmesh>().Stop();
+        GetComponent<NavMeshAgent>().radius = 0;
         transform.gameObject.tag = "Untagged";
         _currentState = State.Die;
         _animator.Play("death");
@@ -267,7 +269,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (!resourceBonusGiven) {
             GameController.instance.AddCountResource("enemyTrash");
-            ShowFloatingText("+6");
+            ShowFloatingText("+3");
             resourceBonusGiven = true;
         }
         yield return new WaitForSeconds(4);
@@ -308,6 +310,8 @@ public class EnemyManager : MonoBehaviour
     {
         Vector3 position = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z) ;
         var textObject = Instantiate(FloatingTextPrefab, position, Quaternion.identity, transform);
+        var diffVector = new Vector3(1 / transform.localScale.x, 1 / transform.localScale.y, 1 / transform.localScale.z);
+        textObject.transform.localScale =diffVector;
         textObject.transform.LookAt(Camera.main.transform);
         textObject.transform.Rotate(0, 180, 0);
         textObject.GetComponent<TextMeshPro>().text = text;

@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6016936162135373229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 17}
+  m_LocalPosition: {x: -8, y: 0.2, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc76e07f68d3094e94fd72010f1d3f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_level: 1
-  m_upgrade_price: 5
+  m_level: 5
+  m_upgrade_price: 47
   UpgradeModels: []
   rangeIndicator: {fileID: 8265563585242545394}
   offsetRangeHeight: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
   firePoint: {fileID: 3368253037552735868}
   rotateX: -90
-  price: 110
+  price: 47
   fire_damage: 0.1
   burn_time: 5
 --- !u!114 &3065367882657682378

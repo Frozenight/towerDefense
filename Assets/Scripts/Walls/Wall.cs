@@ -55,6 +55,6 @@ public class Wall : ManageableBuilding
     }
     private void OnDestroy()
     {
-        enemyController.OnBuildingDestroyed();
+        enemyController?.OnBuildingDestroyed();
     }
 }

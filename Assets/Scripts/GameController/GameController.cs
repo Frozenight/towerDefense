@@ -313,8 +313,8 @@ public class GameController : MonoBehaviour
 
     }
 
-    public void SaveSession(bool emptySession = false, bool sessionIsOver = false) {
-        if (!sessionIsOver)
+    public void SaveSession(bool emptySession = false, bool sessionIsOver = false, bool endWave =false) {
+        if (!sessionIsOver && !endWave)
             if (UnityEngine.Object.FindObjectOfType<EventManager>()
                 .currentState == EventManager.Event.defending)
                     return;

@@ -46,6 +46,9 @@ public class enemySpawner : MonoBehaviour
     {
         startSpawn = false;
         isInPlayMode = true;
+        enemies[0] = waveComponents.enemyPrefab1;
+        enemies[1] = waveComponents.enemyPrefab2;
+        enemies[2] = waveComponents.enemyPrefab3;
     }
 
     public void ImportSessionData(int waveCount) {
@@ -70,29 +73,18 @@ public class enemySpawner : MonoBehaviour
         { 
             var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
             Instantiate(waveComponents.BossPrefab, transform.position + offset, Quaternion.Euler(0, 180, 0)).transform.parent = this.transform;
+            waveComponents.BossPrefab.GetComponent<EnemyHealth>().health += waveComponents.BossPrefab.GetComponent<EnemyHealth>().health;
         }
         else
             for (int i = 0; i < waveComponents.enemyAmount; i++)
             {
                 var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
-                if (i % 3 == 0)
-                {
-                    var enemy = Instantiate(waveComponents.enemyPrefab2, transform.position + offset, Quaternion.Euler(0, 180, 0));
-                    enemy.GetComponent<EnemyHealth>().health = scalingHealth;
-                }
-                else if (i % 5 == 0)
-                {
-                    var enemy = Instantiate(waveComponents.enemyPrefab3, transform.position + offset, Quaternion.Euler(0, 180, 0));
-                    enemy.GetComponent<EnemyHealth>().health = scalingHealth;
-                }
-                else
-                {
-                    var enemy = Instantiate(waveComponents.enemyPrefab1, transform.position + offset, Quaternion.Euler(0, 180, 0));
-                    enemy.GetComponent<EnemyHealth>().health = scalingHealth;
-                }
+                var enemy = Instantiate(enemies[Random.Range(0, 3)], transform.position + offset, Quaternion.Euler(0, 180, 0));
+                enemy.GetComponent<EnemyHealth>().health = scalingHealth;
             }
         scalingHealth = scalingHealth+(waveComponents.enemyAmount-1)*6;
-        waveComponents.enemyAmount++;
+        if(waveComponents.enemyAmount < 20)
+            waveComponents.enemyAmount++;
     }
 
     public void OnBuildingDestroyed()

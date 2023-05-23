@@ -91,7 +91,13 @@ public class ManageableBuildingTab : MonoBehaviour
         PriceText.gameObject.SetActive(mBuilding.buildingName != ManageableBuilding.NAME_WALL);
         LevelText.gameObject.SetActive(mBuilding.buildingName != ManageableBuilding.NAME_WALL);
 
-        if (mBuilding.level == 5)
+        if (mBuilding.level == 5 && mBuilding.buildingName == ManageableBuilding.NAME_TURRET)
+        {
+            UpgradeB.gameObject.SetActive(false);
+            PriceText.gameObject.SetActive(false);
+            SetInteractiveType(true);
+        }
+        else if(mBuilding.level == 10)
         {
             UpgradeB.gameObject.SetActive(false);
             PriceText.gameObject.SetActive(false);
@@ -142,7 +148,7 @@ public class ManageableBuildingTab : MonoBehaviour
             UpdateStats(assignedBuilding?.GetComponent<Turret>());
             UpdateBuildingStats();
         }
-        else if(assignedBuilding?.level != 5 && assignedBuilding?.buildingName != ManageableBuilding.NAME_TURRET)
+        else if(assignedBuilding?.level != 10 && assignedBuilding?.buildingName != ManageableBuilding.NAME_TURRET)
         {
             assignedBuilding?.UpgradeBuilding();
             if (

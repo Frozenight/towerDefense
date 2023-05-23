@@ -977,7 +977,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5116344779794610806}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.558544, y: 3.918023, z: 0.8458441}
@@ -1081,8 +1081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db81617eb3cca845a00311445d9d212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyManager: {fileID: 5591048676677601071}
-  navmesh: {fileID: 1428024733287100316}
   destination: {fileID: 5497550256115851468}
   lastSpeed: {x: 0, y: 0, z: 0}
   enemyAim: {fileID: 5497550256115851468}

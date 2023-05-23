@@ -46,7 +46,7 @@ public class EventManager : MonoBehaviour
         } 
         if (currentState == Event.defending) {
             GameController.instance.SaveGame();
-            GameController.instance.SaveSession();
+            GameController.instance.SaveSession(endWave:true);
         }
         if (ChangingToOrFromDefending(newState)) {
             changeWorkerState?.Invoke();

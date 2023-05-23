@@ -191,8 +191,16 @@ public class AutoRotation : MonoBehaviour
         Vector3 SouthEast = transform.TransformDirection(Quaternion.Euler(0, 45, 0) * Vector3.back);
         Vector3 SouthWest = transform.TransformDirection(Quaternion.Euler(0, -45, 0) * Vector3.back);
 
-        if (!cornerWall.activeSelf)
-            CheckForHits(center, North, South, West, East, NorthEast, NorthWest, SouthEast, SouthWest, recalculate);
+        try
+        {
+            if (!cornerWall.activeSelf)
+                CheckForHits(center, North, South, West, East, NorthEast, NorthWest, SouthEast, SouthWest, recalculate);
+        }
+        catch
+        {
+
+        }
+        
     }
 
     void DoubleCheck()

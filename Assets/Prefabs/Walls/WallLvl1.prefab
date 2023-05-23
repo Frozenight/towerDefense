@@ -66,6 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1756f8872ef0383419a21fa40bc9898c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_level: 1
+  m_upgrade_price: 5
   UpgradeModels: []
   price: 3
 --- !u!114 &5547942735176041356
@@ -80,9 +82,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4afcd4b8c19bee4488e6bb45348a291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_level: 1
+  m_upgrade_price: 5
   UpgradeModels: []
+  maxHealth: 200
   gameOverScreen: {fileID: 0}
   tile: {fileID: 0}
+  currentHealth: 0
 --- !u!208 &2710281921159500779
 NavMeshObstacle:
   m_ObjectHideFlags: 0
