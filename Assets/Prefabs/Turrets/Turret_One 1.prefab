@@ -183,7 +183,7 @@ MonoBehaviour:
   - {fileID: 6139106547975946548, guid: 477b9989b749ce444b30ba7c3181dd4d, type: 3}
   rangeIndicator: {fileID: 1546720296803199531}
   offsetRangeHeight: 0.2
-  fireSound: {fileID: 8300000, guid: 3545ed7dc476c362893c3d92982e19a5, type: 3}
+  fireSound: {fileID: 8300000, guid: b338296468c65983a8a6b48d9cdcfadb, type: 3}
   IsShooting: 0
   range: 18
   fireRate: 1

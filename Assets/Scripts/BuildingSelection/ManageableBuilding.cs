@@ -7,6 +7,7 @@ public class ManageableBuilding : MonoBehaviour {
 
     public static string NAME_UNCATEGORISED = "Uncategorised building";
     public static string NAME_TURRET = "Turret";
+    public static string NAME_MORTAR = "Mortar";
     public static string NAME_BASE = "Recycling Centre";
     public static string NAME_WALL = "Wall";
     public static string NAME_FIRE_TURRET = "Fire Turret";
