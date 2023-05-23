@@ -46,6 +46,7 @@ public class BuildingManager : MonoBehaviour
     public void SelectTurret2()
     {
         selectedTurret = turret2;
+        BuildTower();
     }
 
     public void SelectWall()

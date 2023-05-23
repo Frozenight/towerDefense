@@ -9,11 +9,11 @@ public class Turret : ManageableBuilding
     [SerializeField] float offsetRangeHeight;
 
 
-    private enemySpawner enemyController;
+    protected enemySpawner enemyController;
     protected Animator animator;
 
     public AudioClip fireSound;
-    private AudioSource audioSource;
+    protected AudioSource audioSource;
 
     public bool IsShooting;
     private const float INCREASE_DAMAGE = 5f;
@@ -198,7 +198,7 @@ public class Turret : ManageableBuilding
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    public Transform GetTarget()
+    public virtual Transform GetTarget()
     {
         return target;
     }

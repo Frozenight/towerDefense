@@ -27,11 +27,13 @@ public class GameController : MonoBehaviour
 
     public Rounds rounds;
     public OpenAiAPI aiAPI;
+    public enemySpawner spawner;
 
     private GameData gameData;
     private List<IGameController> gameControllerObjects;
     private FileDataHandler dataHandler;
 
+    [SerializeField] private EventManager eventManager;
     [SerializeField] private GridManager gridManager;
     [SerializeField] private GameObject wall;
     [SerializeField] public GameObject vfx;
@@ -151,6 +153,18 @@ public class GameController : MonoBehaviour
         {
             Wall.sprite = WallColor;
         }
+        if (PlayerPrefs.HasKey("twr2Unlocked") && PlayerPrefs.GetString("twr2Unlocked") == "false")
+        {
+            if (rounds.current_round == spawner.bossWave && eventManager.currentState == EventManager.Event.building)
+            {
+                PlayerPrefs.SetString("twr2Unlocked", "true");
+            }
+        }
+        else if (PlayerPrefs.HasKey("twr2Unlocked") && PlayerPrefs.GetString("twr2Unlocked") == "true")
+        {
+            BuildingSelectUI.GetComponent<Show_BuildingSelection>().showTwr2();
+        }
+
     }
 
     public int GetTurretHealth()

@@ -1,3 +1,4 @@
+using DitzeGames.Effects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class BossManager : MonoBehaviour
     private AudioSource audioSource2;
     private static ILogger logger = Debug.unityLogger;
     private static string kTAG = "MyGameTag";
+    [SerializeField] private GameObject particles;
+    [SerializeField] private GameObject particlesLoc;
     private enum State
     {
         Idle,
@@ -48,7 +51,7 @@ public class BossManager : MonoBehaviour
         PlayThemeSound();
         Objective = GameObject.FindGameObjectWithTag("Base").GetComponent<Building_Base>();
         health = gameObject.GetComponent<EnemyHealth>();
-
+        waitTime = TimeBetweenAttacks;
         _roundController = Timer.instance;
     }
 
@@ -192,6 +195,8 @@ public class BossManager : MonoBehaviour
         waitTime -= Time.deltaTime;
         if (waitTime <= 0)
         {
+            Instantiate(particles, particlesLoc.transform.position, Quaternion.identity);
+            CameraEffects.ShakeOnce();
             if(Objective.tag == "Wall")
                 Objective.ModifyHealth(damage * 2);
             else

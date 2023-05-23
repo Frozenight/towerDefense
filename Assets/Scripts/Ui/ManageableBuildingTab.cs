@@ -91,15 +91,17 @@ public class ManageableBuildingTab : MonoBehaviour
         Stats.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET ||
                                    mBuilding.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
                                    mBuilding.buildingName == ManageableBuilding.NAME_FROST_TURRET ||
-                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET);
+                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_MORTAR);
         if(mBuilding.buildingName == ManageableBuilding.NAME_TURRET ||
                                    mBuilding.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
                                    mBuilding.buildingName == ManageableBuilding.NAME_FROST_TURRET ||
-                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET)
+                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_MORTAR)
         {
             UpdateStats(mBuilding.GetComponent<Turret>());
         }
-        
+
         assignedBuilding = mBuilding;
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;

@@ -30,6 +30,10 @@ public class TutorialManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("firstTime", 0);
         }
+        if (PlayerPrefs.HasKey("firstTime") && PlayerPrefs.GetInt("firstTime") < 1)
+        {
+            PlayerPrefs.SetString("twr2Unlocked", "false");
+        }
         if (PlayerPrefs.HasKey("firstTime") && PlayerPrefs.GetInt("firstTime") > 1)
             this.gameObject.SetActive(false);
         else if (PlayerPrefs.HasKey("firstTime") && PlayerPrefs.GetInt("firstTime") != 1)
@@ -41,6 +45,8 @@ public class TutorialManager : MonoBehaviour
             time = 0;
             NextTutorial();
         }
+        
+        
     }
 
     // Update is called once per frame
