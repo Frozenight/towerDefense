@@ -149,4 +149,9 @@ public class Building_Base : ManageableBuilding, IGameController
     {
         maxHealth += 100;
     }
+
+    public void IncreaseHp()
+    {
+        maxHealth += 10;
+    }
 }

@@ -86,7 +86,7 @@ public class Turret : ManageableBuilding
         GetComponent<Building_Base>().maxHealth = GameController.instance.GetTurretHealth();
         GetComponent<Building_Base>()._currentHealth = GameController.instance.GetTurretHealth();
         animator = GetComponent<Animator>();
-        m_upgrade_price = 5 + (m_level * 2);
+        setBeginingPrice();
     }
 
     protected virtual void UpdateTarget()
@@ -168,6 +168,10 @@ public class Turret : ManageableBuilding
         return;
     }
 
+    protected virtual void setBeginingPrice()
+    {
+        return;
+    }
     public override void DestroyBuilding()
     {
         int sell_price = buildingPrice;

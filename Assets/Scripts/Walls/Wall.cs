@@ -9,7 +9,7 @@ public class Wall : ManageableBuilding
     {
         Debug.Log(GameController.instance.GetWallHealth());
         enemyController = enemySpawner.instance;
-        GetComponent<Building_Base>().maxHealth = GameController.instance.GetWallHealth();
+        GetComponent<Building_Base>().maxHealth = GameController.instance.GetWallHealth() + GameController.instance.getWallHealthIncrese();
         GetComponent<Building_Base>()._currentHealth = GameController.instance.GetWallHealth();
         m_upgrade_price = price + (m_level * 5);
     }
@@ -29,6 +29,8 @@ public class Wall : ManageableBuilding
         m_upgrade_price = price + (m_level * 5);
         price = m_upgrade_price;
     }
+
+
 
     public override int buildingPrice
     {

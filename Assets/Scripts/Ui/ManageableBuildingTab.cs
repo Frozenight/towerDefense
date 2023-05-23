@@ -127,10 +127,11 @@ public class ManageableBuildingTab : MonoBehaviour
             UpdateStats(assignedBuilding?.GetComponent<Turret>());
             UpdateBuildingStats();
         }
-        else if(assignedBuilding?.buildingName != ManageableBuilding.NAME_TURRET)
+        else if (assignedBuilding?.buildingName != ManageableBuilding.NAME_TURRET)
         {
             assignedBuilding?.UpgradeBuilding();
-            if (assignedBuilding?.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
+            if (
+                assignedBuilding?.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
                 assignedBuilding?.buildingName == ManageableBuilding.NAME_FROST_TURRET ||
                 assignedBuilding?.buildingName == ManageableBuilding.NAME_EARTH_TURRET)
             {
