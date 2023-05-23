@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122529}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MushroomPelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122531}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MushroomRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122533}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122535}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122537}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122539}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122541}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122543}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122545}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122497}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122499}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122501}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122503}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122505}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122507}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122509}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122511}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122513}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122515}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +623,8 @@ GameObject:
   - component: {fileID: 2767825008586190478}
   - component: {fileID: 6542133434015607285}
   - component: {fileID: 3022394942151592869}
-  m_Layer: 0
+  - component: {fileID: 4844270806304363443}
+  m_Layer: 3
   m_Name: Mushroom_LP
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -771,6 +772,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireEffect: {fileID: 4711163510423729909}
   iceEffect: {fileID: 5431561185977786285}
+--- !u!114 &4844270806304363443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4034088204673293557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2db81617eb3cca845a00311445d9d212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 4034088204673122517}
+  lastSpeed: {x: 0, y: 0, z: 0}
+  enemyAim: {fileID: 4034088204673122517}
 --- !u!1 &4034088204673293559
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122519}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MushLeg01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +828,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122521}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MushLeg02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,7 +860,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122523}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MushLeg03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -876,7 +892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4034088204673122525}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MushLeg04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -909,7 +925,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4034088204673122527}
   - component: {fileID: 4034088204686954977}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mushroom_Monster_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,13 +1024,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1156233327231778783}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: fireEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1156233327231778783
 Transform:
   m_ObjectHideFlags: 0
@@ -1040,13 +1056,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7561259668534212634}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: iceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7561259668534212634
 Transform:
   m_ObjectHideFlags: 0
@@ -1072,7 +1088,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3114161969178663900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1149,6 +1165,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrostAura
       objectReference: {fileID: 0}
+    - target: {fileID: 914125107827245812, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604078239468159108, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1604078239468159353, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1197,6 +1221,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 4034088204686954977}
+    - target: {fileID: 2868033400730896540, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4592606997958513987, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1213,6 +1241,14 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 4034088204686954977}
+    - target: {fileID: 4592606997958513998, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522141919623643974, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6524403717266067889, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1379,9 +1415,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4477180008834291398, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367232991740041271, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838985731939672225, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
@@ -1400,6 +1452,10 @@ PrefabInstance:
     - target: {fileID: 1537971033341231097, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: m_Name
       value: Fire Lvl 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537971033341231097, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2169653294351557955, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: m_RootOrder
@@ -1457,6 +1513,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 4034088204686954977}
+    - target: {fileID: 6169070207029023339, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6169070207114124794, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1469,6 +1529,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 4034088204686954977}
+    - target: {fileID: 6169070207114124799, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6169070207203454592, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1481,6 +1545,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 4034088204686954977}
+    - target: {fileID: 6169070207203454597, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6169070208730306982, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1493,6 +1561,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 4034088204686954977}
+    - target: {fileID: 6169070208730307003, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
 --- !u!4 &8445315778853467949 stripped

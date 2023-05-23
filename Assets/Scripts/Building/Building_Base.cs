@@ -5,7 +5,9 @@ using System.Collections.Generic;
 
 public class Building_Base : ManageableBuilding, IGameController
 {
-    public int maxHealth { get; set; }
+    public new const int m_typeIndex =0;
+    
+    public int maxHealth;
     public GameOverScreen gameOverScreen;
     public GameObject tile;
 
@@ -20,22 +22,52 @@ public class Building_Base : ManageableBuilding, IGameController
         get { return false; }
     }
 
-    public int _currentHealth { get; set; }
+    public int currentHealth;
 
     public event Action<float> OnHealthChanged = delegate { };
 
+    private int m_workerLevel = 1;
+
     private void Start()
     {
+        if (currentHealth == 0) {
+            currentHealth = maxHealth;
+        }
         gameController = GameController.instance;
         SetArmorMultiplier();
     }
 
     public float healthRatio {
         get {
-            return (float) _currentHealth / maxHealth;
+            return (float) currentHealth / maxHealth;
         }
     }
 
+    /// <summary>
+    /// GetExportedData method override. Call this method only from the main base object.
+    /// </summary>
+    /// <returns>Exported tower data.</returns>
+    public override BuildingData GetExportedData() {
+        return new BuildingMainBaseData(
+            -1,
+            m_level,
+            buildingPrice,
+            m_workerLevel,
+            m_typeIndex,
+            currentHealth,
+            maxHealth
+        );
+    }
+
+    public virtual void ImportSessionData(BuildingData data, bool thisIsMainBase) {
+        currentHealth = data.HealthCurrent;
+        maxHealth = data.HealthMax;
+        ModifyHealth(0);
+        if (!thisIsMainBase)
+            return;
+        m_level = data.Level;
+        m_upgrade_price = 5 * m_level;
+    }
 
     public override void UpgradeBuilding()
     {
@@ -47,16 +79,36 @@ public class Building_Base : ManageableBuilding, IGameController
         m_upgrade_price += 5;
         maxHealth += HEALTH_INCREASE;
         // set health to new max value
-        ModifyHealth(maxHealth - _currentHealth);
+        ModifyHealth(maxHealth - currentHealth);
     }
 
-    public void UpgradeWorkers() {
+    public void UpgradeWorkers()
+    {
         if (gameController.resources < worker_upgrade_price)
             return;
         gameController.resources -= worker_upgrade_price;
+        UpgradeEachWorker();
+        m_workerLevel++;
+    }
+
+    private static void UpgradeEachWorker()
+    {
         var workers = GameObject.FindGameObjectsWithTag("Worker");
         foreach (var w in workers)
             w.GetComponent<MovementAnimated>().Upgrade();
+    }
+
+    public void UpdateWorkerSpeed(float speed) {
+        var workers = GameObject.FindGameObjectsWithTag("Worker");
+        foreach (var w in workers)
+            w.GetComponent<MovementAnimated>().SetSpeed(speed);
+    }
+
+    public float GetWorkerSpeed {
+        get {
+            return GameObject.FindGameObjectWithTag("Worker")
+                .GetComponent<MovementAnimated>().GetSavedSpeed;
+        }
     }
 
     public void SetArmorMultiplier() {
@@ -70,26 +122,21 @@ public class Building_Base : ManageableBuilding, IGameController
         Debug.Log("Reverse armor mult: " + reverseArmorMult);
     }
 
-    private void OnEnable()
-    {
-        _currentHealth = maxHealth;
-    }
-
     public void ModifyHealth(int amount)
     {
         if (amount < 0 && gameObject.tag == "Base") {
             amount = (int)(amount * (1f - reverseArmorMult));
         }
-        _currentHealth += amount;
+        currentHealth += amount;
 
-        float currentHealthPct = (float)_currentHealth / (float)maxHealth;
+        float currentHealthPct = (float)currentHealth / (float)maxHealth;
         OnHealthChanged(currentHealthPct);
         CheckForDeath();
     }
 
     public void CheckForDeath()
     {
-        if (_currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             if (GetComponent<Turret>() != null || GetComponent<Wall>() != null)
             {
@@ -110,29 +157,20 @@ public class Building_Base : ManageableBuilding, IGameController
 
     public void LoadData(GameData data)
     {
-        if(gameObject.tag == "Base")
+        if (gameObject.tag == "Base")
         {
-            this.maxHealth = data.maxBaseHealth;
-            _currentHealth = maxHealth;
+            maxHealth = data.maxBaseHealth;
+            currentHealth = maxHealth;
+            UpdateWorkerSpeed(data.workerSpeed);
         }
-        if(gameObject.tag == "Tower")
-        {
-            this.maxHealth = data.towerHealth;
-            _currentHealth = maxHealth;
-        }
-        if (gameObject.tag == "Wall")
-        {
-            this.maxHealth = data.wallHealth;
-            _currentHealth = maxHealth;
-        }
-
     }
 
     public void SaveData(ref GameData data)
     {
         if (gameObject.tag == "Base")
         {
-            data.maxBaseHealth = this.maxHealth;
+            data.maxBaseHealth = maxHealth;
+            data.workerSpeed = GetWorkerSpeed;
         }
         if (gameObject.tag == "Tower")
         {
@@ -148,5 +186,10 @@ public class Building_Base : ManageableBuilding, IGameController
     public void TestIncreaseHp()
     {
         maxHealth += 100;
+    }
+
+    public void IncreaseHp()
+    {
+        maxHealth += 10;
     }
 }

@@ -43,6 +43,10 @@ public class EventManager : MonoBehaviour
             Debug.Log("Calling Spawning");
             resourceSpawner.bagsPerRound = 0;
             resourceSpawner.StartNewSpawn();
+        } 
+        if (currentState == Event.defending) {
+            GameController.instance.SaveGame();
+            GameController.instance.SaveSession();
         }
         if (ChangingToOrFromDefending(newState)) {
             changeWorkerState?.Invoke();

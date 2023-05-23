@@ -56,7 +56,7 @@ public class ManageableBuildingTab : MonoBehaviour
 
     private void Update()
     {
-        if (RemoveB.gameObject.active)
+        if (RemoveB.gameObject.activeSelf)
         {
             if (eventController.currentState == EventManager.Event.defending)
             {
@@ -104,15 +104,17 @@ public class ManageableBuildingTab : MonoBehaviour
         Stats.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET ||
                                    mBuilding.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
                                    mBuilding.buildingName == ManageableBuilding.NAME_FROST_TURRET ||
-                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET);
+                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_MORTAR);
         if(mBuilding.buildingName == ManageableBuilding.NAME_TURRET ||
                                    mBuilding.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
                                    mBuilding.buildingName == ManageableBuilding.NAME_FROST_TURRET ||
-                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET)
+                                   mBuilding.buildingName == ManageableBuilding.NAME_EARTH_TURRET ||
+                                   mBuilding.buildingName == ManageableBuilding.NAME_MORTAR)
         {
             UpdateStats(mBuilding.GetComponent<Turret>());
         }
-        
+
         assignedBuilding = mBuilding;
         NameText.text = mBuilding.buildingName;
         LevelText.text = "Level: " + mBuilding.level;
@@ -143,7 +145,8 @@ public class ManageableBuildingTab : MonoBehaviour
         else if(assignedBuilding?.level != 5 && assignedBuilding?.buildingName != ManageableBuilding.NAME_TURRET)
         {
             assignedBuilding?.UpgradeBuilding();
-            if (assignedBuilding?.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
+            if (
+                assignedBuilding?.buildingName == ManageableBuilding.NAME_FIRE_TURRET ||
                 assignedBuilding?.buildingName == ManageableBuilding.NAME_FROST_TURRET ||
                 assignedBuilding?.buildingName == ManageableBuilding.NAME_EARTH_TURRET)
             {

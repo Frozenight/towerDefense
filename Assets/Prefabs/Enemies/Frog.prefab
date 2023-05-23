@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 682168969789003941}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: iceEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6306681198587722695}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigRLegPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4299147751579627641}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigHub001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,8 @@ GameObject:
   - component: {fileID: 5397520545178477130}
   - component: {fileID: 5640190923584859644}
   - component: {fileID: 8435588377669799475}
-  m_Layer: 0
+  - component: {fileID: -3242836004041162379}
+  m_Layer: 3
   m_Name: Frog
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -265,6 +266,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireEffect: {fileID: 4116666309373432392}
   iceEffect: {fileID: 36102566928786993}
+--- !u!114 &-3242836004041162379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903103808535759336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2db81617eb3cca845a00311445d9d212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 559476104912687954}
+  lastSpeed: {x: 0, y: 0, z: 0}
+  enemyAim: {fileID: 559476104912687954}
 --- !u!1 &1217898522498166756
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6067498621715391838}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBRLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1303403742683346820}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigRLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8405584406157394215}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBLLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8153124345947729144}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigSpine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8029532938646943297}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigHub002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6271901987540844847}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBLLegPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 210751860255967428}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigRLegAnkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152506896744402694}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigLLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3214988283681255338}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: fireEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +579,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1709733282310084397}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBRLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5674787720123750844}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigLLegAnkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6403974846570904803}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBLLegAnkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5388984066959691603}
   - component: {fileID: 3932218292784280096}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FROG_LOW_370Tris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -767,7 +783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8291610931559209076}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBRLegDigit12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -798,7 +814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5745047634032207980}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigRLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2527435923104396563}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBLLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5748893999364772674}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBLLegDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,7 +910,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7661752775946226174}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBRLegPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -925,7 +941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 16625589680653956}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBRLegDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -957,7 +973,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4150795402321342101}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigHub002Bone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -989,7 +1005,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6861813636388657727}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigLLegDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1020,7 +1036,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7882552281146313284}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigHub002Bone001Bone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1051,7 +1067,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8450766862498436970}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBLLegDigit12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1082,7 +1098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 454259707633474637}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Character001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3531731980268477034}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigRLegDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5377004059038705368}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigBRLegAnkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1176,7 +1192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7040562435593801605}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigLLegPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1207,7 +1223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 475707815996198587}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CATRigLLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1259,11 +1275,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 16604824404790265, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.005
+      value: 0.049
       objectReference: {fileID: 0}
     - target: {fileID: 16604824404790265, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.007
+      value: 0.033
       objectReference: {fileID: 0}
     - target: {fileID: 16604824404790265, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1297,6 +1313,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrostAura
       objectReference: {fileID: 0}
+    - target: {fileID: 914125107827245812, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604078239468159108, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1604078239468159353, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1345,6 +1369,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 3932218292784280096}
+    - target: {fileID: 2868033400730896540, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4592606997958513987, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1361,6 +1389,14 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 3932218292784280096}
+    - target: {fileID: 4592606997958513998, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522141919623643974, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6524403717266067889, guid: a2389a77b0bef6f4b88fb99d32b70274, type: 3}
       propertyPath: ShapeModule.type
       value: 0
@@ -1479,9 +1515,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4477180008834291398, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367232991740041271, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707680636388295258, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838985731939672225, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 754daca3328808a4fa1f28432d005aba, type: 3}
@@ -1500,6 +1552,10 @@ PrefabInstance:
     - target: {fileID: 1537971033341231097, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: m_Name
       value: Fire Lvl 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537971033341231097, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2169653294351557955, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: m_RootOrder
@@ -1557,6 +1613,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 3932218292784280096}
+    - target: {fileID: 6169070207029023339, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6169070207114124794, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1569,6 +1629,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 3932218292784280096}
+    - target: {fileID: 6169070207114124799, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6169070207203454592, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1581,6 +1645,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 3932218292784280096}
+    - target: {fileID: 6169070207203454597, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6169070208730306982, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
       propertyPath: ShapeModule.type
       value: 14
@@ -1593,6 +1661,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_SkinnedMeshRenderer
       value: 
       objectReference: {fileID: 3932218292784280096}
+    - target: {fileID: 6169070208730307003, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 762b005ed2b0413448c626693b15e6c0, type: 3}
 --- !u!4 &7238631390721619350 stripped

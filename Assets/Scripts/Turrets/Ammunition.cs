@@ -29,7 +29,8 @@ public class Ammunition : MonoBehaviour
         float distancePerFrame = speed*Time.deltaTime;
 
         if(dir.magnitude<=distancePerFrame){
-            HitTarget();
+            HitTarget(); 
+            Destroy(gameObject);
             return;
         }
 

@@ -177,12 +177,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623f3a0d2828c564aacd94605b7b9dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_upgrade_price: 7
   UpgradeModels:
   - {fileID: 134015296191264017, guid: 1bd8161c16563204088b4492bcd126a3, type: 3}
   - {fileID: 6139106547975946548, guid: 477b9989b749ce444b30ba7c3181dd4d, type: 3}
   rangeIndicator: {fileID: 1546720296803199531}
   offsetRangeHeight: 0.2
-  fireSound: {fileID: 8300000, guid: 3545ed7dc476c362893c3d92982e19a5, type: 3}
+  fireSound: {fileID: 8300000, guid: b338296468c65983a8a6b48d9cdcfadb, type: 3}
   IsShooting: 0
   range: 18
   fireRate: 1
@@ -209,9 +210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4afcd4b8c19bee4488e6bb45348a291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_upgrade_price: 5
   UpgradeModels: []
+  maxHealth: 200
   gameOverScreen: {fileID: 0}
   tile: {fileID: 0}
+  currentHealth: 200
 --- !u!95 &4613402665312923862
 Animator:
   serializedVersion: 4
