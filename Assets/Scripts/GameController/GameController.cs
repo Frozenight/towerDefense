@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour
     private GameData gameData;
     private List<IGameController> gameControllerObjects;
     private FileDataHandler dataHandler;
+    // private bool sessionIsOver = false;
 
     [SerializeField] private GridManager gridManager;
     [SerializeField] public GameObject vfx;
@@ -50,18 +51,51 @@ public class GameController : MonoBehaviour
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         SessionData session = dataHandler.LoadSessionData();
         bool newSession = session == null;
+        LoadGame(newSession);
         if (newSession) {
             SpawnWalls();
+            Building_Base mainbase = GameObject.FindGameObjectWithTag("Base")
+                        .GetComponent<Building_Base>();
+            mainbase.UpdateWorkerSpeed(0);
         } else {
+            if (enemySpawner.instance != null) {
+                enemySpawner.instance
+                    .ImportSessionData(session.completedWaves);
+            } else {
+                UnityEngine.Object.FindObjectOfType<enemySpawner>()
+                    .ImportSessionData(session.completedWaves);
+            }
+            resources = session.resources;
             Quaternion quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, 90, gridManager.tiles[1].gameObject.transform.rotation.z);
             foreach (var b in session.buildings) {
+                GameObject usedPrefab = wall;
                 switch(b.BuildingType) {
                     case Normal_Turret.m_typeIndex:
-                        GameObject obj = PlaceBuilding(b.TileIndex, turret_normal, quaternion);
+                        usedPrefab = turret_normal;
+                        break;
+                    case Fire_Turret.m_typeIndex:
+                        usedPrefab = turret_fire;                        
+                        break;
+                    case Frost_Turret.m_typeIndex:
+                        usedPrefab = turret_frost;                        
+                        break;
+                    case Earth_Turret.m_typeIndex:
+                        usedPrefab = turret_earth;                        
+                        break;
+                }                    
+                if (b.BuildingType > 0) { // not main base
+                    GameObject obj = PlaceBuilding(b.TileIndex, usedPrefab, quaternion);
+                    if (b.BuildingType > 1)
                         foreach (var t in obj.GetComponents<ManageableBuilding>())
                             if (t.GetType() != typeof(Building_Base))
                                 t.ImportSessionData(b);
-                        break;
+                            else 
+                                (t as Building_Base).ImportSessionData(b, false);
+                } else {
+                    Building_Base mainbase = GameObject.FindGameObjectWithTag("Base")
+                        .GetComponent<Building_Base>();
+                    mainbase.ImportSessionData(b, true);
+                    mainbase.UpdateWorkerSpeed(session.workerSpeed);
                 }
             }
             return;
@@ -83,9 +117,15 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
         gridManager.GenerateGrid();
+        instance = this;
+        this.gameControllerObjects = FindAllGameControllerObjects();
         LoadSessionData();
+        BuildingSelectUI.SetActive(false);
+        aiAPI.GetData();
+        vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
+        SetResourceBonus();
+        bonusText.gameObject.SetActive(false);  
     }
 
     public void AddBonusToGameData() {
@@ -137,6 +177,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        SaveSession(sessionIsOver: true);
         rounds.NewGame();
         gameOverScreen.Setup();
 
@@ -156,17 +197,6 @@ public class GameController : MonoBehaviour
         {
             resources += trashGainEnemyDroped;
         }
-    }
-
-    private void Start()
-    {
-        BuildingSelectUI.SetActive(false);
-        this.gameControllerObjects = FindAllGameControllerObjects();
-        LoadGame();
-        aiAPI.GetData();
-        vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
-        SetResourceBonus();
-        bonusText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -189,16 +219,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public int GetTurretHealth()
-    {
-        return gameData.towerHealth;
-    }
-
-    public int GetWallHealth()
-    {
-        return gameData.towerHealth;
-    }
-
     private List<IGameController> FindAllGameControllerObjects()
     {
         IEnumerable<IGameController> gameControllerObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameController>();
@@ -212,15 +232,23 @@ public class GameController : MonoBehaviour
     }
 
     //Loads game
-    public void LoadGame()
-    {
-        
+    public void LoadGame(bool newSession)
+    {        
         this.gameData = dataHandler.LoadGameData();
 
-        if (this.gameData == null)
-        {
+        if (gameData == null) {            
             Debug.Log("No data was found. Initializing data to defaults");
             NewGame();
+            // if gameData is null, sessionData should also be null
+            if (!newSession) {
+                SaveSession(emptySession: true);
+                newSession = true;                
+            }
+        }
+
+        if (!newSession)
+        {
+            return;
         }
 
         foreach (IGameController gameControllerObj in gameControllerObjects)
@@ -238,12 +266,6 @@ public class GameController : MonoBehaviour
         }
 
         dataHandler.SaveGameData(gameData);
-    }
-
-    //Saves game when you close it
-    public void OnApplicationQuit()
-    {
-        SaveGame();
     }
 
     public int GetTileIndex(GameObject tile) {
@@ -268,13 +290,29 @@ public class GameController : MonoBehaviour
 
     }
 
-    public void SaveSession() {
+    public void SaveSession(bool emptySession = false, bool sessionIsOver = false) {
+        if (!sessionIsOver)
+            if (UnityEngine.Object.FindObjectOfType<EventManager>()
+                .currentState == EventManager.Event.defending)
+                    return;
+        if (emptySession || sessionIsOver) {
+            dataHandler.SaveSessionData(default(SessionData));
+            return;
+        }
         SessionData session = new SessionData();
+        session.resources = resources;
+        session.completedWaves = enemySpawner.instance.completedWaves;
         ManageableBuilding[] buildings = UnityEngine.Object.FindObjectsOfType<ManageableBuilding>();
         foreach(var b in buildings) {
-            if (b.GetType() == typeof(Building_Base) && b.gameObject.tag != "Base")
-                continue;
-            session.buildings.Add(b.GetExportedData());
+            if (b.GetType() == typeof(Building_Base)) {
+                if (b.gameObject.tag == "Base") {
+                    session.workerSpeed = (b as Building_Base).GetWorkerSpeed;
+                } else {
+                    continue;
+                }
+            }
+            var bd = b.GetExportedData();
+            session.buildings.Add(bd);
         }
         dataHandler.SaveSessionData(session);
     }

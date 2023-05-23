@@ -178,8 +178,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_upgrade_price: 7
   UpgradeModels: []
+  maxHealth: 200
   gameOverScreen: {fileID: 0}
   tile: {fileID: 0}
+  currentHealth: 200
 --- !u!65 &3686414825287529246
 BoxCollider:
   m_ObjectHideFlags: 0

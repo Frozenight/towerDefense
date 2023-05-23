@@ -11,12 +11,15 @@ public class Turret : ManageableBuilding
     [SerializeField] float offsetRangeHeight;
 
     public override BuildingData GetExportedData() {
+        var bbase = gameObject.GetComponent<Building_Base>();
         return new BuildingData(
             GameController.instance.GetTileIndex(
                 gameObject.GetComponent<Building_Base>().tile),
             m_level,
             buildingPrice,
-            m_typeIndex
+            m_typeIndex,
+            bbase.currentHealth,
+            bbase.maxHealth
         );
     }
 
@@ -96,8 +99,6 @@ public class Turret : ManageableBuilding
         UnhighlightBuilding();
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
         enemyController = enemySpawner.instance;
-        GetComponent<Building_Base>().maxHealth = GameController.instance.GetTurretHealth();
-        GetComponent<Building_Base>()._currentHealth = GameController.instance.GetTurretHealth();
         animator = GetComponent<Animator>();
     }
 

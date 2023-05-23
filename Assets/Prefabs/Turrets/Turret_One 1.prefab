@@ -212,8 +212,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_upgrade_price: 5
   UpgradeModels: []
+  maxHealth: 200
   gameOverScreen: {fileID: 0}
   tile: {fileID: 0}
+  currentHealth: 200
 --- !u!95 &4613402665312923862
 Animator:
   serializedVersion: 4

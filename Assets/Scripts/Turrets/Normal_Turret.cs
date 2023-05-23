@@ -11,12 +11,15 @@ public class Normal_Turret : Turret
     public GameObject Frost_Turret;
 
     public override BuildingData GetExportedData() {
+        var bbase = gameObject.GetComponent<Building_Base>();
         return new BuildingData(
             GameController.instance.GetTileIndex(
                 gameObject.GetComponent<Building_Base>().tile),
             m_level,
             buildingPrice,
-            m_typeIndex
+            m_typeIndex,
+            bbase.currentHealth,
+            bbase.maxHealth
         );
     }
 
@@ -26,7 +29,8 @@ public class Normal_Turret : Turret
         Fire_Turret.transform.parent = gameObject.transform.parent;
         Fire_Turret.transform.position = gameObject.transform.position;
         Fire_Turret.transform.rotation = gameObject.transform.rotation;
-        Instantiate(Fire_Turret, Fire_Turret.transform.parent);
+        GameObject t = Instantiate(Fire_Turret, Fire_Turret.transform.parent);
+        SetNewTurretsTile(t);
         DestroyImmediate(gameObject);
     }
 
@@ -36,7 +40,8 @@ public class Normal_Turret : Turret
         Frost_Turret.transform.parent = gameObject.transform.parent;
         Frost_Turret.transform.position = gameObject.transform.position;
         Frost_Turret.transform.rotation = gameObject.transform.rotation;
-        Instantiate(Frost_Turret, Frost_Turret.transform.parent);   
+        GameObject t = Instantiate(Frost_Turret, Frost_Turret.transform.parent);   
+        SetNewTurretsTile(t);
         DestroyImmediate(gameObject);
     }
 
@@ -46,7 +51,13 @@ public class Normal_Turret : Turret
         Earth_Turret.transform.parent = gameObject.transform.parent;
         Earth_Turret.transform.position = gameObject.transform.position;
         Earth_Turret.transform.rotation = gameObject.transform.rotation;
-        Instantiate(Earth_Turret, Earth_Turret.transform.parent);
+        GameObject t = Instantiate(Earth_Turret, Earth_Turret.transform.parent);
+        SetNewTurretsTile(t);
         DestroyImmediate(gameObject);
+    }
+
+    private void SetNewTurretsTile(GameObject turret) {
+        GameObject tile = gameObject.GetComponent<Building_Base>().tile;
+        turret.GetComponent<Building_Base>().tile = tile;
     }
 }

@@ -12,12 +12,15 @@ public class Frost_Turret : Turret
     public float reduce_Time;
     
     public override BuildingData GetExportedData() {
+        var bbase = gameObject.GetComponent<Building_Base>();
         return new BuildingData(
             GameController.instance.GetTileIndex(
                 gameObject.GetComponent<Building_Base>().tile),
             m_level,
             buildingPrice,
-            m_typeIndex
+            m_typeIndex,
+            bbase.currentHealth,
+            bbase.maxHealth
         );
     }
 

@@ -14,12 +14,15 @@ public class Earth_Turret : Turret
     }    
 
     public override BuildingData GetExportedData() {
+        var bbase = gameObject.GetComponent<Building_Base>();
         return new BuildingData(
             GameController.instance.GetTileIndex(
                 gameObject.GetComponent<Building_Base>().tile),
             m_level,
             buildingPrice,
-            m_typeIndex
+            m_typeIndex,
+            bbase.currentHealth,
+            bbase.maxHealth
         );
     }
 
