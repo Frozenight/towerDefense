@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class Frost_Turret : Turret
 {
+    public new const int m_typeIndex =4;
+    
     EnemyManager nearestEnemyManager;
     BossManager nearestBossManager;
     public float reduce_Speed;
     public float reduce_Time;
+    
+    public override BuildingData GetExportedData() {
+        var bbase = gameObject.GetComponent<Building_Base>();
+        return new BuildingData(
+            GameController.instance.GetTileIndex(
+                gameObject.GetComponent<Building_Base>().tile),
+            m_level,
+            buildingPrice,
+            m_typeIndex,
+            bbase.currentHealth,
+            bbase.maxHealth
+        );
+    }
 
     public override string buildingName
     {

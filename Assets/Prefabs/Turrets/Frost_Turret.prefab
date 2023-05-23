@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2073adc78ff43b4409d29b904e761330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_upgrade_price: 5
   UpgradeModels: []
   rangeIndicator: {fileID: 4811571686662809408}
   offsetRangeHeight: 0
@@ -206,9 +207,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4afcd4b8c19bee4488e6bb45348a291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_upgrade_price: 7
   UpgradeModels: []
+  maxHealth: 200
   gameOverScreen: {fileID: 0}
   tile: {fileID: 0}
+  currentHealth: 200
 --- !u!65 &1991632271793767533
 BoxCollider:
   m_ObjectHideFlags: 0

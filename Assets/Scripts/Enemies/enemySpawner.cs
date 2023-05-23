@@ -8,12 +8,18 @@ public class enemySpawner : MonoBehaviour
     public float spawnCoolDown = 1f;
     float offsetZ = 5;
 
-    int waveCnt;
+    int waveCnt = 0;
     public int bossWave;
 
     private bool isInPlayMode = false;
 
     [SerializeField] private int scalingHealth  = 40;
+
+    public int completedWaves {
+        get {
+            return waveCnt;
+        }
+    }
 
 
     [System.Serializable]
@@ -38,10 +44,18 @@ public class enemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        waveCnt = 0;
         startSpawn = false;
         isInPlayMode = true;
     }
+
+    public void ImportSessionData(int waveCount) {
+        waveCnt = waveCount;
+        for (int i = 0; i < waveCnt; i++) {
+            scalingHealth = scalingHealth+(waveComponents.enemyAmount-1)*6;
+            waveComponents.enemyAmount++;
+        }
+    }
+
 
     // Update is called once per frame
 

@@ -54,7 +54,7 @@ public class ManageableBuildingTab : MonoBehaviour
 
     private void Update()
     {
-        if (RemoveB.gameObject.active)
+        if (RemoveB.gameObject.activeSelf)
         {
             if (eventController.currentState == EventManager.Event.defending)
             {

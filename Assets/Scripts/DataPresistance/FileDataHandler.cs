@@ -8,19 +8,38 @@ public class FileDataHandler
 {
     private string dataDirPath = "";
     private string dataFileName = "";
+    private string sessionDataFileName = "session.json";
 
     public FileDataHandler(string dataDirPath, string dataFileName)
     {
-        Debug.Log(dataDirPath);
-
         this.dataDirPath = dataDirPath;
         this.dataFileName = dataFileName;
     }
 
-    public GameData Load()
+    public SessionData LoadSessionData()
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
-        GameData loadedData = null;
+        return Load<SessionData>(sessionDataFileName);
+    }
+
+    public void SaveSessionData(SessionData data)
+    {
+        Save(data, sessionDataFileName);
+    }
+
+    public GameData LoadGameData()
+    {
+        return Load<GameData>(dataFileName);
+    }
+
+    public void SaveGameData(GameData data)
+    {
+        Save(data, dataFileName);
+    }
+
+    private T Load<T>(string fileName)
+    {
+        string fullPath = Path.Combine(dataDirPath, fileName);
+        T loadedData = default(T);
 
         if(File.Exists(fullPath))
         {
@@ -35,7 +54,7 @@ public class FileDataHandler
                     }
                 }
 
-                loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
+                loadedData = JsonUtility.FromJson<T>(dataToLoad);
 
             }catch (Exception e)
             {
@@ -45,9 +64,9 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(GameData data)
+    public void Save<T>(T data, string fileName)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        string fullPath = Path.Combine(dataDirPath, fileName);
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
@@ -66,4 +85,6 @@ public class FileDataHandler
             Debug.LogError("Error occured when trying  to save data to file:" + fullPath + "\n" + e);
         }
     }
+
+
 }
