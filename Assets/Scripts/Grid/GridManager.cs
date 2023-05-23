@@ -13,12 +13,9 @@ public class GridManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateGrid();
-        //GenerateFakeGrid();
-        GameController.instance.SpawnWalls();
     }
 
-    void GenerateGrid()
+    public void GenerateGrid()
     {
         for(int x = -40; x < _width; x = x + 4 )
         {

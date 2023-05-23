@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc76e07f68d3094e94fd72010f1d3f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_level: 1
+  m_upgrade_price: 5
   UpgradeModels: []
   rangeIndicator: {fileID: 8265563585242545394}
   offsetRangeHeight: 0
@@ -62,7 +64,7 @@ MonoBehaviour:
   fireCountdown: 0
   damage: 30
   partToRotate: {fileID: 5520268817022992133}
-  bulletPrefab: {fileID: 4994185992374360394, guid: 93f4fc19aaab9eef79655f2106e78091, type: 3}
+  bulletPrefab: {fileID: 4994185992374360394, guid: caf5ad9d4dcbaf74598b876092567e52, type: 3}
   explosionPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
   firePoint: {fileID: 3368253037552735868}
   rotateX: -90
@@ -81,9 +83,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4afcd4b8c19bee4488e6bb45348a291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_level: 6
+  m_upgrade_price: 5
   UpgradeModels: []
+  maxHealth: 200
   gameOverScreen: {fileID: 0}
   tile: {fileID: 0}
+  currentHealth: 200
 --- !u!65 &3686414825287529246
 BoxCollider:
   m_ObjectHideFlags: 0

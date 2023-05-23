@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCoolDown: 10
+  bossWave: 5
+  scalingHealth: 40
   waveComponents:
-  - enemyPrefab: {fileID: 8378590293030824765, guid: ed430beea7457244ab0937ebae4d7e42, type: 3}
-    enemyAmount: 1
+    enemyPrefab1: {fileID: 5116344779794610806, guid: d4deb07fd312cbb42bdf2fa56fac278f, type: 3}
+    enemyPrefab2: {fileID: 903103808535759336, guid: b652716df7ad75c4ba5514f67183f961, type: 3}
+    enemyPrefab3: {fileID: 4034088204673293557, guid: d077e2d4ab08eca46a09735c3082fb95, type: 3}
+    BossPrefab: {fileID: 178664274112698212, guid: bd01d12243254ee4aac1cfc95b27dda7, type: 3}
+    enemyAmount: 2

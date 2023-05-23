@@ -5,9 +5,17 @@ using System.Linq;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using System.Threading.Tasks;
 
 public class GameController : MonoBehaviour
 {
+    [Header("Building Prefabs")]
+    [SerializeField] private GameObject wall;
+    [SerializeField] private GameObject turret_normal;
+    [SerializeField] private GameObject turret_frost;
+    [SerializeField] private GameObject turret_fire;
+    [SerializeField] private GameObject turret_earth;
+
     [Header("File Storage Config")]
     [SerializeField] private string fileName;
     public static GameController instance { get; private set; }
@@ -32,14 +40,77 @@ public class GameController : MonoBehaviour
     private GameData gameData;
     private List<IGameController> gameControllerObjects;
     private FileDataHandler dataHandler;
+    // private bool sessionIsOver = false;
 
     [SerializeField] private EventManager eventManager;
     [SerializeField] private GridManager gridManager;
-    [SerializeField] private GameObject wall;
     [SerializeField] public GameObject vfx;
     [SerializeField] private TextMeshProUGUI bonusText;
     private int resourceBonusFlat = 0;
     private int m_currResourceGain = 0;
+
+    private int WallHealthIncrease = 0;
+    void LoadSessionData() {
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        SessionData session = dataHandler.LoadSessionData();
+        bool newSession = session == null;
+        LoadGame(newSession);
+        if (newSession) {
+            SpawnWalls();
+            Building_Base mainbase = GameObject.FindGameObjectWithTag("Base")
+                        .GetComponent<Building_Base>();
+            mainbase.UpdateWorkerSpeed(0);
+        } else {
+            if (enemySpawner.instance != null) {
+                enemySpawner.instance
+                    .ImportSessionData(session.completedWaves);
+            } else {
+                UnityEngine.Object.FindObjectOfType<enemySpawner>()
+                    .ImportSessionData(session.completedWaves);
+            }
+            resources = session.resources;
+            Quaternion quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, 90, gridManager.tiles[1].gameObject.transform.rotation.z);
+            foreach (var b in session.buildings) {
+                GameObject usedPrefab = wall;
+                switch(b.BuildingType) {
+                    case Normal_Turret.m_typeIndex:
+                        usedPrefab = turret_normal;
+                        break;
+                    case Fire_Turret.m_typeIndex:
+                        usedPrefab = turret_fire;                        
+                        break;
+                    case Frost_Turret.m_typeIndex:
+                        usedPrefab = turret_frost;                        
+                        break;
+                    case Earth_Turret.m_typeIndex:
+                        usedPrefab = turret_earth;                        
+                        break;
+                }                    
+                if (b.BuildingType > 0) { // not main base
+                    GameObject obj = PlaceBuilding(b.TileIndex, usedPrefab, quaternion);
+                    if (b.BuildingType > 1)
+                        foreach (var t in obj.GetComponents<ManageableBuilding>())
+                            if (t.GetType() != typeof(Building_Base))
+                                t.ImportSessionData(b);
+                            else 
+                                (t as Building_Base).ImportSessionData(b, false);
+                } else {
+                    Building_Base mainbase = GameObject.FindGameObjectWithTag("Base")
+                        .GetComponent<Building_Base>();
+                    mainbase.ImportSessionData(b, true);
+                    mainbase.UpdateWorkerSpeed(session.workerSpeed);
+                }
+            }
+            return;
+        }
+    }
+
+    private GameObject PlaceBuilding(int i, GameObject prefab, Quaternion quaternion) {
+        GameObject building = Instantiate(prefab, gridManager.tiles[i].gameObject.transform.position, quaternion);
+        building.GetComponent<Building_Base>().tile = gridManager.tiles[i];
+        gridManager.tiles[i].GetComponent<TileOnWhichToPlace>().placed = true;
+        return building;
+    }
 
     public int currResourceGain {
         get {
@@ -49,7 +120,15 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        gridManager.GenerateGrid();
         instance = this;
+        this.gameControllerObjects = FindAllGameControllerObjects();
+        LoadSessionData();
+        BuildingSelectUI.SetActive(false);
+        aiAPI.GetData();
+        vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
+        SetResourceBonus();
+        bonusText.gameObject.SetActive(false);  
     }
 
     public void AddBonusToGameData() {
@@ -101,6 +180,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        SaveSession(sessionIsOver: true);
         rounds.NewGame();
         gameOverScreen.Setup();
 
@@ -120,19 +200,6 @@ public class GameController : MonoBehaviour
         {
             resources += trashGainEnemyDroped;
         }
-    }
-
-    private void Start()
-    {
-        BuildingSelectUI.SetActive(false);
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        this.gameControllerObjects = FindAllGameControllerObjects();
-        Debug.Log("Load");
-        LoadGame();
-        aiAPI.GetData();
-        vfx = (GameObject)Instantiate(vfx, new Vector3(0, 0, 0), Quaternion.identity);
-        SetResourceBonus();
-        bonusText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -167,16 +234,6 @@ public class GameController : MonoBehaviour
 
     }
 
-    public int GetTurretHealth()
-    {
-        return gameData.towerHealth;
-    }
-
-    public int GetWallHealth()
-    {
-        return gameData.towerHealth;
-    }
-
     private List<IGameController> FindAllGameControllerObjects()
     {
         IEnumerable<IGameController> gameControllerObjects = FindObjectsOfType<MonoBehaviour>().OfType<IGameController>();
@@ -190,15 +247,23 @@ public class GameController : MonoBehaviour
     }
 
     //Loads game
-    public void LoadGame()
-    {
-        
-        this.gameData = dataHandler.Load();
+    public void LoadGame(bool newSession)
+    {        
+        this.gameData = dataHandler.LoadGameData();
 
-        if (this.gameData == null)
-        {
+        if (gameData == null) {            
             Debug.Log("No data was found. Initializing data to defaults");
             NewGame();
+            // if gameData is null, sessionData should also be null
+            if (!newSession) {
+                SaveSession(emptySession: true);
+                newSession = true;                
+            }
+        }
+
+        if (!newSession)
+        {
+            return;
         }
 
         foreach (IGameController gameControllerObj in gameControllerObjects)
@@ -215,13 +280,11 @@ public class GameController : MonoBehaviour
             gameControllerObj.SaveData(ref gameData);
         }
 
-        dataHandler.Save(gameData);
+        dataHandler.SaveGameData(gameData);
     }
 
-    //Saves game when you close it
-    public void OnApplicationQuit()
-    {
-        SaveGame();
+    public int GetTileIndex(GameObject tile) {
+        return gridManager.tiles.IndexOf(tile);
     }
 
     public void SpawnWalls()
@@ -233,7 +296,6 @@ public class GameController : MonoBehaviour
             startWall.GetComponent<Building_Base>().tile = gridManager.tiles[i];
             startWall.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().placed = true;
         }
-        quaternion = Quaternion.Euler(gridManager.tiles[1].gameObject.transform.rotation.x, 90, gridManager.tiles[1].gameObject.transform.rotation.z);
         for (int i = 100; i < 104; i++)
         {
             GameObject startWall = Instantiate(wall, gridManager.tiles[i].gameObject.transform.position, quaternion);
@@ -241,6 +303,38 @@ public class GameController : MonoBehaviour
             startWall.gameObject.GetComponent<Building_Base>().tile.GetComponent<TileOnWhichToPlace>().placed = true;
         }
 
+    }
+
+    public void SaveSession(bool emptySession = false, bool sessionIsOver = false) {
+        if (!sessionIsOver)
+            if (UnityEngine.Object.FindObjectOfType<EventManager>()
+                .currentState == EventManager.Event.defending)
+                    return;
+        if (emptySession || sessionIsOver) {
+            dataHandler.SaveSessionData(default(SessionData));
+            return;
+        }
+        SessionData session = new SessionData();
+        session.resources = resources;
+        session.completedWaves = enemySpawner.instance.completedWaves;
+        ManageableBuilding[] buildings = UnityEngine.Object.FindObjectsOfType<ManageableBuilding>();
+        foreach(var b in buildings) {
+            if (b.GetType() == typeof(Building_Base)) {
+                if (b.gameObject.tag == "Base") {
+                    session.workerSpeed = (b as Building_Base).GetWorkerSpeed;
+                } else {
+                    continue;
+                }
+            }
+            var bd = b.GetExportedData();
+            session.buildings.Add(bd);
+        }
+        dataHandler.SaveSessionData(session);
+    }
+
+    public void NullifySessionData() {
+        dataHandler.SaveSessionData(default(SessionData));
+        return;
     }
 
     private void SetResourceBonus() {
@@ -253,5 +347,15 @@ public class GameController : MonoBehaviour
             }
             m_currResourceGain = trashGainSpawned + resourceBonusFlat;
         }
+    }
+
+    public void WallHealthInscrease()
+    {
+        WallHealthIncrease += 10;
+    }
+
+    public int getWallHealthIncrese()
+    {
+        return WallHealthIncrease;
     }
 }

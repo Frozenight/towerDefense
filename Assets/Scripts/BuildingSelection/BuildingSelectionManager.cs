@@ -6,6 +6,7 @@ public class BuildingSelectionManager : MonoBehaviour
 {
     GameMode gameMode;
     [SerializeField] private ManageableBuildingTab manageBuildingTab;
+    [SerializeField] WallBuilder wallBuilder;
     private string[] ClickableBuildingTags = new string[] 
     { 
         "Tower",
@@ -44,6 +45,19 @@ public class BuildingSelectionManager : MonoBehaviour
             ManageableBuilding.selectedBuilding.UnhighlightBuilding();
             ManageableBuilding.selectedBuilding.GetComponent<Outline>().enabled = false;
         }
+        if (_hit.collider.gameObject.tag == "Wall")
+        {
+            wallBuilder.ShowWallSelection(_hit.collider.gameObject);
+        }
+        else if (_hit.collider.gameObject.tag == "SelectableWall")
+        {
+            wallBuilder.SelectedSelectableWall();
+            return;
+        }
+        else
+        {
+            wallBuilder.HideWallSelection();
+        }
         Debug.Log(_hit.collider.gameObject.name);
        
         ManageableBuilding building =
@@ -67,6 +81,7 @@ public class BuildingSelectionManager : MonoBehaviour
             ManageableBuilding.selectedBuilding.UnhighlightBuilding();
             ManageableBuilding.selectedBuilding.GetComponent<Outline>().enabled = false;
         }
+        wallBuilder.HideWallSelection();
         ManageableBuilding.selectedBuilding = null;
         manageBuildingTab.gameObject.SetActive(false);
         manageTabOpen = false;

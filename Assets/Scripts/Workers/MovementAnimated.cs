@@ -62,7 +62,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
                     animator.SetTrigger("GoForward");
                     // Stops worker at base until ongoingRaid is set to false 
                     if (ongoingRaid) {
-                        savedSpeedAfterRaid = speed;
+                        savedSpeed = speed;
                         speed = 0f;
                     }
                 }
@@ -131,14 +131,36 @@ public class MovementAnimated : MonoBehaviour, IGameController
 
     public void Upgrade()
     {
-        speed += SPEED_INC_ON_UPGRADE;
+        savedSpeed += SPEED_INC_ON_UPGRADE;
+        if (speed != 0)
+            speed = savedSpeed;
+    }
+
+    public float GetSavedSpeed { 
+        get {
+            return savedSpeed; 
+        }
+    }
+
+    public void SetSpeed(float _sp)
+    {
+        // no valid speed, set default value
+        if (_sp == 0) {
+            savedSpeed = speed;
+        } else {
+            savedSpeed = _sp;
+            // shouldn't be necessary, but the check is needed
+            // if there is an ongoing raid
+            if (speed != 0)
+                speed = savedSpeed;
+        }
     }
 
     private void ChangeRaidState() {
         Debug.Log($"ChangeRaidState to {!ongoingRaid}");
         ongoingRaid = !ongoingRaid;
         if (!ongoingRaid) {
-            speed = savedSpeedAfterRaid;
+            speed = savedSpeed;
             if (!PickUp.HasTrash)
                 goingBackward = false;
         } else {
