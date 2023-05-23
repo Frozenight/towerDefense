@@ -5,6 +5,7 @@ using System.Linq;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using GoogleMobileAds.Api;
 
 public class GameController : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GameController : MonoBehaviour
     public Sprite Tower1Grey;
     public Sprite WallGrey;
     [SerializeField] private int trashGainSpawned;
+    [SerializeField] private Interstitial ads;
     [SerializeField] private int trashGainEnemyDroped;
 
     public Rounds rounds;
@@ -99,6 +101,12 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        MobileAds.Initialize(initstatus => { });
+        ads.LoadInterstitialAd();
+        if (ads.interstitialAd != null)
+        {
+            ads.interstitialAd.Show();
+        }
         rounds.NewGame();
         gameOverScreen.Setup();
 
