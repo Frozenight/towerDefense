@@ -10,9 +10,12 @@ public class ManageableBuildingTab : MonoBehaviour
     private IEnumerator labelScaleAnim;
     private int animTime = 15; // 100 == 1 sec
     private float targetScale = 1.2f;
+    private int workerUpgradeCount = 0;
     [SerializeField] private Canvas canv;
     EventManager eventController;
     [SerializeField] private Button WorkerB;
+    [SerializeField] private TextMeshProUGUI BaseWorker;
+    [SerializeField] private TextMeshProUGUI WorkerUpgradeText;
     [SerializeField] private Button UpgradeB;
     [SerializeField] private Button RemoveB;
     [SerializeField] private Button RotationL_B;
@@ -22,7 +25,6 @@ public class ManageableBuildingTab : MonoBehaviour
     [SerializeField] private TextMeshProUGUI LevelText;
     [SerializeField] private TextMeshProUGUI PriceText;
     [SerializeField] private TextMeshProUGUI Description;
-    [SerializeField] public TextMeshProUGUI WorkerPrice;
     [SerializeField] public Button Fire_Turret;
     [SerializeField] public Button Frost_Turret;
     [SerializeField] public Button Earth_Turret;
@@ -69,16 +71,27 @@ public class ManageableBuildingTab : MonoBehaviour
 
     public void FillBuildingData(ManageableBuilding mBuilding) {
         RemoveB.gameObject.SetActive(mBuilding.canDestroyManually);
-        WorkerB.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_BASE);
+        WorkerB.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_BASE && workerUpgradeCount <5);
+        BaseWorker.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_BASE && workerUpgradeCount < 5);
+        WorkerUpgradeText.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_BASE && workerUpgradeCount < 5);
+        if (mBuilding.buildingName == ManageableBuilding.NAME_BASE)
+        {
+            BaseWorker.text = "Worker upgrades " + workerUpgradeCount + "/5";
+        }
+        if(mBuilding.buildingName == ManageableBuilding.NAME_BASE &&  workerUpgradeCount >= 5)
+        {
+            BaseWorker.gameObject.SetActive(true);
+            BaseWorker.text = "Worker upgrades 5/5";
+        }
+
         RotationL_B.gameObject.SetActive(mBuilding.tag == "Wall");
         RotationR_B.gameObject.SetActive(mBuilding.tag == "Wall");
         Turret_type.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_TURRET);
-        WorkerPrice.gameObject.SetActive(mBuilding.buildingName == ManageableBuilding.NAME_BASE);
         UpgradeB.gameObject.SetActive(mBuilding.buildingName != ManageableBuilding.NAME_WALL);
         PriceText.gameObject.SetActive(mBuilding.buildingName != ManageableBuilding.NAME_WALL);
         LevelText.gameObject.SetActive(mBuilding.buildingName != ManageableBuilding.NAME_WALL);
 
-        if (mBuilding.level == 5 && mBuilding.buildingName == ManageableBuilding.NAME_TURRET)
+        if (mBuilding.level == 5)
         {
             UpgradeB.gameObject.SetActive(false);
             PriceText.gameObject.SetActive(false);
@@ -129,7 +142,7 @@ public class ManageableBuildingTab : MonoBehaviour
             UpdateStats(assignedBuilding?.GetComponent<Turret>());
             UpdateBuildingStats();
         }
-        else if (assignedBuilding?.buildingName != ManageableBuilding.NAME_TURRET)
+        else if(assignedBuilding?.level != 5 && assignedBuilding?.buildingName != ManageableBuilding.NAME_TURRET)
         {
             assignedBuilding?.UpgradeBuilding();
             if (
@@ -164,14 +177,23 @@ public class ManageableBuildingTab : MonoBehaviour
 
     public void UpgradeWorkers() {
         if (assignedBuilding is Building_Base) {
-            (assignedBuilding as Building_Base).UpgradeWorkers();
-            UpdateBuildingStats();
+            workerUpgradeCount++;
+            if (workerUpgradeCount <= 5)
+            {
+                BaseWorker.text = "Worker upgrades " + workerUpgradeCount + "/5";
+                (assignedBuilding as Building_Base).UpgradeWorkers();
+                UpdateBuildingStats();
+            }
+        }
+        else  if(assignedBuilding is Building_Base && workerUpgradeCount > 5)
+        {
+            WorkerB.gameObject.SetActive(false);
         }
     }
 
     public void RotateLeft()
     { 
-        Vector3 left = new Vector3 (0, -1, 0);
+        Vector3 left = new Vector3 (0, -1, 0); 
         assignedBuilding.transform.Rotate(left * 1 * Time.deltaTime, 90);
     }
 
@@ -188,7 +210,7 @@ public class ManageableBuildingTab : MonoBehaviour
     }
 
     private void UpdateBuildingStats() {
-        if(assignedBuilding.level == 5 && assignedBuilding.buildingName == ManageableBuilding.NAME_TURRET)
+        if(assignedBuilding.level == 5)
         {
             LevelText.text = "Level: " + assignedBuilding.level;
             PriceText.gameObject.SetActive(false);
