@@ -51,8 +51,8 @@ public class enemySpawner : MonoBehaviour
         
         if (!isInPlayMode)
             return;
-
-        if (waveCnt == bossWave)
+        //5 15 25 35...
+        if ((waveCnt - 5) % 10 == 0)
         { 
             var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
             Instantiate(waveComponents.BossPrefab, transform.position + offset, Quaternion.Euler(0, 180, 0)).transform.parent = this.transform;

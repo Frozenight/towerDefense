@@ -11,6 +11,8 @@ public class FileDataHandler
 
     public FileDataHandler(string dataDirPath, string dataFileName)
     {
+        Debug.Log(dataDirPath);
+
         this.dataDirPath = dataDirPath;
         this.dataFileName = dataFileName;
     }

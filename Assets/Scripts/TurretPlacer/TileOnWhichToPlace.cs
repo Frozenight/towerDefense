@@ -107,7 +107,6 @@ public class TileOnWhichToPlace : MonoBehaviour
     public IEnumerator SpawnTurretAfterTime(float time, GameObject selectedTurret)
     {
         yield return new WaitForSeconds(time);
-
         turret = (GameObject)Instantiate(selectedTurret, transform.position + offsetFromPlacer, transform.rotation);
         turret.gameObject.GetComponent<Building_Base>().tile = gameObject;
     }

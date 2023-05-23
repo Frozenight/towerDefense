@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI timer_text;
     [SerializeField] TextMeshProUGUI timer;
     [SerializeField] enemySpawner spawner;
+    [SerializeField] WallBuilder wallBuilder;
 
     float curreentTime = 0f;
 
@@ -68,6 +69,7 @@ public class Timer : MonoBehaviour
             timerOn = false;
             timer.text = string.Empty;
             startButton.gameObject.SetActive(false);
+            wallBuilder.HideWallSelection();
             if (GameBase.activeSelf)
             {
                 spawner.spawnWave();

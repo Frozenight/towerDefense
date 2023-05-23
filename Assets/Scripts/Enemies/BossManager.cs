@@ -84,7 +84,6 @@ public class BossManager : MonoBehaviour
 
     private void Update()
     {
-        logger.Log("", Objective.buildingName);
         if (health.getHealth() <= 0)
         {
             _animator.SetTrigger("Death");

@@ -1,4 +1,3 @@
-using System.Numerics;
 using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
@@ -13,6 +12,9 @@ public class BuildingManager : MonoBehaviour
     private TileOnWhichToPlace selectedTile;
 
     private GameObject selectedTurret;
+
+    [SerializeField] GridManager gridManager;
+
 
     void Awake (){
         if(instance!=null){
@@ -54,6 +56,43 @@ public class BuildingManager : MonoBehaviour
         BuildTower();
     }
 
+    private void GetTile()
+    {
+        // Create a ray from the mouse cursor on screen in the direction of the camera.
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            // If we hit an object, get its position
+            Vector3 hitObjectPosition = hit.transform.position;
+
+            // Find the tile that occupies the same position as the hit object
+            TileOnWhichToPlace hitTile = FindTileByPosition(hitObjectPosition);
+
+            if (hitTile != null)
+            {
+                selectedTile = hitTile;
+            }
+        }
+    }
+
+    TileOnWhichToPlace FindTileByPosition(Vector3 position)
+    {
+        foreach (GameObject tile in gridManager.tiles)
+        {
+            Vector2Int tilePosition = new Vector2Int(Mathf.RoundToInt(tile.transform.position.x / 4), Mathf.RoundToInt(tile.transform.position.z / 4));
+            Vector2Int hitObjectPosition = new Vector2Int(Mathf.RoundToInt(position.x / 4), Mathf.RoundToInt(position.z / 4));
+
+            if (tilePosition == hitObjectPosition)
+            {
+                return tile.GetComponent<TileOnWhichToPlace>();
+            }
+        }
+
+        return null;
+    }
+
     public void BuildTower()
     {
         GameObject selectedTurret = GetTurret();
@@ -74,5 +113,12 @@ public class BuildingManager : MonoBehaviour
             GameController.instance.resources -= manageableBuilding.buildingPrice;
             selectedTile.placed = true;
         }
+    }
+
+    public void SelectSelectedWall()
+    {
+        selectedTurret = wall;
+        GetTile();
+        BuildTower();
     }
 }
