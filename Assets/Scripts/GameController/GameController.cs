@@ -39,6 +39,8 @@ public class GameController : MonoBehaviour
     private int resourceBonusFlat = 0;
     private int m_currResourceGain = 0;
 
+    private int WallHealthIncrease = 0;
+
     public int currResourceGain {
         get {
             return m_currResourceGain;
@@ -239,5 +241,15 @@ public class GameController : MonoBehaviour
             }
             m_currResourceGain = trashGainSpawned + resourceBonusFlat;
         }
+    }
+
+    public void WallHealthInscrease()
+    {
+        WallHealthIncrease += 10;
+    }
+
+    public int getWallHealthIncrese()
+    {
+        return WallHealthIncrease;
     }
 }

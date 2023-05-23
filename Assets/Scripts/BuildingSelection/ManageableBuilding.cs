@@ -35,8 +35,8 @@ public class ManageableBuilding : MonoBehaviour {
         get { return m_upgrade_price; }
     }
 
-    protected int m_level = 1;
-    protected int m_upgrade_price = 5;
+    public int m_level = 1;
+    public int m_upgrade_price = 5;
     protected int worker_upgrade_price = 25;
 
     [SerializeField] private GameObject[] UpgradeModels = new GameObject[] {};  

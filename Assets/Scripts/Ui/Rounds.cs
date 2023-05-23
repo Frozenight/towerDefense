@@ -14,6 +14,8 @@ public class Rounds : MonoBehaviour
     [SerializeField] Button hide_button;
     [SerializeField] Show_BuildingSelection show_BuildingSelection;
 
+    public int pickUpWave = 2;
+    public PickUpScreen pickUpScreen;
     private void Start()
     {
         EventManager.onRoundChange += NextRound;
@@ -32,6 +34,7 @@ public class Rounds : MonoBehaviour
         {
             gameMode.changeGameMode(5);
             if (current_round == enemySpawner.instance.bossWave-1) { GameController.instance.BossWarning(); }
+            if (current_round == pickUpWave) { pickUpScreen.Setup(); pickUpWave += pickUpWave; }
             ChangeDefendingText();
         }
     }

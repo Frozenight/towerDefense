@@ -18,13 +18,17 @@ public class enemySpawner : MonoBehaviour
 
     [System.Serializable]
     public class WaveComponent {
-        public GameObject enemyPrefab;
+        public GameObject enemyPrefab1;
+        public GameObject enemyPrefab2;
+        public GameObject enemyPrefab3;
         public GameObject BossPrefab;
         public int enemyAmount;
         [System.NonSerialized]
         public int spawned = 0;
     }
     public WaveComponent waveComponents;
+    private GameObject[] enemies = new GameObject[3];
+   
 
     public bool startSpawn {get; set;}
     void Awake()
@@ -57,8 +61,21 @@ public class enemySpawner : MonoBehaviour
             for (int i = 0; i < waveComponents.enemyAmount; i++)
             {
                 var offset = new Vector3(0, 0, Random.Range(-offsetZ, offsetZ));
-                var enemy = Instantiate(waveComponents.enemyPrefab, transform.position + offset, Quaternion.Euler(0, 180, 0));
-                enemy.GetComponent<EnemyHealth>().health = scalingHealth; 
+                if (i % 3 == 0)
+                {
+                    var enemy = Instantiate(waveComponents.enemyPrefab2, transform.position + offset, Quaternion.Euler(0, 180, 0));
+                    enemy.GetComponent<EnemyHealth>().health = scalingHealth;
+                }
+                else if (i % 5 == 0)
+                {
+                    var enemy = Instantiate(waveComponents.enemyPrefab3, transform.position + offset, Quaternion.Euler(0, 180, 0));
+                    enemy.GetComponent<EnemyHealth>().health = scalingHealth;
+                }
+                else
+                {
+                    var enemy = Instantiate(waveComponents.enemyPrefab1, transform.position + offset, Quaternion.Euler(0, 180, 0));
+                    enemy.GetComponent<EnemyHealth>().health = scalingHealth;
+                }
             }
         scalingHealth = scalingHealth+(waveComponents.enemyAmount-1)*6;
         waveComponents.enemyAmount++;
