@@ -24,7 +24,6 @@ public class Rounds : MonoBehaviour
     {
         if (eventController.currentState == EventManager.Event.defending)
         {
-            Debug.Log("TEST AR VEIKIA");
             gameMode.changeGameMode(4);
             current_round++;
             ChangeRoundText();
