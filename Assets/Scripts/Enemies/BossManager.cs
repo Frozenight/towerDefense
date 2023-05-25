@@ -221,10 +221,6 @@ public class BossManager : MonoBehaviour
             m_bonusGiven = true;
         }
         Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
         _roundController.CheckForEndOfRound();
     }
 

@@ -274,10 +274,6 @@ public class EnemyManager : MonoBehaviour
         }
         yield return new WaitForSeconds(4);
         Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
         _roundController.CheckForEndOfRound();
     }
     
