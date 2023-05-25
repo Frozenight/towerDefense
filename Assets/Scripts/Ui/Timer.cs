@@ -86,8 +86,10 @@ public class Timer : MonoBehaviour
         startButton.gameObject.SetActive(true);
     }
 
-    public void CheckForEndOfRound()
+    public void CheckForEndOfRound(EnemyManager obj = null)
     {
+        if (obj != null)
+            DestroyImmediate(obj.gameObject);
         if (GameObject.FindObjectsOfType<EnemyManager>().Length == 0)
         {
             eventController.ChangeGameState();

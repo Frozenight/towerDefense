@@ -220,8 +220,8 @@ public class BossManager : MonoBehaviour
             GameController.instance.AddBonusToGameData();
             m_bonusGiven = true;
         }
-        Destroy(gameObject);
         _roundController.CheckForEndOfRound();
+        Destroy(gameObject);
     }
 
     public  void ReduceSpeed(float reduce, float reduce_time)

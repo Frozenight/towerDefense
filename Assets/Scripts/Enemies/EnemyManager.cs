@@ -273,8 +273,8 @@ public class EnemyManager : MonoBehaviour
             resourceBonusGiven = true;
         }
         yield return new WaitForSeconds(4);
+        _roundController.CheckForEndOfRound(this);
         Destroy(gameObject);
-        _roundController.CheckForEndOfRound();
     }
     
     public void ReduceSpeed(float reduce, float reduce_time)
