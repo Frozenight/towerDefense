@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private EventManager eventManager;
     [SerializeField] private GridManager gridManager;
     [SerializeField] public GameObject vfx;
-    [SerializeField] private TextMeshProUGUI bonusText;
+    [SerializeField] private GameObject bonusText;
     private int resourceBonusFlat = 0;
     private int m_currResourceGain = 0;
 
@@ -158,7 +158,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator ShowBonusInfo(GameBonus bonus) {
         bonusText.gameObject.SetActive(true);
-        bonusText.text = GameTexts.NewBonus(bonus.Type, bonus.Value);
+        bonusText.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = GameTexts.NewBonus(bonus.Type, bonus.Value);
         yield return new WaitForSeconds(7f);
         bonusText.gameObject.SetActive(false);
     }

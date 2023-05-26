@@ -556,7 +556,6 @@ MonoBehaviour:
   LevelText: {fileID: 476825577259962484}
   PriceText: {fileID: 6358040374739254711}
   Description: {fileID: 0}
-  WorkerPrice: {fileID: 5299146611955363094}
   Fire_Turret: {fileID: 8278852437495666288}
   Frost_Turret: {fileID: 3372876738303491316}
   Earth_Turret: {fileID: 5380673723582499252}
@@ -2339,7 +2338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &860368123973635144
 RectTransform:
   m_ObjectHideFlags: 0

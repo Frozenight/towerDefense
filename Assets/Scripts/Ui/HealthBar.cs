@@ -47,6 +47,8 @@ public class HealthBar : MonoBehaviour
     {
         if (this.isActiveAndEnabled)
         {
+            if (foregroundImage.color.a < 0.1)
+                StartCoroutine(FadeIn());
             StartCoroutine(ChangeToPct(pct));
             if (!hit)
                 StartCoroutine(FadeIn());
@@ -73,7 +75,8 @@ public class HealthBar : MonoBehaviour
         float difference = foregroundImageDelayed.fillAmount - foregroundImage.fillAmount;
         if (difference > 0)
         {
-            foregroundImageDelayed.fillAmount -= healthPerFrame * Time.deltaTime * (difference/100);
+            float scale = 0.01f / (difference + 10);  // Extreme scale factor and constant
+            foregroundImageDelayed.fillAmount -= healthPerFrame * Time.deltaTime * scale;
         }
     }
 

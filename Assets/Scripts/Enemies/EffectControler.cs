@@ -63,7 +63,7 @@ public class EffectControler : MonoBehaviour
                 break;
 
             case false:
-                if (enemyManager.slowed == true)
+        if (enemyManager.slowed == true)
         {
             iceEffect.SetActive(true);
         }

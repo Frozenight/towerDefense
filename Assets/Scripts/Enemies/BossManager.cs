@@ -157,7 +157,6 @@ public class BossManager : MonoBehaviour
 
     private void _MoveTo()
     {
-        Debug.Log(Vector3.Distance(transform.position, Objective.transform.position));
         transform.LookAt(Objective.transform);
         if (Vector3.Distance(transform.position, Objective.transform.position) > 3)
         {
