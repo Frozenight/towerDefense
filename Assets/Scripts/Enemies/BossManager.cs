@@ -227,7 +227,6 @@ public class BossManager : MonoBehaviour
     {
         if (slowed == false)
         {
-            Debug.Log("SlowHit");
             temp = speed;
             slowed = true;
             speed = speed * reduce;

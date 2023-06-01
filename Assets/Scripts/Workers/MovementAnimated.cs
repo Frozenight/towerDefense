@@ -35,7 +35,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
     // Update is called once per frame
     void Update()
     {
-        if (NearestObject() != null)
+        if (NearestObject() != null || PickUp.HasTrash)
         {
             if (!detectedRaidStart) {
                 goingBackward = true;
@@ -51,7 +51,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
                 if (Vector3.Distance(transform.position, PointB.transform.position) < 0.001f)
                 {
                     if (PickUp.HasTrash) {
-                        PickUp.HasTrash = false;
+                        PickUp.HasTrash = false;                                       
                         GameController.instance.AddCountResource("trash");
                         if (FloatingTextPrefab)
                         {
@@ -69,9 +69,13 @@ public class MovementAnimated : MonoBehaviour, IGameController
             }
             if (!goingBackward && !PickUp.HasTrash)
             {
-                transform.LookAt(NearestObject().transform.position);
-                var step = speed * Time.deltaTime; // calculate distance to move
-                transform.position = Vector3.MoveTowards(transform.position, NearestObject().transform.position, step);
+                try
+                {
+                    transform.LookAt(NearestObject().transform.position);
+                    var step = speed * Time.deltaTime; // calculate distance to move
+                    transform.position = Vector3.MoveTowards(transform.position, NearestObject().transform.position, step);
+                }
+                catch { }
             }
             else if (!goingBackward && PickUp.HasTrash)
             {
@@ -170,6 +174,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
 
     private void ShowFloatingText(string text)
     {
+        GameController.instance.RemoveTrashBagImage();
         Vector3 position = new Vector3(transform.position.x, transform.position.y + 7, transform.position.z) ;
         var textObject = Instantiate(FloatingTextPrefab, position, Quaternion.identity);
         textObject.transform.LookAt(Camera.main.transform);

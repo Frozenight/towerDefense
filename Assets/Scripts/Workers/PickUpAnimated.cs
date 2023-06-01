@@ -40,7 +40,7 @@ public class PickUpAnimated : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Trash") && trashToPickUp == null)
+        if(other.gameObject.CompareTag("Trash") && trashToPickUp == null && !HasTrash)
         {
             trashToPickUp = other;
             HasTrash = true;

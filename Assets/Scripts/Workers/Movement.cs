@@ -20,13 +20,10 @@ public class Movement : MonoBehaviour, IGameController
     void Start()
     {
         trashObjects = GameController.instance.trashObjects;
-        //transform.position = PointA.transform.position;
-        //going = true;
         time = 0f;
         timeDelay = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 targetPos = new Vector3(PointB.transform.position.x, transform.position.y, PointB.transform.position.z);

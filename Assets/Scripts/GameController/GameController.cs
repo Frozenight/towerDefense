@@ -52,6 +52,9 @@ public class GameController : MonoBehaviour
     private int m_currResourceGain = 0;
 
     private int WallHealthIncrease = 0;
+
+    [SerializeField] private GameObject[] trashbag_images;
+    [SerializeField] private GameObject worker;
     void LoadSessionData() {
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         SessionData session = dataHandler.LoadSessionData();
@@ -354,6 +357,20 @@ public class GameController : MonoBehaviour
                 }
             }
             m_currResourceGain = trashGainSpawned + resourceBonusFlat;
+        }
+    }
+
+    public void RemoveTrashBagImage()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (trashbag_images[i].activeSelf)
+            {
+                if (GameObject.FindGameObjectsWithTag("Trash").Length != 5)
+                    trashbag_images[i].SetActive(false);
+                break;
+            }
+
         }
     }
 

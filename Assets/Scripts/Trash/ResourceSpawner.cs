@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceSpawner: MonoBehaviour
 {
@@ -19,13 +20,15 @@ public class ResourceSpawner: MonoBehaviour
 
     [SerializeField] private EventManager eventManager;
 
+    [SerializeField] private GameObject[] trashbag_images;
+    [SerializeField] private PickUpAnimated worker;
+
     // Start is called before the first frame update
     void Start()
     {
         spawner = GetComponent<Transform>();
-        spawnStart();
+        StartNewSpawn();
         //Debug.Log($"{TrashManager.instance.trashObjects.Count}");
-        StartCoroutine(SpawnNew());
     }
 
     public void StartNewSpawn()
@@ -37,37 +40,20 @@ public class ResourceSpawner: MonoBehaviour
             }
     }
 
-    void spawnStart()
-    {
-        while (spawnNumber != 0)
-        {
-            Vector3 randomPosition = new Vector3(
-                Random.Range(spawner.position.x - offsetX, spawner.position.x + offsetX),
-                Random.Range(spawner.position.y, spawner.position.y),
-                Random.Range(spawner.position.z - offsetZ, spawner.position.z + offsetZ)
-            );
-
-            TrashObject trash;
-
-            trash = Instantiate(objectToSpawn, randomPosition, Quaternion.identity).GetComponent<TrashObject>();
-            trash.transform.parent = this.transform;
-
-            GameController.instance.AddTrash(trash);
-
-            spawnNumber = spawnNumber - 1;
-        }
-        
-    }
 
     private IEnumerator SpawnNew()
     {
-
         yield return new WaitForSeconds(spawnTimer);
         if (bagsPerRound < maxBagsPerRound)
         {
             if (GameController.instance.trashObjects.Count == 0)
             {
                 spawnNumber = 5;
+
+                for (int i = 0; i < spawnNumber; i++)
+                {
+                    trashbag_images[i].SetActive(true);
+                }
                 bagsPerRound += spawnNumber;
                 while (spawnNumber != 0)
                 {
