@@ -12,6 +12,8 @@ TagManager:
   - Wall
   - Model
   - EnemyTrash
+  - SelectableWall
+  - TrashImage
   layers:
   - Default
   - TransparentFX
