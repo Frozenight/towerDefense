@@ -290,7 +290,7 @@ public class GameController : MonoBehaviour
         {
             gameControllerObj.SaveData(ref gameData);
         }
-
+        PlayerPrefs.SetInt("CurrentRound", 0);
         dataHandler.SaveGameData(gameData);
     }
 

@@ -4,7 +4,6 @@ using UnityEngine;
 using GoogleMobileAds.Api;
 using TMPro;
 
-
 public class Interstitial : MonoBehaviour
 {
     // These ad units are configured to always serve test ads.
@@ -19,7 +18,12 @@ public class Interstitial : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI text;
 
-    public void LoadInterstitialAd()
+    private void Start()
+    {
+        LoadAdOnStart();
+    }
+
+    public void LoadAdOnStart()
     {
         // Clean up the old ad before loading a new one.
         if (interstitialAd != null)
@@ -36,23 +40,33 @@ public class Interstitial : MonoBehaviour
         adRequest.Keywords.Add("unity-admob-sample");
 
         // send the request to load the ad.
-        InterstitialAd.Load(_adUnitId, adRequest,
-            (InterstitialAd ad, LoadAdError error) =>
+        InterstitialAd.Load(_adUnitId, adRequest, (InterstitialAd ad, LoadAdError error) =>
+        {
+            // if error is not null, the load request failed.
+            if (error != null || ad == null)
             {
-                // if error is not null, the load request failed.
-                if (error != null || ad == null)
-                {
-                    Debug.LogError("interstitial ad failed to load an ad " +
-                                   "with error : " + error);
-                    text.text = ""+ error;
-                    return;
-                }
+                Debug.LogError("interstitial ad failed to load an ad " +
+                               "with error : " + error);
+                text.text = "" + error;
+                return;
+            }
 
-                Debug.Log("Interstitial ad loaded with response : "
-                          + ad.GetResponseInfo());
-                text.text = ad.GetResponseInfo().ToString();
-                interstitialAd = ad;
-                interstitialAd.Show();
-            });
+            Debug.Log("Interstitial ad loaded with response : "
+                      + ad.GetResponseInfo());
+            text.text = ad.GetResponseInfo().ToString();
+            interstitialAd = ad;
+        });
+    }
+
+    public void LoadInterstitialAd()
+    {
+        if (interstitialAd != null)
+        {
+            interstitialAd.Show();
+        }
+        else
+        {
+            Debug.LogError("Ad is not loaded yet.");
+        }
     }
 }

@@ -68,6 +68,7 @@ public class enemySpawner : MonoBehaviour
         
         if (!isInPlayMode)
             return;
+
         //5 15 25 35...
         if ((waveCnt - 5) % 10 == 0)
         { 

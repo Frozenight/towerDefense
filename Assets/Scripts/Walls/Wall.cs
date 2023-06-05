@@ -22,6 +22,11 @@ public class Wall : ManageableBuilding
 
     private void Start()
     {
+        if (transform.rotation.eulerAngles.y == 180)
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, transform.rotation.eulerAngles.z);
+        }
+
         enemyController = enemySpawner.instance;
         m_upgrade_price = price + (m_level * 5);
     }
@@ -32,7 +37,6 @@ public class Wall : ManageableBuilding
 
     public override void UpgradeBuilding()
     {
-        // Debug.Log("UpgradeBuilding() Turret class, obj " + this.GetHashCode());
         if (gameController.resources < m_upgrade_price)
             return;
 

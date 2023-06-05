@@ -13,6 +13,8 @@ public class PickUpAnimated : MonoBehaviour
     private float timeDelay2;
     private Collider trashToPickUp;
     private Animator animator;
+
+
     // Start is called before the first frame update
     void Start()
     {

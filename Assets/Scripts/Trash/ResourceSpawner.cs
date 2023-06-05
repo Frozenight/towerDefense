@@ -22,6 +22,7 @@ public class ResourceSpawner: MonoBehaviour
 
     [SerializeField] private GameObject[] trashbag_images;
     [SerializeField] private PickUpAnimated worker;
+    [SerializeField] private TrashUI trashUI;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,19 @@ public class ResourceSpawner: MonoBehaviour
             }
     }
 
+    public bool AllTrashPickedUP()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (trashbag_images[i].activeSelf)
+            {
+                return false;
+            }
+
+        }
+        return true;
+    }
+
 
     private IEnumerator SpawnNew()
     {
@@ -49,7 +63,8 @@ public class ResourceSpawner: MonoBehaviour
             if (GameController.instance.trashObjects.Count == 0)
             {
                 spawnNumber = 5;
-
+                trashUI.SlideIn();
+                Debug.Log("Sliding In");
                 for (int i = 0; i < spawnNumber; i++)
                 {
                     trashbag_images[i].SetActive(true);

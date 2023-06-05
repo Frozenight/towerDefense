@@ -13,11 +13,15 @@ public class Rounds : MonoBehaviour
     public int current_round = 0;
     [SerializeField] Button hide_button;
     [SerializeField] Show_BuildingSelection show_BuildingSelection;
+    [SerializeField] enemySpawner enemySpawner;
 
     public int pickUpWave = 2;
     public PickUpScreen pickUpScreen;
+
     private void Start()
     {
+        current_round = PlayerPrefs.GetInt("CurrentRound", 0);  // Load the round
+
         EventManager.onRoundChange += NextRound;
         eventController = GetComponent<EventManager>();
     }
@@ -28,19 +32,24 @@ public class Rounds : MonoBehaviour
         {
             gameMode.changeGameMode(4);
             current_round++;
+
             ChangeRoundText();
         }
         else
         {
+            PlayerPrefs.SetInt("CurrentRound", current_round);  // Save the round
             gameMode.changeGameMode(5);
-            if (current_round == enemySpawner.instance.bossWave-1) { GameController.instance.BossWarning(); }
             if (current_round == pickUpWave) { pickUpScreen.Setup(); pickUpWave += 5; }
+            if (((enemySpawner.completedWaves - 4) % 10 == 0))
+            { GameController.instance.BossWarning(); }
             ChangeDefendingText();
         }
     }
 
     public void NewGame()
     {
+        current_round = 0;
+        PlayerPrefs.SetInt("CurrentRound", current_round); // Reset the round when new game
         eventController.currentState = EventManager.Event.preparation;
     }
 

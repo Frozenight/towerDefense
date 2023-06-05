@@ -19,6 +19,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
     private float timeDelay;
     private PickUpAnimated PickUp;
     private bool detectedRaidStart = true;
+    [SerializeField] private TrashUI trashUI;
 
     private Animator animator;
     // Start is called before the first frame update
@@ -120,7 +121,6 @@ public class MovementAnimated : MonoBehaviour, IGameController
     {
         this.speed = data.workerSpeed;
         savedSpeed = speed;
-        Debug.Log($"LoadData speed: {speed}");
     }
 
     public void SaveData(ref GameData data)
@@ -161,7 +161,6 @@ public class MovementAnimated : MonoBehaviour, IGameController
     }
 
     private void ChangeRaidState() {
-        Debug.Log($"ChangeRaidState to {!ongoingRaid}");
         ongoingRaid = !ongoingRaid;
         if (!ongoingRaid) {
             speed = savedSpeed;
@@ -174,6 +173,7 @@ public class MovementAnimated : MonoBehaviour, IGameController
 
     private void ShowFloatingText(string text)
     {
+        trashUI.SlideOut();
         GameController.instance.RemoveTrashBagImage();
         Vector3 position = new Vector3(transform.position.x, transform.position.y + 7, transform.position.z) ;
         var textObject = Instantiate(FloatingTextPrefab, position, Quaternion.identity);
